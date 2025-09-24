@@ -1,0 +1,178 @@
+PREFIX csro: <https://w3id.org/csro/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
+
+##
+## Container Security Risk Calculation Rules Export Query
+##
+## This CONSTRUCT query exports all calculation rules and their associated weights
+## for container attack techniques. Provides the complete ruleset matrix for
+## comprehensive risk analysis alongside the main risk assessment export.
+##
+## Key exports: Attack techniques with MITRE ATT&CK references, calculation rules,
+## assumption weights, and rating combinations for likelihood and risk calculations.
+##
+
+CONSTRUCT {
+    # Container attack technique information with ATT&CK reference
+    ?technique a csro:ContainerAttackTechnique ;
+        csro:description ?techniqueDescription ;
+        csro:referencesAttackTechnique ?attackTechnique ;
+        csro:hasBaseDifficulty ?baseDifficulty .
+    
+    # Referenced MITRE ATT&CK technique
+    ?attackTechnique a d3f:ATTACKEnterpriseTechnique ;
+        rdfs:label ?attackTechniqueLabel ;
+        d3f:attack-id ?attackTechniqueId ;
+        d3f:definition ?attackTechniqueDefinition .
+    
+    # Exploitability calculation rules
+    ?exploitabilityRule a csro:ExploitabilityCalculationRule ;
+        csro:appliesTo ?technique ;
+        csro:hasWeight ?weight .
+
+    # Exposure calculation rules
+    ?exposureRule a csro:ExposureCalculationRule ;
+        csro:appliesTo ?technique ;
+        csro:hasWeight ?weight .
+
+    # Likelihood calculation rules
+    ?likelihoodRule a csro:LikelihoodCalculationRule ;
+        csro:hasExploitabilityRating ?exploitabilityRating ;
+        csro:hasExposureRating ?exposureRating ;
+        csro:resultsIn ?likelihood .
+
+    # Risk calculation rules
+    ?riskRule a csro:RiskCalculationRule ;
+        csro:hasLikelihoodRating ?likelihood ;
+        csro:hasImpactRating ?impactRating ;
+        csro:resultsIn ?riskLevel .
+
+    # Weight information with assumption details
+    ?weight a csro:AssumptionWeight ;
+        csro:refersToAssumption ?assumption ;
+        csro:weightValue ?weightValue ;
+        csro:effectDescription ?effectDescription .
+
+    # Security assumptions referenced by weights
+    ?assumption a csro:ContainerSecurityAssumption ;
+        csro:assumptionId ?assumptionId ;
+        csro:description ?assumptionDescription ;
+        csro:belongsToCategory ?assumptionCategory ;
+        csro:originatesFrom ?securityStandard .
+    
+    # Assumptions can also originate from specific standard sections
+    ?assumption csro:originatesFrom ?securityStandardSection .
+
+    # Assumption categories
+    ?assumptionCategory a csro:AssumptionCategory ;
+        csro:description ?categoryDescription .
+
+    # Security standards (optional since not all assumptions may have them)
+    ?securityStandard a csro:ContainerSecurityStandard ;
+        csro:description ?securityStandardDescription .
+    
+    # Security standard sections for assumptions (granular references)
+    ?securityStandardSection a csro:ContainerSecurityStandardSection ;
+        csro:belongsToStandard ?sectionParentStandard ;
+        csro:sectionId ?sectionId .
+
+    # Rating instances with descriptions
+    ?exploitabilityRating a csro:ExploitabilityRating ;
+        csro:description ?exploitabilityRatingDescription .
+
+    ?exposureRating a csro:ExposureRating ;
+        csro:description ?exposureRatingDescription .
+
+    ?likelihood a csro:Likelihood ;
+        rdfs:label ?likelihoodLabel .
+
+    ?impactRating a csro:ImpactRating ;
+        csro:description ?impactRatingDescription .
+
+    ?riskLevel a csro:RiskLevel ;
+        rdfs:label ?riskLevelLabel .
+}
+WHERE {
+    # Target specific container attack techniques (filter as needed)
+    ?technique a csro:ContainerAttackTechnique ;
+        csro:description ?techniqueDescription .
+    
+    # Get ATT&CK technique reference
+    OPTIONAL {
+        ?technique csro:referencesAttackTechnique ?attackTechnique .
+        ?attackTechnique rdfs:label ?attackTechniqueLabel ;
+                         d3f:attack-id ?attackTechniqueId ;
+                         d3f:definition ?attackTechniqueDefinition .
+    }
+    
+    OPTIONAL { ?technique csro:hasBaseDifficulty ?baseDifficulty }
+    
+    # Get exploitability or exposure rules for this technique
+    {
+        # Exploitability rules
+        ?exploitabilityRule a csro:ExploitabilityCalculationRule ;
+            csro:appliesTo ?technique ;
+            csro:hasWeight ?weight .
+    } UNION {
+        # Exposure rules
+        ?exposureRule a csro:ExposureCalculationRule ;
+            csro:appliesTo ?technique ;
+            csro:hasWeight ?weight .
+    }
+
+    # Get weight and assumption details
+    ?weight csro:refersToAssumption ?assumption ;
+        csro:weightValue ?weightValue .
+    
+    # Get effect description for weight (optional)
+    OPTIONAL {
+        ?weight csro:effectDescription ?effectDescription .
+    }
+
+    # Get assumption information
+    ?assumption csro:assumptionId ?assumptionId ;
+        csro:description ?assumptionDescription ;
+        csro:belongsToCategory ?assumptionCategory .
+
+    ?assumptionCategory csro:description ?categoryDescription .
+
+    # Security standards (optional)
+    OPTIONAL {
+        ?assumption csro:originatesFrom ?securityStandard .
+        ?securityStandard csro:description ?securityStandardDescription .
+    }
+    
+    # Security standard sections for assumptions (granular references - optional)
+    OPTIONAL {
+        ?assumption csro:originatesFrom ?securityStandardSection .
+        ?securityStandardSection a csro:ContainerSecurityStandardSection ;
+                                 csro:belongsToStandard ?sectionParentStandard ;
+                                 csro:sectionId ?sectionId .
+    }
+
+    # Get all likelihood calculation rules
+    OPTIONAL {
+        ?likelihoodRule a csro:LikelihoodCalculationRule ;
+            csro:hasExploitabilityRating ?exploitabilityRating ;
+            csro:hasExposureRating ?exposureRating ;
+            csro:resultsIn ?likelihood .
+
+        ?exploitabilityRating csro:description ?exploitabilityRatingDescription .
+        ?exposureRating csro:description ?exposureRatingDescription .
+        ?likelihood rdfs:label ?likelihoodLabel .
+    }
+
+    # Get all risk calculation rules
+    OPTIONAL {
+        ?riskRule a csro:RiskCalculationRule ;
+            csro:hasLikelihoodRating ?likelihood ;
+            csro:hasImpactRating ?impactRating ;
+            csro:resultsIn ?riskLevel .
+
+        ?impactRating csro:description ?impactRatingDescription .
+        ?riskLevel rdfs:label ?riskLevelLabel .
+    }
+}
+ORDER BY ?exploitabilityRule ?exposureRule ?likelihoodRule ?riskRule

@@ -1,0 +1,169 @@
+#
+# Container Security Risk Calculation Example Query
+#
+# This query calculates complete risk assessments including exploitability, exposure,
+# likelihood, and risk level ratings for all attack patterns and scenarios.
+# Uses dynamic threshold calculations based on assumption weights.
+#
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+## Complete Risk Assessment with Dynamic Calculations
+## Automatically discovers scenarios and attack patterns, then calculates
+## exploitability and exposure ratings, likelihood (from exploitability + exposure),
+## and risk level (from likelihood + impact) using the ontology calculation rules.
+
+SELECT ?attackAction ?scenario ?technique ?description 
+       ?securityScore_exploitability ?threshold ?upperThreshold ?exploitabilityRating ?securityScore_exposure ?expThreshold ?expUpperThreshold ?exposureRating ?likelihood ?impact ?impactRating ?riskLevel
+WHERE {
+    # Get all attack actions
+    ?attackAction a csro:AttackAction ;
+                  csro:appliesTechnique ?technique ;
+                  csro:inContext ?scenario .
+    
+    ?technique csro:description ?description .
+    
+    # Get impact information
+    ?attackAction csro:causesImpact ?impact .
+    ?impact csro:hasImpactRating ?impactRating .
+    
+    # Calculate exploitability ratings
+    {
+        SELECT ?attackAction ?scenario
+               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exploitability)
+               ?threshold ?upperThreshold
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+            
+            # Get exploitability rule and calculate thresholds
+            ?rule a csro:ExploitabilityCalculationRule ;
+                  csro:appliesTo ?technique ;
+                  csro:hasWeight ?assumptionWeight .
+            
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+            
+            # Calculate sum of all weights for this rule to determine thresholds
+            {
+                SELECT ?rule (SUM(?w) AS ?totalWeight)
+                WHERE {
+                    ?rule csro:hasWeight ?aw .
+                    ?aw csro:weightValue ?w .
+                }
+                GROUP BY ?rule
+            }
+            
+            # Calculate thresholds: 1/3 and 2/3 of total weight
+            BIND(?totalWeight / 3.0 AS ?threshold)
+            BIND(2.0 * ?totalWeight / 3.0 AS ?upperThreshold)
+            
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+            
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?threshold ?upperThreshold
+    }
+    
+    # Calculate exposure ratings
+    {
+        SELECT ?attackAction ?scenario
+               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exposure)
+               ?expThreshold ?expUpperThreshold
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+            
+            # Get exposure rule and calculate thresholds
+            ?rule a csro:ExposureCalculationRule ;
+                  csro:appliesTo ?technique ;
+                  csro:hasWeight ?assumptionWeight .
+            
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+            
+            # Calculate sum of all weights for this rule to determine thresholds
+            {
+                SELECT ?rule (SUM(?w) AS ?totalWeight)
+                WHERE {
+                    ?rule csro:hasWeight ?aw .
+                    ?aw csro:weightValue ?w .
+                }
+                GROUP BY ?rule
+            }
+            
+            # Calculate thresholds: 1/3 and 2/3 of total weight
+            BIND(?totalWeight / 3.0 AS ?expThreshold)
+            BIND(2.0 * ?totalWeight / 3.0 AS ?expUpperThreshold)
+            
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+            
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?expThreshold ?expUpperThreshold
+    }
+    
+    # Determine ratings using three-tier system
+    BIND(
+        IF(?securityScore_exploitability >= ?upperThreshold, csro:LowExploitability,
+           IF(?securityScore_exploitability >= ?threshold, csro:MediumExploitability, csro:HighExploitability)
+        ) AS ?exploitabilityRating_obj
+    )
+    
+    BIND(
+        IF(?securityScore_exposure >= ?expUpperThreshold, csro:LowExposure,
+           IF(?securityScore_exposure >= ?expThreshold, csro:MediumExposure, csro:HighExposure)
+        ) AS ?exposureRating_obj
+    )
+    
+    # Convert ratings to string labels for display
+    BIND(
+        IF(?securityScore_exploitability >= ?upperThreshold, "Low",
+           IF(?securityScore_exploitability >= ?threshold, "Medium", "High")
+        ) AS ?exploitabilityRating
+    )
+    
+    BIND(
+        IF(?securityScore_exposure >= ?expUpperThreshold, "Low",
+           IF(?securityScore_exposure >= ?expThreshold, "Medium", "High")
+        ) AS ?exposureRating
+    )
+    
+    # Calculate likelihood from exploitability + exposure ratings using calculation rules
+    ?likelihoodRule a csro:LikelihoodCalculationRule ;
+                    csro:hasExploitabilityRating ?exploitabilityRating_obj ;
+                    csro:hasExposureRating ?exposureRating_obj ;
+                    csro:resultsIn ?likelihood_obj .
+    
+    # Get likelihood label
+    ?likelihood_obj rdfs:label ?likelihood .
+    
+    # Calculate risk level from likelihood + impact ratings using calculation rules
+    ?riskRule a csro:RiskCalculationRule ;
+              csro:hasLikelihoodRating ?likelihood_obj ;
+              csro:hasImpactRating ?impactRating ;
+              csro:resultsIn ?riskLevel_obj .
+    
+    # Get risk level label
+    ?riskLevel_obj rdfs:label ?riskLevel .
+}
+ORDER BY ?scenario ?technique

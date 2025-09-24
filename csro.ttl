@@ -1,0 +1,3340 @@
+@prefix : <https://w3id.org/csro/ontology#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix csro: <https://w3id.org/csro/ontology#> .
+@prefix d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix terms: <http://purl.org/dc/terms/> .
+@prefix schema: <http://schema.org/> .
+@base <https://w3id.org/csro/ontology#> .
+
+<https://w3id.org/csro/ontology> rdf:type owl:Ontology ;
+                              owl:imports <http://d3fend.mitre.org/ontologies/d3fend.owl> ;
+                              cc:license "https://creativecommons.org/licenses/by/4.0/" ;
+                              dc:contributor "Contributors and reviewers from the container security community"@en ;
+                              dc:creator "Yannick Landeck"@en ;
+                              dc:description "The Container Security Risk Ontology (CSRO) provides a formal vocabulary for modeling security risks in containerized deployments, particularly in operational technology (OT) contexts. This ontology includes both the conceptual schema and concrete instances with enhancements for attack techniques and dynamic risk assessment. Integrated with MITRE D3FEND ontology for ATT&CK technique references."@en ;
+                              dc:issued "2025-09-24"^^xsd:date ;
+                              dc:modified "2025-09-24T00:00:00Z" ;
+                              dc:publisher "Yannick Landeck"@en ;
+                              dc:title "Container Security Risk Ontology"@en ;
+                              terms:created "24th September 2025"@en ;
+                              vann:preferredNamespacePrefix "csro" ;
+                              schema:url "https://w3id.org/csro/ontology"^^xsd:anyURI ;
+                              schema:version "1.0" ;
+                              owl:versionInfo "1.0" ;
+                              skos:definition "A comprehensive ontology for assessing and modeling security risks in container deployments using context scenarios and attack patterns for dynamic risk calculation."@en .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://creativecommons.org/ns#license
+cc:license rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/contributor
+dc:contributor rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/issued
+dc:issued rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/modified
+dc:modified rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/publisher
+dc:publisher rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/terms/created
+terms:created rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/url
+schema:url rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/version
+schema:version rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#definition
+skos:definition rdf:type owl:AnnotationProperty .
+
+
+###  https://w3id.org/csro/ontology/ontology#effectDescription
+csro:effectDescription rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+###  http://www.w3.org/2001/XMLSchema#gYear
+xsd:gYear rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/csro/ontology#addresses
+csro:addresses rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:RiskTreatment ;
+              rdfs:range csro:SecurityAssumption ;
+              rdfs:comment "Indicates that a risk treatment addresses or implements a specific security assumption."@en ;
+              rdfs:label "addresses"@en .
+
+
+###  https://w3id.org/csro/ontology#affects
+csro:affects rdf:type owl:ObjectProperty ;
+            rdfs:domain csro:AttackAction ;
+            rdfs:range csro:Component ;
+            rdfs:comment "Indicates what components are affected by an attack action."@en ;
+            rdfs:label "affects"@en .
+
+
+###  https://w3id.org/csro/ontology#appliesTechnique
+csro:appliesTechnique rdf:type owl:ObjectProperty ;
+                     rdfs:domain csro:AttackAction ;
+                     rdfs:range csro:ContainerAttackTechnique ;
+                     rdfs:comment "Indicates that an attack action applies a specific container attack technique."@en ;
+                     rdfs:label "applies technique"@en .
+
+
+###  https://w3id.org/csro/ontology#appliesTo
+csro:appliesTo rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:AttackPatternCalculationRule ;
+              rdfs:comment "Indicates which attack pattern a calculation rule applies to."@en ;
+              rdfs:label "applies to"@en .
+
+
+###  https://w3id.org/csro/ontology#belongsToCategory
+csro:belongsToCategory rdf:type owl:ObjectProperty ;
+                      rdfs:domain csro:SecurityAssumption ;
+                      rdfs:range csro:AssumptionCategory ;
+                      rdfs:comment "Indicates the category to which a security assumption belongs."@en ;
+                      rdfs:label "belongs to category"@en .
+
+
+###  https://w3id.org/csro/ontology#belongsToStandard
+csro:belongsToStandard rdf:type owl:ObjectProperty ;
+                      rdfs:domain csro:ContainerSecurityStandardSection ;
+                      rdfs:range csro:ContainerSecurityStandard ;
+                      rdfs:comment "Indicates which security standard a section belongs to."@en ;
+                      rdfs:label "belongs to standard"@en .
+
+
+###  https://w3id.org/csro/ontology#causesImpact
+csro:causesImpact rdf:type owl:ObjectProperty ;
+                 rdfs:domain csro:AttackAction ;
+                 rdfs:range csro:Impact ;
+                 rdfs:comment "Indicates the security impact that results from an attack action being successful."@en ;
+                 rdfs:label "causes impact"@en .
+
+
+###  https://w3id.org/csro/ontology#forAssumption
+csro:forAssumption rdf:type owl:ObjectProperty ;
+                  rdfs:domain csro:AssumptionInScenario ;
+                  rdfs:range csro:SecurityAssumption ;
+                  rdfs:comment "Indicates which security assumption an assumption-in-scenario instance refers to."@en ;
+                  rdfs:label "for assumption"@en .
+
+
+###  https://w3id.org/csro/ontology#hasBaseDifficulty
+csro:hasBaseDifficulty rdf:type owl:ObjectProperty ;
+                      rdfs:range csro:DifficultyLevel ;
+                      rdfs:comment "Indicates the base difficulty level of executing an attack pattern."@en ;
+                      rdfs:label "has base difficulty"@en .
+
+
+###  https://w3id.org/csro/ontology#hasExploitabilityRating
+csro:hasExploitabilityRating rdf:type owl:ObjectProperty ;
+                            rdfs:comment "Associates an entity with its exploitability rating."@en ;
+                            rdfs:label "has exploitability rating"@en .
+
+
+###  https://w3id.org/csro/ontology#hasExposureRating
+csro:hasExposureRating rdf:type owl:ObjectProperty ;
+                      rdfs:comment "Associates an entity with its exposure rating."@en ;
+                      rdfs:label "has exposure rating"@en .
+
+
+###  https://w3id.org/csro/ontology#hasGuideline
+csro:hasGuideline rdf:type owl:ObjectProperty ;
+                 rdfs:domain csro:RiskTreatment ;
+                 rdfs:range csro:ContainerSecurityGuideline ;
+                 rdfs:comment "Associates a risk treatment with applicable security guidelines."@en ;
+                 rdfs:label "has guideline"@en .
+
+
+###  https://w3id.org/csro/ontology#hasImpactRating
+csro:hasImpactRating rdf:type owl:ObjectProperty ;
+                    rdfs:domain csro:Impact ;
+                    rdfs:range csro:ImpactRating ;
+                    rdfs:comment "Associates an impact with its severity rating."@en ;
+                    rdfs:label "has impact rating"@en .
+
+
+###  https://w3id.org/csro/ontology#hasLikelihood
+csro:hasLikelihood rdf:type owl:ObjectProperty ;
+                  rdfs:domain csro:AttackAction ;
+                  rdfs:range csro:Likelihood ;
+                  rdfs:comment "Associates an attack action with its calculated likelihood rating."@en ;
+                  rdfs:label "has likelihood"@en .
+
+
+###  https://w3id.org/csro/ontology#hasLikelihoodRating
+csro:hasLikelihoodRating rdf:type owl:ObjectProperty ;
+                        rdfs:domain csro:RiskCalculationRule ;
+                        rdfs:range csro:Likelihood ;
+                        rdfs:comment "Associates a risk calculation rule with a likelihood rating."@en ;
+                        rdfs:label "has likelihood rating"@en .
+
+
+###  https://w3id.org/csro/ontology#hasRiskLevel
+csro:hasRiskLevel rdf:type owl:ObjectProperty ;
+                 rdfs:domain csro:Risk ;
+                 rdfs:range csro:RiskLevel ;
+                 rdfs:comment "Associates a risk with its calculated risk level."@en ;
+                 rdfs:label "has risk level"@en .
+
+
+###  https://w3id.org/csro/ontology#hasSatisfactionState
+csro:hasSatisfactionState rdf:type owl:ObjectProperty ;
+                         rdfs:domain csro:AssumptionInScenario ;
+                         rdfs:range csro:SatisfactionState ;
+                         rdfs:comment "Indicates the satisfaction state of a security assumption within a context scenario."@en ;
+                         rdfs:label "has satisfaction state"@en .
+
+
+###  https://w3id.org/csro/ontology#hasWeight
+csro:hasWeight rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:AttackPatternCalculationRule ;
+              rdfs:range csro:AssumptionWeight ;
+              rdfs:comment "Associates a calculation rule with assumption weights."@en ;
+              rdfs:label "has weight"@en .
+
+
+###  https://w3id.org/csro/ontology#inContext
+csro:inContext rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:AttackAction ;
+              rdfs:range csro:ContextScenario ;
+              rdfs:comment "Indicates the context scenario in which an attack action is evaluated."@en ;
+              rdfs:label "in context"@en .
+
+
+###  https://w3id.org/csro/ontology#includes
+csro:includes rdf:type owl:ObjectProperty ;
+             rdfs:domain csro:ContextScenario ;
+             rdfs:range csro:Component ;
+             rdfs:comment "Indicates which components are involved in or affected by a context scenario."@en ;
+             rdfs:label "includes"@en .
+
+
+###  https://w3id.org/csro/ontology#includesAssumption
+csro:includesAssumption rdf:type owl:ObjectProperty ;
+                       rdfs:domain csro:ContextScenario ;
+                       rdfs:range csro:SecurityAssumption ;
+                       rdfs:comment "Indicates that a context scenario includes a specific security assumption."@en ;
+                       rdfs:label "includes assumption"@en .
+
+
+###  https://w3id.org/csro/ontology#indicates
+csro:indicates rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:Impact ;
+              rdfs:range csro:Risk ;
+              rdfs:comment "Indicates that an impact represents or points to a specific risk."@en ;
+              rdfs:label "indicates"@en .
+
+
+###  https://w3id.org/csro/ontology#isDerivedFrom
+csro:isDerivedFrom rdf:type owl:ObjectProperty ;
+                  rdfs:domain csro:ContainerDeploymentTrait ;
+                  rdfs:range csro:ContainerEvidence ;
+                  rdfs:comment "Indicates that a container deployment trait is derived from or verified by specific evidence."@en ;
+                  rdfs:label "is derived from"@en .
+
+
+###  https://w3id.org/csro/ontology#isImplementedBy
+csro:isImplementedBy rdf:type owl:ObjectProperty ;
+                    rdfs:domain csro:RiskTreatment ;
+                    rdfs:range csro:ContainerDeploymentTrait ;
+                    rdfs:comment "Indicates the container deployment traits that implement a risk treatment."@en ;
+                    rdfs:label "is implemented by"@en .
+
+
+###  https://w3id.org/csro/ontology#isTreatedBy
+csro:isTreatedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf csro:treats ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( csro:AttackAction
+                                            csro:Risk
+                                          )
+                            ] ;
+                rdfs:range csro:RiskTreatment ;
+                rdfs:comment "Indicates that a risk or attack action is addressed by a specific treatment."@en ;
+                rdfs:label "is treated by"@en .
+
+
+###  https://w3id.org/csro/ontology#isVerifiableBy
+csro:isVerifiableBy rdf:type owl:ObjectProperty ;
+                   rdfs:domain csro:SecurityAssumption ;
+                   rdfs:range csro:ContainerDeploymentTrait ;
+                   rdfs:comment "Indicates that a security assumption can be verified by the presence of specific container deployment traits."@en ;
+                   rdfs:label "is verifiable by"@en .
+
+
+###  https://w3id.org/csro/ontology#isVerifiableByAbsence
+csro:isVerifiableByAbsence rdf:type owl:ObjectProperty ;
+                          rdfs:domain csro:SecurityAssumption ;
+                          rdfs:range csro:ContainerDeploymentTrait ;
+                          rdfs:comment "Indicates that a security assumption can be verified by the absence of specific container deployment traits."@en ;
+                          rdfs:label "is verifiable by absence"@en .
+
+
+###  https://w3id.org/csro/ontology#originatesFrom
+csro:originatesFrom rdf:type owl:ObjectProperty ;
+                   rdfs:domain csro:SecurityAssumption ;
+                   rdfs:range [ rdf:type owl:Class ;
+                                owl:unionOf ( csro:ContainerSecurityStandard
+                                              csro:ContainerSecurityStandardSection
+                                            )
+                              ] ;
+                   rdfs:comment "Indicates that a security assumption originates from or is defined by a specific security standard or section."@en ;
+                   rdfs:label "originates from"@en .
+
+
+###  https://w3id.org/csro/ontology#referencesAttackTechnique
+csro:referencesAttackTechnique rdf:type owl:ObjectProperty ;
+                              rdfs:domain csro:ContainerAttackTechnique ;
+                              rdfs:range d3f:ATTACKEnterpriseTechnique ;
+                              rdfs:comment "References the MITRE ATT&CK Enterprise technique that this container attack technique is based on."@en ;
+                              rdfs:label "references attack technique"@en .
+
+
+###  https://w3id.org/csro/ontology#refersToAssumption
+csro:refersToAssumption rdf:type owl:ObjectProperty ;
+                       rdfs:domain csro:AssumptionWeight ;
+                       rdfs:range csro:SecurityAssumption ;
+                       rdfs:comment "Indicates which security assumption an assumption weight refers to."@en ;
+                       rdfs:label "refers to assumption"@en .
+
+
+###  https://w3id.org/csro/ontology#requiresTrait
+csro:requiresTrait rdf:type owl:ObjectProperty ;
+                  rdfs:range csro:ContainerDeploymentTrait ;
+                  rdfs:comment "Indicates the container deployment traits required for an attack pattern to be applicable."@en ;
+                  rdfs:label "requires trait"@en .
+
+
+###  https://w3id.org/csro/ontology#resultsIn
+csro:resultsIn rdf:type owl:ObjectProperty ;
+              rdfs:domain csro:AttackPatternCalculationRule ;
+              rdfs:comment "Indicates the result produced by a calculation rule."@en ;
+              rdfs:label "results in"@en .
+
+
+###  https://w3id.org/csro/ontology#treats
+csro:treats rdf:type owl:ObjectProperty ;
+           rdfs:domain csro:RiskTreatment ;
+           rdfs:range csro:Risk ;
+           rdfs:comment "Indicates that a risk treatment addresses or mitigates a specific risk."@en ;
+           rdfs:label "treats"@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://w3id.org/csro/ontology#assumptionId
+csro:assumptionId rdf:type owl:DatatypeProperty ;
+                 rdfs:domain csro:SecurityAssumption ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "The unique identifier for a security assumption (e.g., RTS-2, IMG-2)."@en ;
+                 rdfs:label "assumption ID"@en .
+
+
+###  https://w3id.org/csro/ontology#description
+csro:description rdf:type owl:DatatypeProperty ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Provides a detailed textual description of the concept."@en ;
+                rdfs:label "description"@en .
+
+
+###  https://w3id.org/csro/ontology#publicationYear
+csro:publicationYear rdf:type owl:DatatypeProperty ;
+                    rdfs:domain csro:ContainerSecurityStandard ;
+                    rdfs:range xsd:gYear ;
+                    rdfs:comment "The year when the security standard was published."@en ;
+                    rdfs:label "publication year"@en .
+
+
+###  https://w3id.org/csro/ontology#publishedBy
+csro:publishedBy rdf:type owl:DatatypeProperty ;
+                rdfs:domain csro:ContainerSecurityStandard ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The organization that published or maintains the security standard."@en ;
+                rdfs:label "published by"@en .
+
+
+###  https://w3id.org/csro/ontology#referenceUrl
+csro:referenceUrl rdf:type owl:DatatypeProperty ;
+                 rdfs:range xsd:anyURI ;
+                 rdfs:comment "Provides a reference URL or web link for additional information about the concept."@en ;
+                 rdfs:label "reference URL"@en .
+
+
+###  https://w3id.org/csro/ontology#sectionId
+csro:sectionId rdf:type owl:DatatypeProperty ;
+              rdfs:domain csro:ContainerSecurityStandardSection ;
+              rdfs:range xsd:string ;
+              rdfs:comment "The identifier of the section within the standard (e.g., '§4.1.2', '4.3', 'D04', '#9')."@en ;
+              rdfs:label "section ID"@en .
+
+
+###  https://w3id.org/csro/ontology#shortDescription
+csro:shortDescription rdf:type owl:DatatypeProperty ;
+                     rdfs:range xsd:string ;
+                     rdfs:comment "Provides a brief textual description of the concept."@en ;
+                     rdfs:label "short description"@en .
+
+
+###  https://w3id.org/csro/ontology#standardId
+csro:standardId rdf:type owl:DatatypeProperty ;
+               rdfs:domain csro:ContainerSecurityStandard ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The unique identifier or name of the security standard."@en ;
+               rdfs:label "standard ID"@en .
+
+
+###  https://w3id.org/csro/ontology#version
+csro:version rdf:type owl:DatatypeProperty ;
+            rdfs:domain csro:ContainerSecurityStandard ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The version number or identifier of the security standard."@en ;
+            rdfs:label "version"@en .
+
+
+###  https://w3id.org/csro/ontology#weightValue
+csro:weightValue rdf:type owl:DatatypeProperty ;
+                rdfs:domain csro:AssumptionWeight ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "The numerical weight value indicating the effectiveness of an assumption (0-3 scale)."@en ;
+                rdfs:label "weight value"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://w3id.org/csro/ontology#AssumptionCategory
+csro:AssumptionCategory rdf:type owl:Class ;
+                       rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                       rdfs:comment "A category for grouping related security assumptions (e.g., Runtime Security, Network Security)."@en ;
+                       rdfs:label "Assumption Category"@en .
+
+
+###  https://w3id.org/csro/ontology#AssumptionInScenario
+csro:AssumptionInScenario rdf:type owl:Class ;
+                         rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                         rdfs:comment "A specific instance of a security assumption within a context scenario, including its satisfaction state."@en ;
+                         rdfs:label "Assumption in Scenario"@en .
+
+
+###  https://w3id.org/csro/ontology#AssumptionWeight
+csro:AssumptionWeight rdf:type owl:Class ;
+                     rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                     rdfs:comment "The weight or effectiveness value of a security assumption in relation to a specific calculation rule."@en ;
+                     rdfs:label "Assumption Weight"@en .
+
+
+###  https://w3id.org/csro/ontology#AttackAction
+csro:AttackAction rdf:type owl:Class ;
+                 rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                 rdfs:comment "The application of an attack pattern in a specific context scenario, with dynamically calculated risk assessments."@en ;
+                 rdfs:label "Attack Action"@en .
+
+
+###  https://w3id.org/csro/ontology#AttackPatternCalculationRule
+csro:AttackPatternCalculationRule rdf:type owl:Class ;
+                                 rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                                 rdfs:comment "A rule for dynamically calculating risk assessment values based on attack patterns and context scenarios."@en ;
+                                 rdfs:label "Attack Pattern Calculation Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#Component
+csro:Component rdf:type owl:Class ;
+              rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+              rdfs:comment "A system component that can be affected by security impacts."@en ;
+              rdfs:label "Component"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerAttackTechnique
+csro:ContainerAttackTechnique rdf:type owl:Class ;
+                             rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                             rdfs:comment "A MITRE ATT&CK technique adapted and contextualized for container security risk assessment."@en ;
+                             rdfs:label "Container Attack Technique"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerDeploymentTrait
+csro:ContainerDeploymentTrait rdf:type owl:Class ;
+                             rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                             rdfs:comment "A configuration characteristic or setting used in container deployment."@en ;
+                             rdfs:label "Container Deployment Trait"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerEvidence
+csro:ContainerEvidence rdf:type owl:Class ;
+                      rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                      rdfs:comment "Evidence that can be collected to verify container deployment traits and security assumptions."@en ;
+                      rdfs:label "Container Evidence"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerSecurityAssumption
+csro:ContainerSecurityAssumption rdf:type owl:Class ;
+                                rdfs:subClassOf csro:SecurityAssumption ;
+                                rdfs:comment "A security assumption about the operational environment of a container application, derived from standards and best practices."@en ;
+                                rdfs:label "Container Security Assumption"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerSecurityGuideline
+csro:ContainerSecurityGuideline rdf:type owl:Class ;
+                               rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                               rdfs:comment "A security guideline or best practice recommendation for container deployments."@en ;
+                               rdfs:label "Container Security Guideline"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerSecurityRiskThing
+csro:ContainerSecurityRiskThing rdf:type owl:Class ;
+                               rdfs:comment "The root class for all risk assessment concepts in container security."@en ;
+                               rdfs:label "Container Security Risk Thing"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerSecurityStandard
+csro:ContainerSecurityStandard rdf:type owl:Class ;
+                              rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                              rdfs:comment "A formal security standard or framework that defines container security requirements."@en ;
+                              rdfs:label "Container Security Standard"@en .
+
+
+###  https://w3id.org/csro/ontology#ContainerSecurityStandardSection
+csro:ContainerSecurityStandardSection rdf:type owl:Class ;
+                                     rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                                     rdfs:comment "A specific section, chapter, or control within a container security standard."@en ;
+                                     rdfs:label "Container Security Standard Section"@en .
+
+
+###  https://w3id.org/csro/ontology#ContextScenario
+csro:ContextScenario rdf:type owl:Class ;
+                    rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                    rdfs:comment "A scenario representing a collection of security assumptions with their satisfaction states. Scenarios are independent of specific attacks and represent different security postures."@en ;
+                    rdfs:label "Context Scenario"@en .
+
+
+###  https://w3id.org/csro/ontology#DifficultyLevel
+csro:DifficultyLevel rdf:type owl:Class ;
+                    rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                    rdfs:comment "The base difficulty level for executing an attack pattern (e.g., Low, Medium, High)."@en ;
+                    rdfs:label "Difficulty Level"@en .
+
+
+###  https://w3id.org/csro/ontology#DockerComposeSetting
+csro:DockerComposeSetting rdf:type owl:Class ;
+                         rdfs:subClassOf csro:ContainerEvidence ;
+                         rdfs:comment "Configuration settings extracted from Docker Compose files as evidence for container deployment traits."@en ;
+                         rdfs:label "Docker Compose Setting"@en .
+
+
+###  https://w3id.org/csro/ontology#ExploitabilityCalculationRule
+csro:ExploitabilityCalculationRule rdf:type owl:Class ;
+                                  rdfs:subClassOf csro:AttackPatternCalculationRule ;
+                                  rdfs:comment "A rule for calculating exploitability ratings based on attack patterns and security assumptions."@en ;
+                                  rdfs:label "Exploitability Calculation Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#ExploitabilityRating
+csro:ExploitabilityRating rdf:type owl:Class ;
+                         rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                         rdfs:comment "A rating indicating the ease of exploitation (e.g., Low, Medium, High)."@en ;
+                         rdfs:label "Exploitability Rating"@en .
+
+
+###  https://w3id.org/csro/ontology#ExposureCalculationRule
+csro:ExposureCalculationRule rdf:type owl:Class ;
+                            rdfs:subClassOf csro:AttackPatternCalculationRule ;
+                            rdfs:comment "A rule for calculating exposure ratings based on attack patterns and security assumptions."@en ;
+                            rdfs:label "Exposure Calculation Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#ExposureRating
+csro:ExposureRating rdf:type owl:Class ;
+                   rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                   rdfs:comment "A rating indicating the level of exposure to attack (e.g., Low, Medium, High)."@en ;
+                   rdfs:label "Exposure Rating"@en .
+
+
+###  https://w3id.org/csro/ontology#HadolintDockerfileRule
+csro:HadolintDockerfileRule rdf:type owl:Class ;
+                           rdfs:subClassOf csro:ContainerEvidence ;
+                           rdfs:comment "Dockerfile analysis rules and findings from Hadolint tool as evidence for container image security."@en ;
+                           rdfs:label "Hadolint Dockerfile Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#Impact
+csro:Impact rdf:type owl:Class ;
+           rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+           rdfs:comment "The consequence or effect that results from a security threat being realized."@en ;
+           rdfs:label "Impact"@en .
+
+
+###  https://w3id.org/csro/ontology#ImpactRating
+csro:ImpactRating rdf:type owl:Class ;
+                 rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                 rdfs:comment "A rating indicating the severity of security impact (e.g., Negligible, Moderate, Critical, Disastrous)."@en ;
+                 rdfs:label "Impact Rating"@en .
+
+
+###  https://w3id.org/csro/ontology#Likelihood
+csro:Likelihood rdf:type owl:Class ;
+               rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+               rdfs:comment "A rating indicating the probability of an attack being successful (e.g., Very Unlikely, Unlikely, Possible, Likely, Very Likely)."@en ;
+               rdfs:label "Likelihood"@en .
+
+
+###  https://w3id.org/csro/ontology#LikelihoodCalculationRule
+csro:LikelihoodCalculationRule rdf:type owl:Class ;
+                              rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                              rdfs:comment "A rule for calculating likelihood ratings from exploitability and exposure ratings."@en ;
+                              rdfs:label "Likelihood Calculation Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#Risk
+csro:Risk rdf:type owl:Class ;
+         rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+         rdfs:comment "A potential security risk resulting from the combination of likelihood and impact."@en ;
+         rdfs:label "Risk"@en .
+
+
+###  https://w3id.org/csro/ontology#RiskCalculationRule
+csro:RiskCalculationRule rdf:type owl:Class ;
+                        rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                        rdfs:comment "A rule for calculating overall risk levels from likelihood and impact ratings."@en ;
+                        rdfs:label "Risk Calculation Rule"@en .
+
+
+###  https://w3id.org/csro/ontology#RiskLevel
+csro:RiskLevel rdf:type owl:Class ;
+              rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+              rdfs:comment "The overall risk level calculated from likelihood and impact (e.g., Negligible, Minor, Moderate, Significant, Major)."@en ;
+              rdfs:label "Risk Level"@en .
+
+
+###  https://w3id.org/csro/ontology#RiskTreatment
+csro:RiskTreatment rdf:type owl:Class ;
+                  rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                  rdfs:comment "A strategy or action for mitigating security risks."@en ;
+                  rdfs:label "Risk Treatment"@en .
+
+
+###  https://w3id.org/csro/ontology#SatisfactionState
+csro:SatisfactionState rdf:type owl:Class ;
+                      rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                      rdfs:comment "The satisfaction state of a security assumption: satisfied, dissatisfied, or unknown."@en ;
+                      rdfs:label "Satisfaction State"@en .
+
+
+###  https://w3id.org/csro/ontology#SecurityAssumption
+csro:SecurityAssumption rdf:type owl:Class ;
+                       rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                       rdfs:comment "A security assumption about the operational environment of a system for security risk assessment."@en ;
+                       rdfs:label "Security Assumption"@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://w3id.org/csro/ontology#AUTH_1
+csro:AUTH_1 rdf:type owl:NamedIndividual ,
+                    csro:ContainerSecurityAssumption ;
+           csro:belongsToCategory csro:AuthenticationAccess ;
+           csro:originatesFrom csro:CIS_Docker_Benchmark_2_7 ,
+                              csro:NIST_SP_800_190_Section_4_3_2 ,
+                              csro:OWASP_Docker_Top_10_D04 ;
+           csro:assumptionId "AUTH-1" ;
+           csro:description "Authentication for exposed container APIs is enforced" .
+
+
+###  https://w3id.org/csro/ontology#AUTH_2
+csro:AUTH_2 rdf:type owl:NamedIndividual ,
+                    csro:ContainerSecurityAssumption ;
+           csro:belongsToCategory csro:AuthenticationAccess ;
+           csro:originatesFrom csro:CIS_Docker_Benchmark_2_12 ,
+                              csro:NIST_SP_800_190_Section_4_3_1 ;
+           csro:assumptionId "AUTH-2" ;
+           csro:description "Role-based access control is used for orchestration and container management" .
+
+
+###  https://w3id.org/csro/ontology#AUTH_3
+csro:AUTH_3 rdf:type owl:NamedIndividual ,
+                    csro:ContainerSecurityAssumption ;
+           csro:belongsToCategory csro:AuthenticationAccess ;
+           csro:originatesFrom csro:CIS_Docker_Benchmark_3_23 ,
+                              csro:CIS_Docker_Benchmark_3_24 ,
+                              csro:CIS_Docker_Benchmark_3_3 ,
+                              csro:CIS_Docker_Benchmark_3_4 ,
+                              csro:CIS_Docker_Benchmark_5_32 ,
+                              csro:NIST_SP_800_190_Section_4_3_1 ,
+                              csro:OWASP_Docker_Security_Cheat_Sheet_1 ;
+           csro:assumptionId "AUTH-3" ;
+           csro:description "Access to container management interfaces (e.g., Docker socket) is restricted" .
+
+
+###  https://w3id.org/csro/ontology#Application
+csro:Application rdf:type owl:NamedIndividual ,
+                         csro:Component ;
+                csro:description "Container applications and processes running on the host system." ;
+                rdfs:label "Application" .
+
+
+###  https://w3id.org/csro/ontology#AuthenticationAccess
+csro:AuthenticationAccess rdf:type owl:NamedIndividual ,
+                                  csro:AssumptionCategory ;
+                         csro:description "Security assumptions related to authentication and access control." .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario
+csro:BasicScenario rdf:type owl:NamedIndividual ,
+                           csro:ContextScenario ;
+                  csro:includes csro:Application ,
+                               csro:Device ,
+                               csro:DeviceContainerRuntime ,
+                               csro:DeviceOperatingSystem ,
+                               csro:OtherApplications ;
+                  csro:includesAssumption csro:BasicScenario_IMG_2 ,
+                                         csro:BasicScenario_NET_1 ,
+                                         csro:BasicScenario_NET_2 ,
+                                         csro:BasicScenario_RTS_1 ,
+                                         csro:BasicScenario_RTS_2 ,
+                                         csro:BasicScenario_RTS_3 ;
+                  csro:description "Basic container deployment scenario with minimal security measures implemented." .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_IMG_2
+csro:BasicScenario_IMG_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:IMG_2 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_NET_1
+csro:BasicScenario_NET_1 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:NET_1 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_NET_2
+csro:BasicScenario_NET_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:NET_2 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_RTS_1
+csro:BasicScenario_RTS_1 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_1 ;
+                        csro:hasSatisfactionState csro:Unknown .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_RTS_2
+csro:BasicScenario_RTS_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_2 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#BasicScenario_RTS_3
+csro:BasicScenario_RTS_3 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_3 ;
+                        csro:hasSatisfactionState csro:Unknown .
+
+
+###  https://w3id.org/csro/ontology#CICDSupplyChain
+csro:CICDSupplyChain rdf:type owl:NamedIndividual ,
+                             csro:AssumptionCategory ;
+                    csro:description "Security assumptions related to CI/CD and supply chain security." .
+
+
+###  https://w3id.org/csro/ontology#CIC_1
+csro:CIC_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:OWASP_Docker_Security_Cheat_Sheet_13 ;
+          csro:assumptionId "CIC-1" ;
+          csro:description "The CI/CD pipeline for the app is secured (regarding code repositories, build environments, secrets, vulnerabilities, signing, auditing ...)" .
+
+
+###  https://w3id.org/csro/ontology#CIC_2
+csro:CIC_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:OWASP_Docker_Security_Cheat_Sheet_13 ;
+          csro:assumptionId "CIC-2" ;
+          csro:description "SBOMs are used for the app to track code dependencies" .
+
+
+###  https://w3id.org/csro/ontology#CIC_3
+csro:CIC_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:OWASP_Docker_Security_Cheat_Sheet_9 ;
+          csro:assumptionId "CIC-3" ;
+          csro:description "Code reviews and automated testing of the app are enforced" .
+
+
+###  https://w3id.org/csro/ontology#CIC_4
+csro:CIC_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_11 ,
+                             csro:NIST_SP_800_190_Section_4_1_5 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_13 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "CIC-4" ;
+          csro:description "Third-party components used by the app are validated" .
+
+
+###  https://w3id.org/csro/ontology#CIC_5
+csro:CIC_5 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_7 ;
+          csro:assumptionId "CIC-5" ;
+          csro:description "The CI/CD pipeline for the app enables reproducible builds" .
+
+
+###  https://w3id.org/csro/ontology#CIC_6
+csro:CIC_6 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:CICDSupplyChain ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_4_5 ,
+                             csro:OWASP_Docker_Top_10_D05 ;
+          csro:assumptionId "CIC-6" ;
+          csro:description "Apps for development and production are not deployed in the same environment" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark
+csro:CIS_Docker_Benchmark rdf:type owl:NamedIndividual ,
+                                  csro:ContainerSecurityStandard ;
+                         csro:description "CIS Docker Benchmark: Security configuration benchmark for Docker" ;
+                         csro:publishedBy "Center for Internet Security" ;
+                         csro:standardId "CIS Docker Benchmark" ;
+                         csro:version "v1.6.0" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_1_1
+csro:CIS_Docker_Benchmark_1_1 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure a separate partition for containers has been created" ;
+                             csro:sectionId "1.1" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_1_2_2
+csro:CIS_Docker_Benchmark_1_2_2 rdf:type owl:NamedIndividual ,
+                                        csro:ContainerSecurityStandardSection ;
+                               csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                               csro:description "Ensure the version of Docker is up to date" ;
+                               csro:sectionId "1.2.2" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_12
+csro:CIS_Docker_Benchmark_2_12 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure centralized and remote logging is configured" ;
+                              csro:sectionId "2.12" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_13
+csro:CIS_Docker_Benchmark_2_13 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure operations on legacy registry (v1) are Disabled" ;
+                              csro:sectionId "2.13" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_17
+csro:CIS_Docker_Benchmark_2_17 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure experimental features are avoided in production" ;
+                              csro:sectionId "2.17" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_2
+csro:CIS_Docker_Benchmark_2_2 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure network traffic is restricted between containers on the default bridge" ;
+                             csro:sectionId "2.2" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_3
+csro:CIS_Docker_Benchmark_2_3 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure logging level is set to 'info'" ;
+                             csro:sectionId "2.3" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_5
+csro:CIS_Docker_Benchmark_2_5 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure insecure registries are not used" ;
+                             csro:sectionId "2.5" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_2_7
+csro:CIS_Docker_Benchmark_2_7 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure the default ulimit is configured appropriately" ;
+                             csro:sectionId "2.7" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_3_23
+csro:CIS_Docker_Benchmark_3_23 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure that docker server certificate file permissions are set to 400" ;
+                              csro:sectionId "3.23" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_3_24
+csro:CIS_Docker_Benchmark_3_24 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure that docker server certificate key file permissions are set to 400" ;
+                              csro:sectionId "3.24" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_3_3
+csro:CIS_Docker_Benchmark_3_3 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure that docker.service file ownership is set to root:root" ;
+                             csro:sectionId "3.3" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_3_4
+csro:CIS_Docker_Benchmark_3_4 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure that docker.service file permissions are set to 644 or more restrictive" ;
+                             csro:sectionId "3.4" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_1
+csro:CIS_Docker_Benchmark_4_1 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure a user for the container has been created" ;
+                             csro:sectionId "4.1" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_10
+csro:CIS_Docker_Benchmark_4_10 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure secrets are not stored in Dockerfiles" ;
+                              csro:sectionId "4.10" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_11
+csro:CIS_Docker_Benchmark_4_11 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure verified packages are only Installed" ;
+                              csro:sectionId "4.11" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_2
+csro:CIS_Docker_Benchmark_4_2 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure that HEALTHCHECK instruction has been added to the container image" ;
+                             csro:sectionId "4.2" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_3
+csro:CIS_Docker_Benchmark_4_3 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure unnecessary packages are not installed in the container" ;
+                             csro:sectionId "4.3" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_4
+csro:CIS_Docker_Benchmark_4_4 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure images are scanned and rebuilt to include security patches" ;
+                             csro:sectionId "4.4" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_5
+csro:CIS_Docker_Benchmark_4_5 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure Content trust for Docker is Enabled" ;
+                             csro:sectionId "4.5" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_6
+csro:CIS_Docker_Benchmark_4_6 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure HEALTHCHECK instruction has been added to the container image" ;
+                             csro:sectionId "4.6" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_7
+csro:CIS_Docker_Benchmark_4_7 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure update instructions are not used alone in the Dockerfile" ;
+                             csro:sectionId "4.7" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_4_8
+csro:CIS_Docker_Benchmark_4_8 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure setuid and setgid permissions are removed in the images" ;
+                             csro:sectionId "4.8" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_10
+csro:CIS_Docker_Benchmark_5_10 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure memory usage for container is limited" ;
+                              csro:sectionId "5.10" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_11
+csro:CIS_Docker_Benchmark_5_11 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure CPU priority is set appropriately on the container" ;
+                              csro:sectionId "5.11" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_12
+csro:CIS_Docker_Benchmark_5_12 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the container's root filesystem is mounted as read only" ;
+                              csro:sectionId "5.12" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_13
+csro:CIS_Docker_Benchmark_5_13 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the container's root filesystem is mounted as read only" ;
+                              csro:sectionId "5.13" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_14
+csro:CIS_Docker_Benchmark_5_14 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure 'on-failure' container restart policy is set to '5'" ;
+                              csro:sectionId "5.14" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_16
+csro:CIS_Docker_Benchmark_5_16 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the host's process namespace is not shared" ;
+                              csro:sectionId "5.16" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_17
+csro:CIS_Docker_Benchmark_5_17 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the host's IPC namespace is not shared" ;
+                              csro:sectionId "5.17" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_18
+csro:CIS_Docker_Benchmark_5_18 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure host devices are not directly exposed to containers" ;
+                              csro:sectionId "5.18" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_2
+csro:CIS_Docker_Benchmark_5_2 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure SELinux security options are set, if applicable" ;
+                             csro:sectionId "5.2" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_21
+csro:CIS_Docker_Benchmark_5_21 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the default ulimit is overwritten at runtime, only if needed" ;
+                              csro:sectionId "5.21" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_22
+csro:CIS_Docker_Benchmark_5_22 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure docker exec commands are not used with privileged option" ;
+                              csro:sectionId "5.22" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_24
+csro:CIS_Docker_Benchmark_5_24 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure cgroup usage is confirmed" ;
+                              csro:sectionId "5.24" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_25
+csro:CIS_Docker_Benchmark_5_25 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the container is restricted from acquiring additional privileges" ;
+                              csro:sectionId "5.25" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_27
+csro:CIS_Docker_Benchmark_5_27 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure docker commands always get the latest version of the image" ;
+                              csro:sectionId "5.27" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_28
+csro:CIS_Docker_Benchmark_5_28 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure PIDs cgroup limit is used" ;
+                              csro:sectionId "5.28" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_3
+csro:CIS_Docker_Benchmark_5_3 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure Linux Kernel Capabilities are restricted within containers" ;
+                             csro:sectionId "5.3" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_30
+csro:CIS_Docker_Benchmark_5_30 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the host's user namespaces is not shared" ;
+                              csro:sectionId "5.30" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_31
+csro:CIS_Docker_Benchmark_5_31 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure the Docker socket is not mounted inside any containers" ;
+                              csro:sectionId "5.31" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_32
+csro:CIS_Docker_Benchmark_5_32 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                              csro:description "Ensure docker exec commands are not used with user option" ;
+                              csro:sectionId "5.32" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_4
+csro:CIS_Docker_Benchmark_5_4 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure privileged containers are not used" ;
+                             csro:sectionId "5.4" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_5_6
+csro:CIS_Docker_Benchmark_5_6 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure sensitive host system directories are not mounted on containers" ;
+                             csro:sectionId "5.6" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_6_1
+csro:CIS_Docker_Benchmark_6_1 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure image sprawl is avoided" ;
+                             csro:sectionId "6.1" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_7_3
+csro:CIS_Docker_Benchmark_7_3 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure swarm services are binded to a specific host interface" ;
+                             csro:sectionId "7.3" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_7_4
+csro:CIS_Docker_Benchmark_7_4 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure data exchanged between containers are encrypted on different nodes on the overlay network" ;
+                             csro:sectionId "7.4" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_7_6
+csro:CIS_Docker_Benchmark_7_6 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure swarm manager is run in auto-lock mode" ;
+                             csro:sectionId "7.6" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_7_7
+csro:CIS_Docker_Benchmark_7_7 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure swarm manager auto-lock key is rotated periodically" ;
+                             csro:sectionId "7.7" .
+
+
+###  https://w3id.org/csro/ontology#CIS_Docker_Benchmark_7_8
+csro:CIS_Docker_Benchmark_7_8 rdf:type owl:NamedIndividual ,
+                                      csro:ContainerSecurityStandardSection ;
+                             csro:belongsToStandard csro:CIS_Docker_Benchmark ;
+                             csro:description "Ensure node certificates are rotated as appropriate" ;
+                             csro:sectionId "7.8" .
+
+
+###  https://w3id.org/csro/ontology#CRM_1
+csro:CRM_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ComplianceRiskManagement ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_6 ;
+          csro:assumptionId "CRM-1" ;
+          csro:description "Regular risk assessments of apps and host devices are performed" .
+
+
+###  https://w3id.org/csro/ontology#CRM_2
+csro:CRM_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ComplianceRiskManagement ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_6 ;
+          csro:assumptionId "CRM-2" ;
+          csro:description "The operation's asset inventory is maintained" .
+
+
+###  https://w3id.org/csro/ontology#CRM_3
+csro:CRM_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ComplianceRiskManagement ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_17 ,
+                             csro:CIS_Docker_Benchmark_5_2 ,
+                             csro:CIS_Docker_Benchmark_5_22 ,
+                             csro:CIS_Docker_Benchmark_5_3 ,
+                             csro:NIST_SP_800_190_Section_4_1_2 ,
+                             csro:NIST_SP_800_190_Section_4_3_1 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:NIST_SP_800_190_Section_6 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_5 ;
+          csro:assumptionId "CRM-3" ;
+          csro:description "Container security policies along the app lifecycle are documented and enforced" .
+
+
+###  https://w3id.org/csro/ontology#CRM_4
+csro:CRM_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ComplianceRiskManagement ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_1_2 ,
+                             csro:NIST_SP_800_190_Section_4_3_1 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ;
+          csro:assumptionId "CRM-4" ;
+          csro:description "Periodic audits and reviews of apps and host devices are conducted" .
+
+
+###  https://w3id.org/csro/ontology#ComplianceRiskManagement
+csro:ComplianceRiskManagement rdf:type owl:NamedIndividual ,
+                                      csro:AssumptionCategory ;
+                             csro:description "Security assumptions related to compliance and risk management." .
+
+
+###  https://w3id.org/csro/ontology#ConfigureHostFirewall
+csro:ConfigureHostFirewall rdf:type owl:NamedIndividual ,
+                                   csro:RiskTreatment ;
+                          csro:addresses csro:NET_2 ;
+                          csro:hasGuideline csro:GuidelineNetworking ;
+                          csro:isImplementedBy csro:host-level_firewall ;
+                          csro:description "Configure host-level firewall rules and network policies to control traffic" ;
+                          rdfs:label "Configure Host-Level Firewall" .
+
+
+###  https://w3id.org/csro/ontology#ContainerImageSecurity
+csro:ContainerImageSecurity rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionCategory ;
+                           csro:description "Security assumptions related to container image security practices." .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceExp_NET_1_Weight
+csro:ContainerPtraceExp_NET_1_Weight rdf:type owl:NamedIndividual ,
+                                             csro:AssumptionWeight ;
+                                    csro:refersToAssumption csro:NET_1 ;
+                                    csro:description "Weight for network segmentation assumption in container ptrace injection exposure calculation" ;
+                                    csro:weightValue 2.0 ;
+                                    csro:effectDescription "Medium effect - moderately reduces attack exposure by limiting network access and preventing lateral movement" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceExp_NET_2_Weight
+csro:ContainerPtraceExp_NET_2_Weight rdf:type owl:NamedIndividual ,
+                                             csro:AssumptionWeight ;
+                                    csro:refersToAssumption csro:NET_2 ;
+                                    csro:description "Weight for firewall rules assumption in container ptrace injection exposure calculation" ;
+                                    csro:weightValue 2.0 ;
+                                    csro:effectDescription "Medium effect - moderately reduces attack exposure by controlling network traffic and blocking unauthorized connections" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjection
+csro:ContainerPtraceInjection rdf:type owl:NamedIndividual ,
+                                      csro:ContainerAttackTechnique ;
+                             csro:hasBaseDifficulty csro:Medium ;
+                             csro:referencesAttackTechnique d3f:T1055.008 ;
+                             csro:requiresTrait csro:cap_add_CAP_SYS_PTRACE ,
+                                               csro:host_pid ;
+                             csro:description "Container-specific adaptation of MITRE ATT&CK T1055.008 (Ptrace System Calls) targeting container escape scenarios through process injection in containerized environments" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjectionAttack_BasicScenario
+csro:ContainerPtraceInjectionAttack_BasicScenario rdf:type owl:NamedIndividual ,
+                                                          csro:AttackAction ;
+                                                 csro:affects csro:Application ,
+                                                             csro:Device ,
+                                                             csro:DeviceContainerRuntime ,
+                                                             csro:DeviceOperatingSystem ,
+                                                             csro:OtherApplications ;
+                                                 csro:appliesTechnique csro:ContainerPtraceInjection ;
+                                                 csro:causesImpact csro:HostProcessManipulation ;
+                                                 csro:inContext csro:BasicScenario ;
+                                                 csro:description "Container ptrace injection attack (T1055.008) applied in basic scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjectionAttack_HardenedScenario
+csro:ContainerPtraceInjectionAttack_HardenedScenario rdf:type owl:NamedIndividual ,
+                                                             csro:AttackAction ;
+                                                    csro:affects csro:Application ,
+                                                                csro:Device ,
+                                                                csro:DeviceContainerRuntime ,
+                                                                csro:DeviceOperatingSystem ,
+                                                                csro:OtherApplications ;
+                                                    csro:appliesTechnique csro:ContainerPtraceInjection ;
+                                                    csro:causesImpact csro:HostProcessManipulation ;
+                                                    csro:inContext csro:HardenedScenario ;
+                                                    csro:description "Container ptrace injection attack (T1055.008) applied in hardened scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjectionAttack_MixedScenario
+csro:ContainerPtraceInjectionAttack_MixedScenario rdf:type owl:NamedIndividual ,
+                                                          csro:AttackAction ;
+                                                 csro:affects csro:Application ,
+                                                             csro:Device ,
+                                                             csro:DeviceContainerRuntime ,
+                                                             csro:DeviceOperatingSystem ,
+                                                             csro:OtherApplications ;
+                                                 csro:appliesTechnique csro:ContainerPtraceInjection ;
+                                                 csro:causesImpact csro:HostProcessManipulation ;
+                                                 csro:inContext csro:MixedScenario ;
+                                                 csro:description "Container ptrace injection attack (T1055.008) applied in mixed scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjectionExploitabilityRule
+csro:ContainerPtraceInjectionExploitabilityRule rdf:type owl:NamedIndividual ,
+                                                        csro:ExploitabilityCalculationRule ;
+                                               csro:appliesTo csro:ContainerPtraceInjection ;
+                                               csro:hasWeight csro:ContainerPtrace_IMG_2_Weight ,
+                                                             csro:ContainerPtrace_RTS_1_Weight ,
+                                                             csro:ContainerPtrace_RTS_2_Weight ,
+                                                             csro:ContainerPtrace_RTS_3_Weight ;
+                                               csro:description "Rule for calculating exploitability of container ptrace injection technique (T1055.008)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjectionExposureRule
+csro:ContainerPtraceInjectionExposureRule rdf:type owl:NamedIndividual ,
+                                                  csro:ExposureCalculationRule ;
+                                         csro:appliesTo csro:ContainerPtraceInjection ;
+                                         csro:hasWeight csro:ContainerPtraceExp_NET_1_Weight ,
+                                                       csro:ContainerPtraceExp_NET_2_Weight ;
+                                         csro:description "Rule for calculating exposure of container ptrace injection technique (T1055.008)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtrace_IMG_2_Weight
+csro:ContainerPtrace_IMG_2_Weight rdf:type owl:NamedIndividual ,
+                                          csro:AssumptionWeight ;
+                                 csro:refersToAssumption csro:IMG_2 ;
+                                 csro:description "Weight for vulnerability scanning assumption in container ptrace injection exploitability calculation" ;
+                                 csro:weightValue 1.0 ;
+                                 csro:effectDescription "Low effect - provides basic protection by ensuring container images are free of known vulnerabilities" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtrace_RTS_1_Weight
+csro:ContainerPtrace_RTS_1_Weight rdf:type owl:NamedIndividual ,
+                                          csro:AssumptionWeight ;
+                                 csro:refersToAssumption csro:RTS_1 ;
+                                 csro:description "Weight for non-root user assumption in container ptrace injection exploitability calculation" ;
+                                 csro:weightValue 3.0 ;
+                                 csro:effectDescription "High effect - significantly reduces attack success by limiting process privileges and access to system resources" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtrace_RTS_2_Weight
+csro:ContainerPtrace_RTS_2_Weight rdf:type owl:NamedIndividual ,
+                                          csro:AssumptionWeight ;
+                                 csro:refersToAssumption csro:RTS_2 ;
+                                 csro:description "Weight for read-only filesystem assumption in container ptrace injection exploitability calculation" ;
+                                 csro:weightValue 2.0 ;
+                                 csro:effectDescription "Medium effect - provides moderate protection against shellcode injection by preventing file system modifications" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtrace_RTS_3_Weight
+csro:ContainerPtrace_RTS_3_Weight rdf:type owl:NamedIndividual ,
+                                          csro:AssumptionWeight ;
+                                 csro:refersToAssumption csro:RTS_3 ;
+                                 csro:description "Weight for minimal capabilities assumption in container ptrace injection exploitability calculation" ;
+                                 csro:weightValue 1.0 ;
+                                 csro:effectDescription "Low effect - provides basic protection by removing unnecessary Linux capabilities" .
+
+
+###  https://w3id.org/csro/ontology#Critical
+csro:Critical rdf:type owl:NamedIndividual ,
+                      csro:ImpactRating ;
+             csro:description "Critical impact rating indicating severe consequences." .
+
+
+###  https://w3id.org/csro/ontology#Device
+csro:Device rdf:type owl:NamedIndividual ,
+                    csro:Component ;
+           csro:description "Physical or virtual device hosting the container runtime." ;
+           rdfs:label "Device" .
+
+
+###  https://w3id.org/csro/ontology#DeviceAccess
+csro:DeviceAccess rdf:type owl:NamedIndividual ,
+                          csro:ContainerDeploymentTrait ;
+                 csro:description "Container has access to host devices" ;
+                 rdfs:label "device_access" .
+
+
+###  https://w3id.org/csro/ontology#DeviceContainerRuntime
+csro:DeviceContainerRuntime rdf:type owl:NamedIndividual ,
+                                    csro:Component ;
+                           csro:description "Container runtime engine (e.g., Docker, containerd) running on the host device." ;
+                           rdfs:label "Device Container Runtime" .
+
+
+###  https://w3id.org/csro/ontology#DeviceOperatingSystem
+csro:DeviceOperatingSystem rdf:type owl:NamedIndividual ,
+                                   csro:Component ;
+                          csro:description "Host operating system where containers are deployed." ;
+                          rdfs:label "Device Operating System" .
+
+
+###  https://w3id.org/csro/ontology#Disastrous
+csro:Disastrous rdf:type owl:NamedIndividual ,
+                        csro:ImpactRating ;
+               csro:description "Disastrous impact rating indicating catastrophic consequences." .
+
+
+###  https://w3id.org/csro/ontology#Dissatisfied
+csro:Dissatisfied rdf:type owl:NamedIndividual ,
+                          csro:SatisfactionState ;
+                 csro:description "The security assumption is not satisfied/implemented." .
+
+
+###  https://w3id.org/csro/ontology#EnableReadOnlyFilesystem
+csro:EnableReadOnlyFilesystem rdf:type owl:NamedIndividual ,
+                                      csro:RiskTreatment ;
+                             csro:addresses csro:RTS_2 ;
+                             csro:hasGuideline csro:GuidelineFilesystem ;
+                             csro:isImplementedBy csro:read_only_filesystem ;
+                             csro:description "Mount container filesystem as read-only to prevent malicious file modifications" ;
+                             rdfs:label "Enable Read-Only Filesystem" .
+
+
+###  https://w3id.org/csro/ontology#GuidelineCapabilities
+csro:GuidelineCapabilities rdf:type owl:NamedIndividual ,
+                                   csro:ContainerSecurityGuideline ;
+                          csro:description "Best practices for managing Linux capabilities in containers" ;
+                          csro:referenceUrl "https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities" ;
+                          rdfs:label "Container Capabilities Security Guidelines" .
+
+
+###  https://w3id.org/csro/ontology#GuidelineFilesystem
+csro:GuidelineFilesystem rdf:type owl:NamedIndividual ,
+                                 csro:ContainerSecurityGuideline ;
+                        csro:description "Best practices for container filesystem security" ;
+                        csro:referenceUrl "https://docs.docker.com/engine/reference/run/#read-only-containers" ;
+                        rdfs:label "Container Filesystem Security Guidelines" .
+
+
+###  https://w3id.org/csro/ontology#GuidelineNamespaces
+csro:GuidelineNamespaces rdf:type owl:NamedIndividual ,
+                                 csro:ContainerSecurityGuideline ;
+                        csro:description "Best practices for namespace isolation in containers" ;
+                        csro:referenceUrl "https://docs.docker.com/engine/security/userns-remap/" ;
+                        rdfs:label "Container Namespace Security Guidelines" .
+
+
+###  https://w3id.org/csro/ontology#GuidelineNetworking
+csro:GuidelineNetworking rdf:type owl:NamedIndividual ,
+                                 csro:ContainerSecurityGuideline ;
+                        csro:description "Best practices for container network security and segmentation" ;
+                        csro:referenceUrl "https://docs.docker.com/network/bridge/" ;
+                        rdfs:label "Container Network Security Guidelines" .
+
+
+###  https://w3id.org/csro/ontology#GuidelineUserConfiguration
+csro:GuidelineUserConfiguration rdf:type owl:NamedIndividual ,
+                                        csro:ContainerSecurityGuideline ;
+                               csro:description "Best practices for configuring container user permissions" ;
+                               csro:referenceUrl "https://docs.docker.com/develop/dev-best-practices/#how-to-keep-your-images-small" ;
+                               rdfs:label "Container User Configuration Guidelines" .
+
+
+###  https://w3id.org/csro/ontology#HIS_1
+csro:HIS_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:HostInfrastructureSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_1_2_2 ,
+                             csro:NIST_SP_800_190_Section_4_5_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_0 ,
+                             csro:OWASP_Docker_Top_10_D02 ;
+          csro:assumptionId "HIS-1" ;
+          csro:description "The container runtime on the host device is up to date" .
+
+
+###  https://w3id.org/csro/ontology#HIS_2
+csro:HIS_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:HostInfrastructureSecurity ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_5_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_8 ,
+                             csro:OWASP_Docker_Top_10_D09 ;
+          csro:assumptionId "HIS-2" ;
+          csro:description "The host device is deployed as an immutable infrastructure (e.g. read-only file system)" .
+
+
+###  https://w3id.org/csro/ontology#HIS_3
+csro:HIS_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:HostInfrastructureSecurity ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_5_5 ;
+          csro:assumptionId "HIS-3" ;
+          csro:description "The host device is monitored for unauthorized changes" .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario
+csro:HardenedScenario rdf:type owl:NamedIndividual ,
+                              csro:ContextScenario ;
+                     csro:includes csro:Application ,
+                                  csro:Device ,
+                                  csro:DeviceContainerRuntime ,
+                                  csro:DeviceOperatingSystem ,
+                                  csro:OtherApplications ;
+                     csro:includesAssumption csro:HardenedScenario_IMG_2 ,
+                                            csro:HardenedScenario_NET_1 ,
+                                            csro:HardenedScenario_NET_2 ,
+                                            csro:HardenedScenario_RTS_1 ,
+                                            csro:HardenedScenario_RTS_2 ,
+                                            csro:HardenedScenario_RTS_3 ;
+                     csro:description "Hardened container deployment scenario with comprehensive security measures implemented." .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_IMG_2
+csro:HardenedScenario_IMG_2 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:IMG_2 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_NET_1
+csro:HardenedScenario_NET_1 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:NET_1 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_NET_2
+csro:HardenedScenario_NET_2 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:NET_2 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_RTS_1
+csro:HardenedScenario_RTS_1 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:RTS_1 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_RTS_2
+csro:HardenedScenario_RTS_2 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:RTS_2 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#HardenedScenario_RTS_3
+csro:HardenedScenario_RTS_3 rdf:type owl:NamedIndividual ,
+                                    csro:AssumptionInScenario ;
+                           csro:forAssumption csro:RTS_3 ;
+                           csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#High
+csro:High rdf:type owl:NamedIndividual ,
+                  csro:DifficultyLevel ;
+         csro:description "High difficulty level for attack execution" .
+
+
+###  https://w3id.org/csro/ontology#HighExploitability
+csro:HighExploitability rdf:type owl:NamedIndividual ,
+                                csro:ExploitabilityRating ;
+                       csro:description "High exploitability rating" .
+
+
+###  https://w3id.org/csro/ontology#HighExploitabilityAndHighExposure
+csro:HighExploitabilityAndHighExposure rdf:type owl:NamedIndividual ,
+                                               csro:LikelihoodCalculationRule ;
+                                      csro:hasExploitabilityRating csro:HighExploitability ;
+                                      csro:hasExposureRating csro:HighExposure ;
+                                      csro:resultsIn csro:VeryLikely .
+
+
+###  https://w3id.org/csro/ontology#HighExploitabilityAndLowExposure
+csro:HighExploitabilityAndLowExposure rdf:type owl:NamedIndividual ,
+                                              csro:LikelihoodCalculationRule ;
+                                     csro:hasExploitabilityRating csro:HighExploitability ;
+                                     csro:hasExposureRating csro:LowExposure ;
+                                     csro:resultsIn csro:Possible .
+
+
+###  https://w3id.org/csro/ontology#HighExploitabilityAndMediumExposure
+csro:HighExploitabilityAndMediumExposure rdf:type owl:NamedIndividual ,
+                                                 csro:LikelihoodCalculationRule ;
+                                        csro:hasExploitabilityRating csro:HighExploitability ;
+                                        csro:hasExposureRating csro:MediumExposure ;
+                                        csro:resultsIn csro:Likely .
+
+
+###  https://w3id.org/csro/ontology#HighExposure
+csro:HighExposure rdf:type owl:NamedIndividual ,
+                          csro:ExposureRating ;
+                 csro:description "High exposure rating" .
+
+
+###  https://w3id.org/csro/ontology#HostInfrastructureSecurity
+csro:HostInfrastructureSecurity rdf:type owl:NamedIndividual ,
+                                        csro:AssumptionCategory ;
+                               csro:description "Security assumptions related to host and infrastructure security." .
+
+
+###  https://w3id.org/csro/ontology#HostProcessManipulation
+csro:HostProcessManipulation rdf:type owl:NamedIndividual ,
+                                     csro:Impact ;
+                            csro:hasImpactRating csro:Disastrous ;
+                            csro:indicates csro:HostProcessManipulationRisk ;
+                            csro:description "Ability to manipulate and inject code into host processes, potentially compromising the entire host system." .
+
+
+###  https://w3id.org/csro/ontology#HostProcessManipulationRisk
+csro:HostProcessManipulationRisk rdf:type owl:NamedIndividual ,
+                                         csro:Risk ;
+                                csro:isTreatedBy csro:ConfigureHostFirewall ,
+                                                csro:EnableReadOnlyFilesystem ,
+                                                csro:MinimizeCapabilities ,
+                                                csro:RunAsNonRootUser ,
+                                                csro:ScanContainerImages ,
+                                                csro:SegmentNetworks ;
+                                csro:description "Risk of container escape and host process manipulation through SysPtrace attack" ;
+                                rdfs:label "Host Process Manipulation Risk" .
+
+
+###  https://w3id.org/csro/ontology#IMG_1
+csro:IMG_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_3 ,
+                             csro:NIST_SP_800_190_Section_4_1_2 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "IMG-1" ;
+          csro:description "App uses minimal base images" .
+
+
+###  https://w3id.org/csro/ontology#IMG_2
+csro:IMG_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:isVerifiableBy csro:dockerfile_no_findings ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_4 ,
+                             csro:NIST_SP_800_190_Section_4_1_1 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_13 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_9 ;
+          csro:assumptionId "IMG-2" ;
+          csro:description "App images are scanned for vulnerabilities" .
+
+
+###  https://w3id.org/csro/ontology#IMG_3
+csro:IMG_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_2 ,
+                             csro:CIS_Docker_Benchmark_4_5 ,
+                             csro:NIST_SP_800_190_Section_4_1_5 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_13 ,
+                             csro:OWASP_Docker_Top_10_D08 ;
+          csro:assumptionId "IMG-3" ;
+          csro:description "App images are signed and verified" .
+
+
+###  https://w3id.org/csro/ontology#IMG_4
+csro:IMG_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_6_1 ,
+                             csro:NIST_SP_800_190_Section_4_2_2 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_9 ;
+          csro:assumptionId "IMG-4" ;
+          csro:description "Dockerfiles of the app pin the base image version" .
+
+
+###  https://w3id.org/csro/ontology#IMG_5
+csro:IMG_5 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_4 ,
+                             csro:CIS_Docker_Benchmark_5_28 ,
+                             csro:NIST_SP_800_190_Section_4_1_1 ,
+                             csro:OWASP_Docker_Top_10_D02 ;
+          csro:assumptionId "IMG-5" ;
+          csro:description "App images are rebuilt and updated regularly" .
+
+
+###  https://w3id.org/csro/ontology#IMG_6
+csro:IMG_6 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_5 ,
+                             csro:CIS_Docker_Benchmark_4_5 ,
+                             csro:NIST_SP_800_190_Section_4_2 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_13 ,
+                             csro:OWASP_Docker_Top_10_D08 ;
+          csro:assumptionId "IMG-6" ;
+          csro:description "Device orchestration only uses trusted image registries" .
+
+
+###  https://w3id.org/csro/ontology#Likely
+csro:Likely rdf:type owl:NamedIndividual ,
+                    csro:Likelihood ;
+           rdfs:label "Likely" .
+
+
+###  https://w3id.org/csro/ontology#LikelyLikelihoodAndCriticalImpact
+csro:LikelyLikelihoodAndCriticalImpact rdf:type owl:NamedIndividual ,
+                                               csro:RiskCalculationRule ;
+                                      csro:hasImpactRating csro:Critical ;
+                                      csro:hasLikelihoodRating csro:Likely ;
+                                      csro:resultsIn csro:Significant .
+
+
+###  https://w3id.org/csro/ontology#LikelyLikelihoodAndDisastrousImpact
+csro:LikelyLikelihoodAndDisastrousImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Disastrous ;
+                                        csro:hasLikelihoodRating csro:Likely ;
+                                        csro:resultsIn csro:Major .
+
+
+###  https://w3id.org/csro/ontology#LikelyLikelihoodAndModerateImpact
+csro:LikelyLikelihoodAndModerateImpact rdf:type owl:NamedIndividual ,
+                                               csro:RiskCalculationRule ;
+                                      csro:hasImpactRating csro:Moderate ;
+                                      csro:hasLikelihoodRating csro:Likely ;
+                                      csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#LikelyLikelihoodAndNegligibleImpact
+csro:LikelyLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Negligible ;
+                                        csro:hasLikelihoodRating csro:Likely ;
+                                        csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#Low
+csro:Low rdf:type owl:NamedIndividual ,
+                 csro:DifficultyLevel ;
+        csro:description "Low difficulty level for attack execution" .
+
+
+###  https://w3id.org/csro/ontology#LowExploitability
+csro:LowExploitability rdf:type owl:NamedIndividual ,
+                               csro:ExploitabilityRating ;
+                      csro:description "Low exploitability rating" .
+
+
+###  https://w3id.org/csro/ontology#LowExploitabilityAndHighExposure
+csro:LowExploitabilityAndHighExposure rdf:type owl:NamedIndividual ,
+                                              csro:LikelihoodCalculationRule ;
+                                     csro:hasExploitabilityRating csro:LowExploitability ;
+                                     csro:hasExposureRating csro:HighExposure ;
+                                     csro:resultsIn csro:Possible .
+
+
+###  https://w3id.org/csro/ontology#LowExploitabilityAndLowExposure
+csro:LowExploitabilityAndLowExposure rdf:type owl:NamedIndividual ,
+                                             csro:LikelihoodCalculationRule ;
+                                    csro:hasExploitabilityRating csro:LowExploitability ;
+                                    csro:hasExposureRating csro:LowExposure ;
+                                    csro:resultsIn csro:VeryUnlikely .
+
+
+###  https://w3id.org/csro/ontology#LowExploitabilityAndMediumExposure
+csro:LowExploitabilityAndMediumExposure rdf:type owl:NamedIndividual ,
+                                                csro:LikelihoodCalculationRule ;
+                                       csro:hasExploitabilityRating csro:LowExploitability ;
+                                       csro:hasExposureRating csro:MediumExposure ;
+                                       csro:resultsIn csro:Unlikely .
+
+
+###  https://w3id.org/csro/ontology#LowExposure
+csro:LowExposure rdf:type owl:NamedIndividual ,
+                         csro:ExposureRating ;
+                csro:description "Low exposure rating" .
+
+
+###  https://w3id.org/csro/ontology#MON_1
+csro:MON_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_1_1 ,
+                             csro:CIS_Docker_Benchmark_2_3 ,
+                             csro:NIST_SP_800_190_Section_4_4_4 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_10 ,
+                             csro:OWASP_Docker_Top_10_D10 ;
+          csro:assumptionId "MON-1" ;
+          csro:description "Container-level logging is enabled" .
+
+
+###  https://w3id.org/csro/ontology#MON_2
+csro:MON_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-2" ;
+          csro:description "Processes on the host device are monitored for anomalous behavior" .
+
+
+###  https://w3id.org/csro/ontology#MON_3
+csro:MON_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_17 ,
+                             csro:CIS_Docker_Benchmark_5_2 ,
+                             csro:CIS_Docker_Benchmark_5_22 ,
+                             csro:CIS_Docker_Benchmark_5_3 ,
+                             csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-3" ;
+          csro:description "Runtime security tools (e.g. Falco, Trivy) are used" .
+
+
+###  https://w3id.org/csro/ontology#MON_4
+csro:MON_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_6 ,
+                             csro:CIS_Docker_Benchmark_5_27 ,
+                             csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-4" ;
+          csro:description "Incident response procedures are implemented" .
+
+
+###  https://w3id.org/csro/ontology#MON_5
+csro:MON_5 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_13 ,
+                             csro:NIST_SP_800_190_Section_4_4_4 ,
+                             csro:OWASP_Docker_Top_10_D10 ;
+          csro:assumptionId "MON-5" ;
+          csro:description "Logs are centralized and protected" .
+
+
+###  https://w3id.org/csro/ontology#MON_6
+csro:MON_6 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-6" ;
+          csro:description "Decoy containers (honeypots) are deployed on the device to detect malicious activity" .
+
+
+###  https://w3id.org/csro/ontology#MON_7
+csro:MON_7 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-7" ;
+          csro:description "Container API calls and orchestration events are monitored for anomalies" .
+
+
+###  https://w3id.org/csro/ontology#MON_8
+csro:MON_8 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:MonitoringDetectionResponse ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_4_4 ;
+          csro:assumptionId "MON-8" ;
+          csro:description "Alerts are triggered for unauthorized access attempts to container registries or APIs" .
+
+
+###  https://w3id.org/csro/ontology#Major
+csro:Major rdf:type owl:NamedIndividual ,
+                   csro:RiskLevel ;
+          rdfs:label "Major" .
+
+
+###  https://w3id.org/csro/ontology#Medium
+csro:Medium rdf:type owl:NamedIndividual ,
+                    csro:DifficultyLevel ;
+           csro:description "Medium difficulty level for attack execution" .
+
+
+###  https://w3id.org/csro/ontology#MediumExploitability
+csro:MediumExploitability rdf:type owl:NamedIndividual ,
+                                  csro:ExploitabilityRating ;
+                         csro:description "Medium exploitability rating" .
+
+
+###  https://w3id.org/csro/ontology#MediumExploitabilityAndHighExposure
+csro:MediumExploitabilityAndHighExposure rdf:type owl:NamedIndividual ,
+                                                 csro:LikelihoodCalculationRule ;
+                                        csro:hasExploitabilityRating csro:MediumExploitability ;
+                                        csro:hasExposureRating csro:HighExposure ;
+                                        csro:resultsIn csro:Likely .
+
+
+###  https://w3id.org/csro/ontology#MediumExploitabilityAndLowExposure
+csro:MediumExploitabilityAndLowExposure rdf:type owl:NamedIndividual ,
+                                                csro:LikelihoodCalculationRule ;
+                                       csro:hasExploitabilityRating csro:MediumExploitability ;
+                                       csro:hasExposureRating csro:LowExposure ;
+                                       csro:resultsIn csro:Unlikely .
+
+
+###  https://w3id.org/csro/ontology#MediumExploitabilityAndMediumExposure
+csro:MediumExploitabilityAndMediumExposure rdf:type owl:NamedIndividual ,
+                                                   csro:LikelihoodCalculationRule ;
+                                          csro:hasExploitabilityRating csro:MediumExploitability ;
+                                          csro:hasExposureRating csro:MediumExposure ;
+                                          csro:resultsIn csro:Possible .
+
+
+###  https://w3id.org/csro/ontology#MediumExposure
+csro:MediumExposure rdf:type owl:NamedIndividual ,
+                            csro:ExposureRating ;
+                   csro:description "Medium exposure rating" .
+
+
+###  https://w3id.org/csro/ontology#MinimizeCapabilities
+csro:MinimizeCapabilities rdf:type owl:NamedIndividual ,
+                                  csro:RiskTreatment ;
+                         csro:addresses csro:RTS_3 ;
+                         csro:hasGuideline csro:GuidelineCapabilities ;
+                         csro:isImplementedBy csro:cap_drop_all ;
+                         csro:description "Deploy containers with minimal Linux capabilities to reduce attack surface" ;
+                         rdfs:label "Minimize Linux Capabilities" .
+
+
+###  https://w3id.org/csro/ontology#Minor
+csro:Minor rdf:type owl:NamedIndividual ,
+                   csro:RiskLevel ;
+          rdfs:label "Minor" .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario
+csro:MixedScenario rdf:type owl:NamedIndividual ,
+                           csro:ContextScenario ;
+                  csro:includes csro:Application ,
+                               csro:Device ,
+                               csro:DeviceContainerRuntime ,
+                               csro:DeviceOperatingSystem ,
+                               csro:OtherApplications ;
+                  csro:includesAssumption csro:MixedScenario_IMG_2 ,
+                                         csro:MixedScenario_NET_1 ,
+                                         csro:MixedScenario_NET_2 ,
+                                         csro:MixedScenario_RTS_1 ,
+                                         csro:MixedScenario_RTS_2 ,
+                                         csro:MixedScenario_RTS_3 ;
+                  csro:description "Mixed container deployment scenario with partial security measures implemented to demonstrate medium ratings." .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_IMG_2
+csro:MixedScenario_IMG_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:IMG_2 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_NET_1
+csro:MixedScenario_NET_1 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:NET_1 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_NET_2
+csro:MixedScenario_NET_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:NET_2 ;
+                        csro:hasSatisfactionState csro:Unknown .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_RTS_1
+csro:MixedScenario_RTS_1 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_1 ;
+                        csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_RTS_2
+csro:MixedScenario_RTS_2 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_2 ;
+                        csro:hasSatisfactionState csro:Dissatisfied .
+
+
+###  https://w3id.org/csro/ontology#MixedScenario_RTS_3
+csro:MixedScenario_RTS_3 rdf:type owl:NamedIndividual ,
+                                 csro:AssumptionInScenario ;
+                        csro:forAssumption csro:RTS_3 ;
+                        csro:hasSatisfactionState csro:Satisfied .
+
+
+###  https://w3id.org/csro/ontology#Moderate
+csro:Moderate rdf:type owl:NamedIndividual ,
+                      csro:ImpactRating ,
+                      csro:RiskLevel ;
+             csro:description "Moderate impact rating indicating significant but manageable consequences." ;
+             rdfs:label "Moderate" .
+
+
+###  https://w3id.org/csro/ontology#MonitoringDetectionResponse
+csro:MonitoringDetectionResponse rdf:type owl:NamedIndividual ,
+                                         csro:AssumptionCategory ;
+                                csro:description "Security assumptions related to monitoring, detection and response." .
+
+
+###  https://w3id.org/csro/ontology#NET_1
+csro:NET_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:NetworkSecurity ;
+          csro:isVerifiableByAbsence csro:external_network ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_5_10 ,
+                             csro:CIS_Docker_Benchmark_5_30 ,
+                             csro:NIST_SP_800_190_Section_4_3_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_5 ,
+                             csro:OWASP_Docker_Top_10_D03 ;
+          csro:assumptionId "NET-1" ;
+          csro:description "App container networks are segmented" .
+
+
+###  https://w3id.org/csro/ontology#NET_2
+csro:NET_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:NetworkSecurity ;
+          csro:isVerifiableBy csro:host-level_firewall ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_2 ,
+                             csro:CIS_Docker_Benchmark_5_14 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_5 ,
+                             csro:OWASP_Docker_Top_10_D03 ;
+          csro:assumptionId "NET-2" ;
+          csro:description "Host-level firewall rules and network policies are applied" .
+
+
+###  https://w3id.org/csro/ontology#NET_3
+csro:NET_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:NetworkSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_7_3 ,
+                             csro:NIST_SP_800_190_Section_4_3_3 ;
+          csro:assumptionId "NET-3" ;
+          csro:description "Inter-container communication is encrypted" .
+
+
+###  https://w3id.org/csro/ontology#NET_4
+csro:NET_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:NetworkSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_2 ,
+                             csro:CIS_Docker_Benchmark_5_14 ,
+                             csro:NIST_SP_800_190_Section_4_4_2 ,
+                             csro:OWASP_Docker_Top_10_D03 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "NET-4" ;
+          csro:description "Ingress/egress controls for containers are implemented" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190
+csro:NIST_SP_800_190 rdf:type owl:NamedIndividual ,
+                             csro:ContainerSecurityStandard ;
+                    csro:description "NIST Special Publication 800-190: Application Container Security Guide" ;
+                    csro:publicationYear "2017"^^xsd:gYear ;
+                    csro:publishedBy "National Institute of Standards and Technology" ;
+                    csro:standardId "NIST SP 800-190" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_1_1
+csro:NIST_SP_800_190_Section_4_1_1 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Image vulnerabilities" ;
+                                  csro:sectionId "§4.1.1" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_1_2
+csro:NIST_SP_800_190_Section_4_1_2 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Image configuration defects" ;
+                                  csro:sectionId "§4.1.2" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_1_4
+csro:NIST_SP_800_190_Section_4_1_4 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Embedded malware" ;
+                                  csro:sectionId "§4.1.4" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_1_5
+csro:NIST_SP_800_190_Section_4_1_5 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Embedded clear text secrets" ;
+                                  csro:sectionId "§4.1.5" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_2
+csro:NIST_SP_800_190_Section_4_2 rdf:type owl:NamedIndividual ,
+                                         csro:ContainerSecurityStandardSection ;
+                                csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                csro:description "Registry risks" ;
+                                csro:sectionId "§4.2" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_2_2
+csro:NIST_SP_800_190_Section_4_2_2 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Countermeasures for Registry Threats" ;
+                                  csro:sectionId "§4.2.2" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_3_1
+csro:NIST_SP_800_190_Section_4_3_1 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Insecure user access rights" ;
+                                  csro:sectionId "§4.3.1" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_3_2
+csro:NIST_SP_800_190_Section_4_3_2 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Insecure inter-container network traffic" ;
+                                  csro:sectionId "§4.3.2" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_3_3
+csro:NIST_SP_800_190_Section_4_3_3 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Insecure data in transit and at rest" ;
+                                  csro:sectionId "§4.3.3" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_4_2
+csro:NIST_SP_800_190_Section_4_4_2 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Unrestricted network access" ;
+                                  csro:sectionId "§4.4.2" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_4_3
+csro:NIST_SP_800_190_Section_4_4_3 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Insecure container runtime configurations" ;
+                                  csro:sectionId "§4.4.3" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_4_4
+csro:NIST_SP_800_190_Section_4_4_4 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Unrestricted resource consumption" ;
+                                  csro:sectionId "§4.4.4" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_4_5
+csro:NIST_SP_800_190_Section_4_4_5 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Insecure secrets management" ;
+                                  csro:sectionId "§4.4.5" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_5_3
+csro:NIST_SP_800_190_Section_4_5_3 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Inadequate host OS hardening" ;
+                                  csro:sectionId "§4.5.3" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_4_5_5
+csro:NIST_SP_800_190_Section_4_5_5 rdf:type owl:NamedIndividual ,
+                                           csro:ContainerSecurityStandardSection ;
+                                  csro:belongsToStandard csro:NIST_SP_800_190 ;
+                                  csro:description "Inadequate monitoring and logging" ;
+                                  csro:sectionId "§4.5.5" .
+
+
+###  https://w3id.org/csro/ontology#NIST_SP_800_190_Section_6
+csro:NIST_SP_800_190_Section_6 rdf:type owl:NamedIndividual ,
+                                       csro:ContainerSecurityStandardSection ;
+                              csro:belongsToStandard csro:NIST_SP_800_190 ;
+                              csro:description "Threat Modeling and Risk Assessment" ;
+                              csro:sectionId "§6" .
+
+
+###  https://w3id.org/csro/ontology#Negligible
+csro:Negligible rdf:type owl:NamedIndividual ,
+                        csro:ImpactRating ;
+               csro:description "Negligible impact rating indicating minimal consequences." .
+
+
+###  https://w3id.org/csro/ontology#NetworkSecurity
+csro:NetworkSecurity rdf:type owl:NamedIndividual ,
+                             csro:AssumptionCategory ;
+                    csro:description "Security assumptions related to network security and segmentation." .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet
+csro:OWASP_Docker_Security_Cheat_Sheet rdf:type owl:NamedIndividual ,
+                                               csro:ContainerSecurityStandard ;
+                                      csro:description "OWASP Docker Security Cheat Sheet: Security best practices for Docker" ;
+                                      csro:publishedBy "Open Web Application Security Project" ;
+                                      csro:standardId "OWASP Docker Security Cheat Sheet" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_0
+csro:OWASP_Docker_Security_Cheat_Sheet_0 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Rule #0 - Keep Host and Docker up to date" ;
+                                        csro:sectionId "#0" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_1
+csro:OWASP_Docker_Security_Cheat_Sheet_1 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Keep Host and Docker up to date" ;
+                                        csro:sectionId "#1" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_10
+csro:OWASP_Docker_Security_Cheat_Sheet_10 rdf:type owl:NamedIndividual ,
+                                                  csro:ContainerSecurityStandardSection ;
+                                         csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                         csro:description "Set up appropriate logging" ;
+                                         csro:sectionId "#10" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_11
+csro:OWASP_Docker_Security_Cheat_Sheet_11 rdf:type owl:NamedIndividual ,
+                                                  csro:ContainerSecurityStandardSection ;
+                                         csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                         csro:description "Use official docker images" ;
+                                         csro:sectionId "#11" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_12
+csro:OWASP_Docker_Security_Cheat_Sheet_12 rdf:type owl:NamedIndividual ,
+                                                  csro:ContainerSecurityStandardSection ;
+                                         csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                         csro:description "Include health / liveness checks" ;
+                                         csro:sectionId "#12" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_13
+csro:OWASP_Docker_Security_Cheat_Sheet_13 rdf:type owl:NamedIndividual ,
+                                                  csro:ContainerSecurityStandardSection ;
+                                         csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                         csro:description "Verify container images" ;
+                                         csro:sectionId "#13" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_2
+csro:OWASP_Docker_Security_Cheat_Sheet_2 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Do not expose the Docker daemon socket" ;
+                                        csro:sectionId "#2" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_3
+csro:OWASP_Docker_Security_Cheat_Sheet_3 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Limit capabilities (Grant only specific capabilities, needed by a container)" ;
+                                        csro:sectionId "#3" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_5
+csro:OWASP_Docker_Security_Cheat_Sheet_5 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Set filesystem and volumes to read-only" ;
+                                        csro:sectionId "#5" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_6
+csro:OWASP_Docker_Security_Cheat_Sheet_6 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Complete lifecycle management" ;
+                                        csro:sectionId "#6" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_7
+csro:OWASP_Docker_Security_Cheat_Sheet_7 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Restrict system calls from within containers" ;
+                                        csro:sectionId "#7" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_8
+csro:OWASP_Docker_Security_Cheat_Sheet_8 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Set filesystem and volumes to read-only" ;
+                                        csro:sectionId "#8" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Security_Cheat_Sheet_9
+csro:OWASP_Docker_Security_Cheat_Sheet_9 rdf:type owl:NamedIndividual ,
+                                                 csro:ContainerSecurityStandardSection ;
+                                        csro:belongsToStandard csro:OWASP_Docker_Security_Cheat_Sheet ;
+                                        csro:description "Use minimal base images" ;
+                                        csro:sectionId "#9" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10
+csro:OWASP_Docker_Top_10 rdf:type owl:NamedIndividual ,
+                                 csro:ContainerSecurityStandard ;
+                        csro:description "OWASP Docker Top 10: Top 10 Docker security risks" ;
+                        csro:publicationYear "2019"^^xsd:gYear ;
+                        csro:publishedBy "Open Web Application Security Project" ;
+                        csro:standardId "OWASP Docker Top 10" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D01
+csro:OWASP_Docker_Top_10_D01 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Secure User Mapping" ;
+                            csro:sectionId "D01" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D02
+csro:OWASP_Docker_Top_10_D02 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Patch Management Strategy" ;
+                            csro:sectionId "D02" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D03
+csro:OWASP_Docker_Top_10_D03 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Network Segmentation and Firewalling" ;
+                            csro:sectionId "D03" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D04
+csro:OWASP_Docker_Top_10_D04 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Secure Defaults and Hardening" ;
+                            csro:sectionId "D04" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D05
+csro:OWASP_Docker_Top_10_D05 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Maintain Security Contexts" ;
+                            csro:sectionId "D05" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D06
+csro:OWASP_Docker_Top_10_D06 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Protect Secrets" ;
+                            csro:sectionId "D06" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D07
+csro:OWASP_Docker_Top_10_D07 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Resource Protection" ;
+                            csro:sectionId "D07" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D08
+csro:OWASP_Docker_Top_10_D08 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Container Image Integrity and Origin" ;
+                            csro:sectionId "D08" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D09
+csro:OWASP_Docker_Top_10_D09 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Follow Immutable Paradigm" ;
+                            csro:sectionId "D09" .
+
+
+###  https://w3id.org/csro/ontology#OWASP_Docker_Top_10_D10
+csro:OWASP_Docker_Top_10_D10 rdf:type owl:NamedIndividual ,
+                                     csro:ContainerSecurityStandardSection ;
+                            csro:belongsToStandard csro:OWASP_Docker_Top_10 ;
+                            csro:description "Logging" ;
+                            csro:sectionId "D10" .
+
+
+###  https://w3id.org/csro/ontology#OtherApplications
+csro:OtherApplications rdf:type owl:NamedIndividual ,
+                               csro:Component ;
+                      csro:description "Other applications and processes running on the host system outside of containers." ;
+                      rdfs:label "Other Applications" .
+
+
+###  https://w3id.org/csro/ontology#Possible
+csro:Possible rdf:type owl:NamedIndividual ,
+                      csro:Likelihood ;
+             rdfs:label "Possible" .
+
+
+###  https://w3id.org/csro/ontology#PossibleLikelihoodAndCriticalImpact
+csro:PossibleLikelihoodAndCriticalImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Critical ;
+                                        csro:hasLikelihoodRating csro:Possible ;
+                                        csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#PossibleLikelihoodAndDisastrousImpact
+csro:PossibleLikelihoodAndDisastrousImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Disastrous ;
+                                          csro:hasLikelihoodRating csro:Possible ;
+                                          csro:resultsIn csro:Significant .
+
+
+###  https://w3id.org/csro/ontology#PossibleLikelihoodAndModerateImpact
+csro:PossibleLikelihoodAndModerateImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Moderate ;
+                                        csro:hasLikelihoodRating csro:Possible ;
+                                        csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#PossibleLikelihoodAndNegligibleImpact
+csro:PossibleLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Negligible ;
+                                          csro:hasLikelihoodRating csro:Possible ;
+                                          csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#RTS_1
+csro:RTS_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:isVerifiableBy csro:non-root_user ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_1 ,
+                             csro:CIS_Docker_Benchmark_5_24 ,
+                             csro:CIS_Docker_Benchmark_5_31 ,
+                             csro:NIST_SP_800_190_Section_4_1_2 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_11 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_2 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_9 ,
+                             csro:OWASP_Docker_Top_10_D01 ;
+          csro:assumptionId "RTS-1" ;
+          csro:description "App containers are run as non-root user" .
+
+
+###  https://w3id.org/csro/ontology#RTS_2
+csro:RTS_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:isVerifiableBy csro:read_only_filesystem ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_5_13 ,
+                             csro:NIST_SP_800_190_Section_4_4_4 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_8 ,
+                             csro:OWASP_Docker_Top_10_D09 ;
+          csro:assumptionId "RTS-2" ;
+          csro:description "App containers use read-only file systems" .
+
+
+###  https://w3id.org/csro/ontology#RTS_3
+csro:RTS_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:isVerifiableBy csro:cap_drop_all ;
+          csro:isVerifiableByAbsence csro:cap_add_CAP_NET_ADMIN ,
+                                    csro:cap_add_CAP_SYS_ADMIN ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_8 ,
+                             csro:CIS_Docker_Benchmark_5_4 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_3 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "RTS-3" ;
+          csro:description "App containers are deployed with minimal Linux capabilities" .
+
+
+###  https://w3id.org/csro/ontology#RTS_4
+csro:RTS_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_2_17 ,
+                             csro:CIS_Docker_Benchmark_5_22 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_6 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "RTS-4" ;
+          csro:description "Seccomp is implemented on the device" .
+
+
+###  https://w3id.org/csro/ontology#RTS_5
+csro:RTS_5 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_5_2 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_6 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "RTS-5" ;
+          csro:description "AppArmor is implemented on the device" .
+
+
+###  https://w3id.org/csro/ontology#RTS_6
+csro:RTS_6 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_5_3 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_6 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "RTS-6" ;
+          csro:description "SELinux is implemented on the device" .
+
+
+###  https://w3id.org/csro/ontology#RTS_7
+csro:RTS_7 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:RuntimeSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_5_10 ,
+                             csro:CIS_Docker_Benchmark_5_11 ,
+                             csro:CIS_Docker_Benchmark_5_12 ,
+                             csro:CIS_Docker_Benchmark_5_16 ,
+                             csro:CIS_Docker_Benchmark_5_17 ,
+                             csro:CIS_Docker_Benchmark_5_18 ,
+                             csro:CIS_Docker_Benchmark_5_21 ,
+                             csro:CIS_Docker_Benchmark_5_25 ,
+                             csro:CIS_Docker_Benchmark_5_31 ,
+                             csro:CIS_Docker_Benchmark_5_6 ,
+                             csro:NIST_SP_800_190_Section_4_4_3 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_11 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_7 ,
+                             csro:OWASP_Docker_Top_10_D07 ;
+          csro:assumptionId "RTS-7" ;
+          csro:description "App containers have minimal access to host resources" .
+
+
+###  https://w3id.org/csro/ontology#RunAsNonRootUser
+csro:RunAsNonRootUser rdf:type owl:NamedIndividual ,
+                              csro:RiskTreatment ;
+                     csro:addresses csro:RTS_1 ;
+                     csro:hasGuideline csro:GuidelineUserConfiguration ;
+                     csro:isImplementedBy csro:non-root_user ;
+                     csro:description "Configure containers to run with non-root user privileges to limit potential damage" ;
+                     rdfs:label "Run As Non-Root User" .
+
+
+###  https://w3id.org/csro/ontology#RuntimeSecurity
+csro:RuntimeSecurity rdf:type owl:NamedIndividual ,
+                             csro:AssumptionCategory ;
+                    csro:description "Security assumptions related to container runtime configuration and behavior." .
+
+
+###  https://w3id.org/csro/ontology#SCM_1
+csro:SCM_1 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:SecretsConfigManagement ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_7_4 ,
+                             csro:NIST_SP_800_190_Section_4_1_4 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_12 ,
+                             csro:OWASP_Docker_Top_10_D06 ;
+          csro:assumptionId "SCM-1" ;
+          csro:description "Secure secrets management tools (e.g. vaults or secrets manager) are used" .
+
+
+###  https://w3id.org/csro/ontology#SCM_2
+csro:SCM_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:SecretsConfigManagement ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_10 ,
+                             csro:NIST_SP_800_190_Section_4_1_4 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_12 ,
+                             csro:OWASP_Docker_Top_10_D06 ;
+          csro:assumptionId "SCM-2" ;
+          csro:description "Apps do not contain any hardcoded secrets" .
+
+
+###  https://w3id.org/csro/ontology#SCM_3
+csro:SCM_3 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:SecretsConfigManagement ;
+          csro:originatesFrom csro:NIST_SP_800_190_Section_4_1_4 ,
+                             csro:OWASP_Docker_Security_Cheat_Sheet_12 ,
+                             csro:OWASP_Docker_Top_10_D06 ;
+          csro:assumptionId "SCM-3" ;
+          csro:description "Secrets at rest and in transit are encrypted" .
+
+
+###  https://w3id.org/csro/ontology#SCM_4
+csro:SCM_4 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:SecretsConfigManagement ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_7_6 ,
+                             csro:CIS_Docker_Benchmark_7_7 ,
+                             csro:CIS_Docker_Benchmark_7_8 ,
+                             csro:NIST_SP_800_190_Section_4_1_4 ;
+          csro:assumptionId "SCM-4" ;
+          csro:description "Automatic secret rotation and revocation policies are implemented" .
+
+
+###  https://w3id.org/csro/ontology#Satisfied
+csro:Satisfied rdf:type owl:NamedIndividual ,
+                       csro:SatisfactionState ;
+              csro:description "The security assumption is satisfied/implemented." .
+
+
+###  https://w3id.org/csro/ontology#ScanContainerImages
+csro:ScanContainerImages rdf:type owl:NamedIndividual ,
+                                 csro:RiskTreatment ;
+                        csro:addresses csro:IMG_2 ;
+                        csro:isImplementedBy csro:dockerfile_analyzed ,
+                                            csro:dockerfile_no_findings ;
+                        csro:description "Perform vulnerability scanning on container images to identify and address security issues" ;
+                        rdfs:label "Scan Container Images" .
+
+
+###  https://w3id.org/csro/ontology#SecretsConfigManagement
+csro:SecretsConfigManagement rdf:type owl:NamedIndividual ,
+                                     csro:AssumptionCategory ;
+                            csro:description "Security assumptions related to secrets and configuration management." .
+
+
+###  https://w3id.org/csro/ontology#SegmentNetworks
+csro:SegmentNetworks rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:NET_1 ;
+                    csro:hasGuideline csro:GuidelineNetworking ;
+                    csro:description "Implement network segmentation to limit container communication and reduce attack spread" ;
+                    rdfs:label "Segment Container Networks" .
+
+
+###  https://w3id.org/csro/ontology#Significant
+csro:Significant rdf:type owl:NamedIndividual ,
+                         csro:RiskLevel ;
+                rdfs:label "Significant" .
+
+
+###  https://w3id.org/csro/ontology#Unknown
+csro:Unknown rdf:type owl:NamedIndividual ,
+                     csro:SatisfactionState ;
+            csro:description "The satisfaction state of the security assumption is unknown." .
+
+
+###  https://w3id.org/csro/ontology#Unlikely
+csro:Unlikely rdf:type owl:NamedIndividual ,
+                      csro:Likelihood ;
+             rdfs:label "Unlikely" .
+
+
+###  https://w3id.org/csro/ontology#UnlikelyLikelihoodAndCriticalImpact
+csro:UnlikelyLikelihoodAndCriticalImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Critical ;
+                                        csro:hasLikelihoodRating csro:Unlikely ;
+                                        csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#UnlikelyLikelihoodAndDisastrousImpact
+csro:UnlikelyLikelihoodAndDisastrousImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Disastrous ;
+                                          csro:hasLikelihoodRating csro:Unlikely ;
+                                          csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#UnlikelyLikelihoodAndModerateImpact
+csro:UnlikelyLikelihoodAndModerateImpact rdf:type owl:NamedIndividual ,
+                                                 csro:RiskCalculationRule ;
+                                        csro:hasImpactRating csro:Moderate ;
+                                        csro:hasLikelihoodRating csro:Unlikely ;
+                                        csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#UnlikelyLikelihoodAndNegligibleImpact
+csro:UnlikelyLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Negligible ;
+                                          csro:hasLikelihoodRating csro:Unlikely ;
+                                          csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#VeryLikely
+csro:VeryLikely rdf:type owl:NamedIndividual ,
+                        csro:Likelihood ;
+               rdfs:label "Very Likely" .
+
+
+###  https://w3id.org/csro/ontology#VeryLikelyLikelihoodAndCriticalImpact
+csro:VeryLikelyLikelihoodAndCriticalImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Critical ;
+                                          csro:hasLikelihoodRating csro:VeryLikely ;
+                                          csro:resultsIn csro:Major .
+
+
+###  https://w3id.org/csro/ontology#VeryLikelyLikelihoodAndDisastrousImpact
+csro:VeryLikelyLikelihoodAndDisastrousImpact rdf:type owl:NamedIndividual ,
+                                                     csro:RiskCalculationRule ;
+                                            csro:hasImpactRating csro:Disastrous ;
+                                            csro:hasLikelihoodRating csro:VeryLikely ;
+                                            csro:resultsIn csro:Major .
+
+
+###  https://w3id.org/csro/ontology#VeryLikelyLikelihoodAndModerateImpact
+csro:VeryLikelyLikelihoodAndModerateImpact rdf:type owl:NamedIndividual ,
+                                                   csro:RiskCalculationRule ;
+                                          csro:hasImpactRating csro:Moderate ;
+                                          csro:hasLikelihoodRating csro:VeryLikely ;
+                                          csro:resultsIn csro:Significant .
+
+
+###  https://w3id.org/csro/ontology#VeryLikelyLikelihoodAndNegligibleImpact
+csro:VeryLikelyLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
+                                                     csro:RiskCalculationRule ;
+                                            csro:hasImpactRating csro:Negligible ;
+                                            csro:hasLikelihoodRating csro:VeryLikely ;
+                                            csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#VeryUnlikely
+csro:VeryUnlikely rdf:type owl:NamedIndividual ,
+                          csro:Likelihood ;
+                 rdfs:label "Very Unlikely" .
+
+
+###  https://w3id.org/csro/ontology#VeryUnlikelyLikelihoodAndCriticalImpact
+csro:VeryUnlikelyLikelihoodAndCriticalImpact rdf:type owl:NamedIndividual ,
+                                                     csro:RiskCalculationRule ;
+                                            csro:hasImpactRating csro:Critical ;
+                                            csro:hasLikelihoodRating csro:VeryUnlikely ;
+                                            csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#VeryUnlikelyLikelihoodAndDisastrousImpact
+csro:VeryUnlikelyLikelihoodAndDisastrousImpact rdf:type owl:NamedIndividual ,
+                                                       csro:RiskCalculationRule ;
+                                              csro:hasImpactRating csro:Disastrous ;
+                                              csro:hasLikelihoodRating csro:VeryUnlikely ;
+                                              csro:resultsIn csro:Moderate .
+
+
+###  https://w3id.org/csro/ontology#VeryUnlikelyLikelihoodAndModerateImpact
+csro:VeryUnlikelyLikelihoodAndModerateImpact rdf:type owl:NamedIndividual ,
+                                                     csro:RiskCalculationRule ;
+                                            csro:hasImpactRating csro:Moderate ;
+                                            csro:hasLikelihoodRating csro:VeryUnlikely ;
+                                            csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#VeryUnlikelyLikelihoodAndNegligibleImpact
+csro:VeryUnlikelyLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
+                                                       csro:RiskCalculationRule ;
+                                              csro:hasImpactRating csro:Negligible ;
+                                              csro:hasLikelihoodRating csro:VeryUnlikely ;
+                                              csro:resultsIn csro:Minor .
+
+
+###  https://w3id.org/csro/ontology#cap_add
+csro:cap_add rdf:type owl:NamedIndividual ,
+                     csro:ContainerDeploymentTrait ;
+            csro:description "Adding Linux capabilities to a container" ;
+            rdfs:label "cap_add" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_ALL
+csro:cap_add_ALL rdf:type owl:NamedIndividual ,
+                         csro:ContainerDeploymentTrait ;
+                csro:description "Adding all Linux capabilities to a container (equivalent to privileged mode)" ;
+                rdfs:label "cap_add_ALL" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_AUDIT_CONTROL
+csro:cap_add_CAP_AUDIT_CONTROL rdf:type owl:NamedIndividual ,
+                                       csro:ContainerDeploymentTrait ;
+                              csro:description "Adding CAP_AUDIT_CONTROL capability to control kernel audit subsystem" ;
+                              rdfs:label "cap_add_CAP_AUDIT_CONTROL" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_AUDIT_READ
+csro:cap_add_CAP_AUDIT_READ rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Adding CAP_AUDIT_READ capability to read audit log via multicast netlink socket" ;
+                           rdfs:label "cap_add_CAP_AUDIT_READ" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_AUDIT_WRITE
+csro:cap_add_CAP_AUDIT_WRITE rdf:type owl:NamedIndividual ,
+                                     csro:ContainerDeploymentTrait ;
+                            csro:description "Adding CAP_AUDIT_WRITE capability to write records to kernel audit log" ;
+                            rdfs:label "cap_add_CAP_AUDIT_WRITE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_BLOCK_SUSPEND
+csro:cap_add_CAP_BLOCK_SUSPEND rdf:type owl:NamedIndividual ,
+                                       csro:ContainerDeploymentTrait ;
+                              csro:description "Adding CAP_BLOCK_SUSPEND capability to employ features that can block system suspend" ;
+                              rdfs:label "cap_add_CAP_BLOCK_SUSPEND" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_BPF
+csro:cap_add_CAP_BPF rdf:type owl:NamedIndividual ,
+                             csro:ContainerDeploymentTrait ;
+                    csro:description "Adding CAP_BPF capability to employ privileged BPF operations" ;
+                    rdfs:label "cap_add_CAP_BPF" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_CHECKPOINT_RESTORE
+csro:cap_add_CAP_CHECKPOINT_RESTORE rdf:type owl:NamedIndividual ,
+                                            csro:ContainerDeploymentTrait ;
+                                   csro:description "Adding CAP_CHECKPOINT_RESTORE capability to checkpoint and restore processes" ;
+                                   rdfs:label "cap_add_CAP_CHECKPOINT_RESTORE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_CHOWN
+csro:cap_add_CAP_CHOWN rdf:type owl:NamedIndividual ,
+                               csro:ContainerDeploymentTrait ;
+                      csro:description "Adding CAP_CHOWN capability to make arbitrary changes to file UIDs and GIDs" ;
+                      rdfs:label "cap_add_CAP_CHOWN" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_DAC_OVERRIDE
+csro:cap_add_CAP_DAC_OVERRIDE rdf:type owl:NamedIndividual ,
+                                      csro:ContainerDeploymentTrait ;
+                             csro:description "Adding CAP_DAC_OVERRIDE capability to bypass file read, write, and execute permission checks" ;
+                             rdfs:label "cap_add_CAP_DAC_OVERRIDE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_DAC_READ_SEARCH
+csro:cap_add_CAP_DAC_READ_SEARCH rdf:type owl:NamedIndividual ,
+                                         csro:ContainerDeploymentTrait ;
+                                csro:description "Adding CAP_DAC_READ_SEARCH capability to bypass file read permission checks and directory read and execute permission checks" ;
+                                rdfs:label "cap_add_CAP_DAC_READ_SEARCH" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_FOWNER
+csro:cap_add_CAP_FOWNER rdf:type owl:NamedIndividual ,
+                                csro:ContainerDeploymentTrait ;
+                       csro:description "Adding CAP_FOWNER capability to bypass permission checks on operations that normally require the filesystem UID of the process to match the UID of the file" ;
+                       rdfs:label "cap_add_CAP_FOWNER" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_FSETID
+csro:cap_add_CAP_FSETID rdf:type owl:NamedIndividual ,
+                                csro:ContainerDeploymentTrait ;
+                       csro:description "Adding CAP_FSETID capability to don't clear set-user-ID and set-group-ID mode bits when a file is modified" ;
+                       rdfs:label "cap_add_CAP_FSETID" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_IPC_LOCK
+csro:cap_add_CAP_IPC_LOCK rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Adding CAP_IPC_LOCK capability to lock memory (mlock, mlockall, mmap, shmctl)" ;
+                         rdfs:label "cap_add_CAP_IPC_LOCK" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_IPC_OWNER
+csro:cap_add_CAP_IPC_OWNER rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding CAP_IPC_OWNER capability to bypass permission checks for operations on System V IPC objects" ;
+                          rdfs:label "cap_add_CAP_IPC_OWNER" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_KILL
+csro:cap_add_CAP_KILL rdf:type owl:NamedIndividual ,
+                              csro:ContainerDeploymentTrait ;
+                     csro:description "Adding CAP_KILL capability to bypass permission checks for sending signals" ;
+                     rdfs:label "cap_add_CAP_KILL" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_LEASE
+csro:cap_add_CAP_LEASE rdf:type owl:NamedIndividual ,
+                               csro:ContainerDeploymentTrait ;
+                      csro:description "Adding CAP_LEASE capability to establish leases on arbitrary files" ;
+                      rdfs:label "cap_add_CAP_LEASE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_LINUX_IMMUTABLE
+csro:cap_add_CAP_LINUX_IMMUTABLE rdf:type owl:NamedIndividual ,
+                                         csro:ContainerDeploymentTrait ;
+                                csro:description "Adding CAP_LINUX_IMMUTABLE capability to set the FS_APPEND_FL and FS_IMMUTABLE_FL inode flags" ;
+                                rdfs:label "cap_add_CAP_LINUX_IMMUTABLE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_MAC_ADMIN
+csro:cap_add_CAP_MAC_ADMIN rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding CAP_MAC_ADMIN capability to allow MAC configuration or state changes" ;
+                          rdfs:label "cap_add_CAP_MAC_ADMIN" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_MAC_OVERRIDE
+csro:cap_add_CAP_MAC_OVERRIDE rdf:type owl:NamedIndividual ,
+                                      csro:ContainerDeploymentTrait ;
+                             csro:description "Adding CAP_MAC_OVERRIDE capability to override Mandatory Access Control (MAC)" ;
+                             rdfs:label "cap_add_CAP_MAC_OVERRIDE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_MKNOD
+csro:cap_add_CAP_MKNOD rdf:type owl:NamedIndividual ,
+                               csro:ContainerDeploymentTrait ;
+                      csro:description "Adding CAP_MKNOD capability to create special files using mknod" ;
+                      rdfs:label "cap_add_CAP_MKNOD" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_NET_ADMIN
+csro:cap_add_CAP_NET_ADMIN rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding the CAP_NET_ADMIN capability to a container" ;
+                          rdfs:label "cap_add_CAP_NET_ADMIN" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_NET_BIND_SERVICE
+csro:cap_add_CAP_NET_BIND_SERVICE rdf:type owl:NamedIndividual ,
+                                          csro:ContainerDeploymentTrait ;
+                                 csro:description "Adding CAP_NET_BIND_SERVICE capability to bind a socket to Internet domain privileged ports (port numbers less than 1024)" ;
+                                 rdfs:label "cap_add_CAP_NET_BIND_SERVICE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_NET_BROADCAST
+csro:cap_add_CAP_NET_BROADCAST rdf:type owl:NamedIndividual ,
+                                       csro:ContainerDeploymentTrait ;
+                              csro:description "Adding CAP_NET_BROADCAST capability to make socket broadcasts and listen to multicasts" ;
+                              rdfs:label "cap_add_CAP_NET_BROADCAST" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_NET_RAW
+csro:cap_add_CAP_NET_RAW rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Adding CAP_NET_RAW capability to use RAW and PACKET sockets" ;
+                        rdfs:label "cap_add_CAP_NET_RAW" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_PERFMON
+csro:cap_add_CAP_PERFMON rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Adding CAP_PERFMON capability to employ various performance-monitoring mechanisms" ;
+                        rdfs:label "cap_add_CAP_PERFMON" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SETFCAP
+csro:cap_add_CAP_SETFCAP rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Adding CAP_SETFCAP capability to set file capabilities" ;
+                        rdfs:label "cap_add_CAP_SETFCAP" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SETGID
+csro:cap_add_CAP_SETGID rdf:type owl:NamedIndividual ,
+                                csro:ContainerDeploymentTrait ;
+                       csro:description "Adding CAP_SETGID capability to make arbitrary manipulations of process GIDs and supplementary GID list" ;
+                       rdfs:label "cap_add_CAP_SETGID" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SETPCAP
+csro:cap_add_CAP_SETPCAP rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Adding CAP_SETPCAP capability to modify process capabilities" ;
+                        rdfs:label "cap_add_CAP_SETPCAP" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SETUID
+csro:cap_add_CAP_SETUID rdf:type owl:NamedIndividual ,
+                                csro:ContainerDeploymentTrait ;
+                       csro:description "Adding CAP_SETUID capability to make arbitrary manipulations of process UIDs" ;
+                       rdfs:label "cap_add_CAP_SETUID" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYSLOG
+csro:cap_add_CAP_SYSLOG rdf:type owl:NamedIndividual ,
+                                csro:ContainerDeploymentTrait ;
+                       csro:description "Adding CAP_SYSLOG capability to perform privileged syslog operations" ;
+                       rdfs:label "cap_add_CAP_SYSLOG" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_ADMIN
+csro:cap_add_CAP_SYS_ADMIN rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding the CAP_SYS_ADMIN capability to a container" ;
+                          rdfs:label "cap_add_CAP_SYS_ADMIN" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_BOOT
+csro:cap_add_CAP_SYS_BOOT rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Adding CAP_SYS_BOOT capability to use reboot and kexec_load system calls" ;
+                         rdfs:label "cap_add_CAP_SYS_BOOT" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_CHROOT
+csro:cap_add_CAP_SYS_CHROOT rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Adding CAP_SYS_CHROOT capability to use chroot system call" ;
+                           rdfs:label "cap_add_CAP_SYS_CHROOT" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_MODULE
+csro:cap_add_CAP_SYS_MODULE rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Adding CAP_SYS_MODULE capability to load and unload kernel modules" ;
+                           rdfs:label "cap_add_CAP_SYS_MODULE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_NICE
+csro:cap_add_CAP_SYS_NICE rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Adding CAP_SYS_NICE capability to raise process nice value and change the nice value for arbitrary processes" ;
+                         rdfs:label "cap_add_CAP_SYS_NICE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_PACCT
+csro:cap_add_CAP_SYS_PACCT rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding CAP_SYS_PACCT capability to use acct system call" ;
+                          rdfs:label "cap_add_CAP_SYS_PACCT" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_PTRACE
+csro:cap_add_CAP_SYS_PTRACE rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Adding CAP_SYS_PTRACE capability to trace arbitrary processes using ptrace" ;
+                           rdfs:label "cap_add_CAP_SYS_PTRACE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_RAWIO
+csro:cap_add_CAP_SYS_RAWIO rdf:type owl:NamedIndividual ,
+                                   csro:ContainerDeploymentTrait ;
+                          csro:description "Adding CAP_SYS_RAWIO capability to perform I/O port operations and access /proc/kcore" ;
+                          rdfs:label "cap_add_CAP_SYS_RAWIO" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_RESOURCE
+csro:cap_add_CAP_SYS_RESOURCE rdf:type owl:NamedIndividual ,
+                                      csro:ContainerDeploymentTrait ;
+                             csro:description "Adding CAP_SYS_RESOURCE capability to override resource limits" ;
+                             rdfs:label "cap_add_CAP_SYS_RESOURCE" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_TIME
+csro:cap_add_CAP_SYS_TIME rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Adding CAP_SYS_TIME capability to set system clock and real-time hardware clock" ;
+                         rdfs:label "cap_add_CAP_SYS_TIME" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_SYS_TTY_CONFIG
+csro:cap_add_CAP_SYS_TTY_CONFIG rdf:type owl:NamedIndividual ,
+                                        csro:ContainerDeploymentTrait ;
+                               csro:description "Adding CAP_SYS_TTY_CONFIG capability to use vhangup and employ various privileged ioctl operations on virtual terminals" ;
+                               rdfs:label "cap_add_CAP_SYS_TTY_CONFIG" .
+
+
+###  https://w3id.org/csro/ontology#cap_add_CAP_WAKE_ALARM
+csro:cap_add_CAP_WAKE_ALARM rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Adding CAP_WAKE_ALARM capability to trigger something that will wake up the system" ;
+                           rdfs:label "cap_add_CAP_WAKE_ALARM" .
+
+
+###  https://w3id.org/csro/ontology#cap_drop
+csro:cap_drop rdf:type owl:NamedIndividual ,
+                      csro:ContainerDeploymentTrait ;
+             csro:description "Dropping Linux capabilities from a container" ;
+             rdfs:label "cap_drop" .
+
+
+###  https://w3id.org/csro/ontology#cap_drop_all
+csro:cap_drop_all rdf:type owl:NamedIndividual ,
+                          csro:ContainerDeploymentTrait ;
+                 csro:description "Docker deployment trait to drop all Linux capabilities." ;
+                 rdfs:label "cap_drop: ALL" .
+
+
+###  https://w3id.org/csro/ontology#container_image_name
+csro:container_image_name rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Container image identifier and name specification" ;
+                         rdfs:label "container_image_name" .
+
+
+###  https://w3id.org/csro/ontology#depends_on
+csro:depends_on rdf:type owl:NamedIndividual ,
+                        csro:ContainerDeploymentTrait ;
+               csro:description "Container has dependencies on other containers or services" ;
+               rdfs:label "depends_on" .
+
+
+###  https://w3id.org/csro/ontology#dockerfile_analyzed
+csro:dockerfile_analyzed rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Container image has been analyzed for vulnerabilities with vulnerability scanner" ;
+                        rdfs:label "dockerfile_analyzed" .
+
+
+###  https://w3id.org/csro/ontology#dockerfile_no_findings
+csro:dockerfile_no_findings rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Container image vulnerability analysis found zero security findings" ;
+                           rdfs:label "dockerfile_no_findings" .
+
+
+###  https://w3id.org/csro/ontology#dockerfile_template
+csro:dockerfile_template rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Container image built from a Dockerfile template" ;
+                        rdfs:label "dockerfile_template" .
+
+
+###  https://w3id.org/csro/ontology#external_network
+csro:external_network rdf:type owl:NamedIndividual ,
+                              csro:ContainerDeploymentTrait ;
+                     csro:description "Container is connected to external network interfaces" ;
+                     rdfs:label "external_network" .
+
+
+###  https://w3id.org/csro/ontology#host-level_firewall
+csro:host-level_firewall rdf:type owl:NamedIndividual ,
+                                 csro:ContainerDeploymentTrait ;
+                        csro:description "Host-level firewall rules and network policies are configured and active" ;
+                        rdfs:label "host-level_firewall" .
+
+
+###  https://w3id.org/csro/ontology#host_cgroup
+csro:host_cgroup rdf:type owl:NamedIndividual ,
+                         csro:ContainerDeploymentTrait ;
+                csro:description "Container shares cgroup namespace with host" ;
+                rdfs:label "host_cgroup" .
+
+
+###  https://w3id.org/csro/ontology#host_network
+csro:host_network rdf:type owl:NamedIndividual ,
+                          csro:ContainerDeploymentTrait ;
+                 csro:description "Container uses host network namespace" ;
+                 rdfs:label "host_network" .
+
+
+###  https://w3id.org/csro/ontology#host_pid
+csro:host_pid rdf:type owl:NamedIndividual ,
+                      csro:ContainerDeploymentTrait ;
+             csro:description "Container shares PID namespace with host" ;
+             rdfs:label "host_pid" .
+
+
+###  https://w3id.org/csro/ontology#internal_network
+csro:internal_network rdf:type owl:NamedIndividual ,
+                              csro:ContainerDeploymentTrait ;
+                     csro:description "Container is connected to internal network interfaces only" ;
+                     rdfs:label "internal_network" .
+
+
+###  https://w3id.org/csro/ontology#internal_port
+csro:internal_port rdf:type owl:NamedIndividual ,
+                           csro:ContainerDeploymentTrait ;
+                  csro:description "Container exposes ports only to internal networks" ;
+                  rdfs:label "internal_port" .
+
+
+###  https://w3id.org/csro/ontology#layer2_network
+csro:layer2_network rdf:type owl:NamedIndividual ,
+                            csro:ContainerDeploymentTrait ;
+                   csro:description "Container has layer 2 network connectivity" ;
+                   rdfs:label "layer2_network" .
+
+
+###  https://w3id.org/csro/ontology#named_volume
+csro:named_volume rdf:type owl:NamedIndividual ,
+                          csro:ContainerDeploymentTrait ;
+                 csro:description "Container uses Docker named volumes for data persistence" ;
+                 rdfs:label "named_volume" .
+
+
+###  https://w3id.org/csro/ontology#non-root_user
+csro:non-root_user rdf:type owl:NamedIndividual ,
+                           csro:ContainerDeploymentTrait ;
+                  csro:description "Container runs with non-root user privileges" ;
+                  rdfs:label "non-root_user" .
+
+
+###  https://w3id.org/csro/ontology#privileged_flag
+csro:privileged_flag rdf:type owl:NamedIndividual ,
+                             csro:ContainerDeploymentTrait ;
+                    csro:description "Container is run in privileged mode with extended capabilities" ;
+                    rdfs:label "privileged_flag" .
+
+
+###  https://w3id.org/csro/ontology#privileged_host_volume
+csro:privileged_host_volume rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Container mounts privileged host directories as volumes" ;
+                           rdfs:label "privileged_host_volume" .
+
+
+###  https://w3id.org/csro/ontology#privileged_port
+csro:privileged_port rdf:type owl:NamedIndividual ,
+                             csro:ContainerDeploymentTrait ;
+                    csro:description "Container binds to privileged ports (below 1024)" ;
+                    rdfs:label "privileged_port" .
+
+
+###  https://w3id.org/csro/ontology#proxy-redirect_network
+csro:proxy-redirect_network rdf:type owl:NamedIndividual ,
+                                    csro:ContainerDeploymentTrait ;
+                           csro:description "Container network traffic is routed through a proxy or redirect service" ;
+                           rdfs:label "proxy-redirect_network" .
+
+
+###  https://w3id.org/csro/ontology#read_only_filesystem
+csro:read_only_filesystem rdf:type owl:NamedIndividual ,
+                                  csro:ContainerDeploymentTrait ;
+                         csro:description "Container filesystem is mounted as read-only" ;
+                         rdfs:label "read_only_filesystem" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( csro:DifficultyLevel
+                csro:ExploitabilityRating
+                csro:ExposureRating
+                csro:Likelihood
+                csro:RiskLevel
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( csro:ExploitabilityCalculationRule
+                csro:ExposureCalculationRule
+                csro:LikelihoodCalculationRule
+                csro:RiskCalculationRule
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

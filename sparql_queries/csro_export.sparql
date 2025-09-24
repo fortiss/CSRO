@@ -1,0 +1,442 @@
+PREFIX csro: <https://w3id.org/csro/ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
+
+##
+## Container Security Risk Ontology Export Query
+## 
+## This CONSTRUCT query exports comprehensive risk assessment data including
+## attack actions, dynamic risk calculations, affected components, and treatments.
+## The output generates scenario-specific risk instances and is JSON-LD compatible.
+##
+## Key Features:
+## - Dynamic threshold calculations based on assumption weights
+## - Scenario-specific impact and risk instances 
+## - Context-aware risk treatment filtering
+## - Integration with MITRE ATT&CK techniques via D3FEND ontology
+##
+
+CONSTRUCT {
+    # Main attack action with calculated risk information
+    ?attackAction a csro:AttackAction ;
+        csro:description ?attackDescription ;
+        csro:appliesTechnique ?technique ;
+        csro:inContext ?scenario ;
+        csro:affects ?component ;
+        csro:causesImpact ?scenarioSpecificImpact ;
+        csro:hasExploitabilityRating ?exploitabilityRating ;
+        csro:hasExposureRating ?exposureRating ;
+        csro:hasLikelihood ?likelihood .
+    
+    # Container attack technique information with ATT&CK reference
+    ?technique a csro:ContainerAttackTechnique ;
+        csro:description ?techniqueDescription ;
+        csro:referencesAttackTechnique ?attackTechnique ;
+        csro:requiresTrait ?requiredTrait ;
+        csro:hasBaseDifficulty ?baseDifficulty .
+    
+    # Referenced MITRE ATT&CK technique
+    ?attackTechnique a d3f:ATTACKEnterpriseTechnique ;
+        rdfs:label ?attackTechniqueLabel ;
+        d3f:attack-id ?attackTechniqueId ;
+        d3f:definition ?attackTechniqueDefinition .
+    
+    # Required traits for attack pattern
+    ?requiredTrait a csro:ContainerDeploymentTrait ;
+        csro:description ?traitDescription ;
+        csro:isDerivedFrom ?traitEvidence .
+
+    # Evidence for deployment traits
+    ?traitEvidence a csro:ContainerEvidence ;
+        csro:description ?traitEvidenceDescription .
+    
+    # Scenario information with assumptions
+    ?scenario a csro:ContextScenario ;
+        csro:description ?scenarioDescription ;
+        csro:includesAssumption ?assumptionInScenario ;
+        csro:includes ?component .
+    
+    # Security assumptions with verification information
+    ?assumption a csro:ContainerSecurityAssumption ;
+        csro:assumptionId ?assumptionId ;
+        csro:description ?assumptionDescription ;
+        csro:belongsToCategory ?assumptionCategory ;
+        csro:isVerifiableBy ?verificationTrait ;
+        csro:isVerifiableByAbsence ?verificationAbsenceTrait ;
+        csro:originatesFrom ?assumptionSecurityStandard .
+    
+    # Assumptions can also originate from specific standard sections
+    ?assumption csro:originatesFrom ?assumptionSecurityStandardSection .
+
+    # Assumption categories
+    ?assumptionCategory a csro:AssumptionCategory ;
+        csro:description ?categoryDescription .
+
+    # Security standards for assumptions
+    ?assumptionSecurityStandard a csro:ContainerSecurityStandard ;
+        csro:description ?assumptionSecurityStandardDescription .
+    
+    # Security standard sections for assumptions (granular references)
+    ?assumptionSecurityStandardSection a csro:ContainerSecurityStandardSection ;
+        csro:belongsToStandard ?sectionParentStandard ;
+        csro:sectionId ?sectionId .
+        
+    # Verification traits
+    ?verificationTrait a csro:ContainerDeploymentTrait ;
+        csro:description ?verificationTraitDescription .
+    
+    ?verificationAbsenceTrait a csro:ContainerDeploymentTrait ;
+        csro:description ?verificationAbsenceTraitDescription .
+    
+    # Assumption satisfaction states in scenarios
+    ?assumptionInScenario a csro:AssumptionInScenario ;
+        csro:forAssumption ?assumption ;
+        csro:hasSatisfactionState ?satisfactionState .
+    
+    # Satisfaction states
+    ?satisfactionState a csro:SatisfactionState ;
+        csro:description ?satisfactionStateDescription .
+    
+    # Impact and risk information (with scenario-specific impact and risk)
+    ?scenarioSpecificImpact a csro:Impact ;
+        rdfs:label ?scenarioSpecificImpactLabel ;
+        csro:description ?impactDescription ;
+        csro:hasImpactRating ?impactRating ;
+        csro:indicates ?scenarioSpecificRisk .
+    
+    # Scenario-specific risk with calculated risk level (treatments are conditional)
+    ?scenarioSpecificRisk a csro:Risk ;
+        rdfs:label ?scenarioSpecificRiskLabel ;
+        csro:description ?riskDescription ;
+        csro:hasRiskLevel ?riskLevel .
+        
+    # Risk treatment relationship (only when applicable treatments exist)
+    ?scenarioSpecificRisk csro:isTreatedBy ?riskTreatment .
+    
+    # Complete risk treatment information (only for applicable treatments)
+    ?riskTreatment a csro:RiskTreatment ;
+        rdfs:label ?treatmentLabel ;
+        csro:description ?treatmentDescription ;
+        csro:addresses ?treatmentAddressedAssumption ;
+        csro:isImplementedBy ?treatmentImplementationTrait ;
+        csro:hasGuideline ?treatmentGuideline .
+    
+    # Security assumptions addressed by treatments
+    ?treatmentAddressedAssumption a csro:ContainerSecurityAssumption ;
+        csro:assumptionId ?treatmentAddressedAssumptionId ;
+        csro:description ?treatmentAddressedAssumptionDescription .
+    
+    # Treatment implementation traits
+    ?treatmentImplementationTrait a csro:ContainerDeploymentTrait ;
+        csro:description ?treatmentTraitDescription .
+    
+    # Treatment guidelines
+    ?treatmentGuideline a csro:ContainerSecurityGuideline ;
+        rdfs:label ?guidelineLabel ;
+        csro:description ?guidelineDescription ;
+        csro:referenceUrl ?guidelineReferenceUrl .
+    
+    # Components affected by attack
+    ?component a csro:Component ;
+        rdfs:label ?componentLabel ;
+        csro:description ?componentDescription .
+    
+    # Impact ratings
+    ?impactRating a csro:ImpactRating ;
+        csro:description ?impactRatingDescription .
+    
+    # Exploitability ratings
+    ?exploitabilityRating a csro:ExploitabilityRating ;
+        csro:description ?exploitabilityRatingDescription .
+    
+    # Exposure ratings
+    ?exposureRating a csro:ExposureRating ;
+        csro:description ?exposureRatingDescription .
+    
+    # Likelihood ratings
+    ?likelihood a csro:Likelihood ;
+        rdfs:label ?likelihoodLabel .
+    
+    # Risk level ratings
+    ?riskLevel a csro:RiskLevel ;
+        rdfs:label ?riskLevelLabel .
+    
+
+}
+WHERE {
+    # Get attack actions for container attack techniques
+    ?attackAction a csro:AttackAction ;
+                  csro:appliesTechnique ?technique ;
+                  csro:inContext ?scenario ;
+                  csro:description ?attackDescription ;
+                  csro:affects ?component ;
+                  csro:causesImpact ?impact .
+    
+    # Container attack technique information
+    ?technique csro:description ?techniqueDescription .
+    OPTIONAL { 
+        ?technique csro:referencesAttackTechnique ?attackTechnique .
+        ?attackTechnique rdfs:label ?attackTechniqueLabel ;
+                         d3f:attack-id ?attackTechniqueId ;
+                         d3f:definition ?attackTechniqueDefinition .
+    }
+    OPTIONAL { ?technique csro:hasBaseDifficulty ?baseDifficulty }
+    
+    # Required traits for attack technique
+    OPTIONAL {
+        ?technique csro:requiresTrait ?requiredTrait .
+        ?requiredTrait csro:description ?traitDescription .
+        
+        # Evidence for traits (optional)
+        OPTIONAL {
+            ?requiredTrait csro:isDerivedFrom ?traitEvidence .
+            ?traitEvidence csro:description ?traitEvidenceDescription .
+        }
+    }
+    
+    # Scenario information
+    ?scenario csro:description ?scenarioDescription ;
+              csro:includes ?component .
+    
+    # Get all assumptions in scenario
+    OPTIONAL {
+        ?scenario csro:includesAssumption ?assumptionInScenario .
+        ?assumptionInScenario csro:forAssumption ?assumption .
+        ?assumption csro:assumptionId ?assumptionId ;
+                    csro:description ?assumptionDescription ;
+                    csro:belongsToCategory ?assumptionCategory .
+        
+        # Assumption category information
+        ?assumptionCategory csro:description ?categoryDescription .
+        
+        # Security standards for assumptions (optional)
+        OPTIONAL {
+            ?assumption csro:originatesFrom ?assumptionSecurityStandard .
+            ?assumptionSecurityStandard csro:description ?assumptionSecurityStandardDescription .
+        }
+        
+        # Security standard sections for assumptions (granular references - optional)
+        OPTIONAL {
+            ?assumption csro:originatesFrom ?assumptionSecurityStandardSection .
+            ?assumptionSecurityStandardSection a csro:ContainerSecurityStandardSection ;
+                                               csro:belongsToStandard ?sectionParentStandard ;
+                                               csro:sectionId ?sectionId .
+        }
+        
+        # Verification information for assumptions
+        OPTIONAL {
+            ?assumption csro:isVerifiableBy ?verificationTrait .
+            ?verificationTrait csro:description ?verificationTraitDescription .
+        }
+        OPTIONAL {
+            ?assumption csro:isVerifiableByAbsence ?verificationAbsenceTrait .
+            ?verificationAbsenceTrait csro:description ?verificationAbsenceTraitDescription .
+        }
+        
+        # Assumption satisfaction states
+        OPTIONAL {
+            ?assumptionInScenario csro:hasSatisfactionState ?satisfactionState .
+            ?satisfactionState csro:description ?satisfactionStateDescription .
+        }
+    }
+    
+    # Component information
+    ?component rdfs:label ?componentLabel ;
+               csro:description ?componentDescription .
+    
+    # Impact and risk relationships
+    ?impact csro:description ?impactDescription ;
+            csro:hasImpactRating ?impactRating ;
+            csro:indicates ?risk .
+    
+    # Impact rating information
+    ?impactRating csro:description ?impactRatingDescription .
+    
+    # Base risk information (no treatment relationship here)
+    ?risk rdfs:label ?riskLabel ;
+          csro:description ?riskDescription .
+    
+    # Generate scenario-specific risk instance
+    BIND(URI(CONCAT(STR(?risk), "_", REPLACE(STR(?scenario), ".*[:#]", ""))) AS ?scenarioSpecificRisk)
+    BIND(CONCAT(?riskLabel, " (", REPLACE(STR(?scenario), ".*[:#]", ""), ")") AS ?scenarioSpecificRiskLabel)
+    
+    # Generate scenario-specific impact instance  
+    BIND(URI(CONCAT(STR(?impact), "_", REPLACE(STR(?scenario), ".*[:#]", ""))) AS ?scenarioSpecificImpact)
+    BIND(CONCAT(REPLACE(STR(?impact), ".*[:#]", ""), " (", REPLACE(STR(?scenario), ".*[:#]", ""), ")") AS ?scenarioSpecificImpactLabel)
+    
+    # Risk treatments filtered by scenario
+    OPTIONAL {
+        ?risk csro:isTreatedBy ?riskTreatment .
+        ?riskTreatment rdfs:label ?treatmentLabel ;
+                       csro:description ?treatmentDescription .
+        
+        # Only include treatments that are applicable in this scenario
+        {
+            # Case 1: General treatments (don't address specific assumptions)
+            FILTER NOT EXISTS { ?riskTreatment csro:addresses ?anyAssumption }
+        }
+        UNION
+        {
+            # Case 2: Treatments for unsatisfied assumptions in current scenario
+            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
+            ?scenario csro:includesAssumption ?addressedAssumptionInScenario .
+            ?addressedAssumptionInScenario csro:forAssumption ?treatmentAddressedAssumption ;
+                                           csro:hasSatisfactionState ?addressedAssumptionSatisfactionState .
+            FILTER(?addressedAssumptionSatisfactionState != csro:Satisfied)
+        }
+        
+        # Treatment details
+        OPTIONAL {
+            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
+            ?treatmentAddressedAssumption csro:assumptionId ?treatmentAddressedAssumptionId ;
+                                          csro:description ?treatmentAddressedAssumptionDescription .
+        }
+        
+        OPTIONAL {
+            ?riskTreatment csro:isImplementedBy ?treatmentImplementationTrait .
+            ?treatmentImplementationTrait csro:description ?treatmentTraitDescription .
+        }
+        
+        OPTIONAL {
+            ?riskTreatment csro:hasGuideline ?treatmentGuideline .
+            ?treatmentGuideline rdfs:label ?guidelineLabel ;
+                                csro:description ?guidelineDescription .
+            OPTIONAL {
+                ?treatmentGuideline csro:referenceUrl ?guidelineReferenceUrl .
+            }
+        }
+    }
+    
+
+    
+    # Dynamic calculations for exploitability with dynamic thresholds
+    {
+        SELECT ?attackAction ?scenario
+               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exploitability)
+               ?threshold ?upperThreshold
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+            
+            # Get exploitability rule and calculate dynamic thresholds
+            ?rule a csro:ExploitabilityCalculationRule ;
+                  csro:appliesTo ?technique ;
+                  csro:hasWeight ?assumptionWeight .
+            
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+            
+            # Calculate sum of all weights for this rule to determine thresholds
+            {
+                SELECT ?rule (SUM(?w) AS ?totalWeight)
+                WHERE {
+                    ?rule csro:hasWeight ?aw .
+                    ?aw csro:weightValue ?w .
+                }
+                GROUP BY ?rule
+            }
+            
+            # Calculate dynamic thresholds: 1/3 and 2/3 of total weight
+            BIND(?totalWeight / 3.0 AS ?threshold)
+            BIND(2.0 * ?totalWeight / 3.0 AS ?upperThreshold)
+            
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+            
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?threshold ?upperThreshold
+    }
+    
+    # Dynamic calculations for exposure with dynamic thresholds
+    {
+        SELECT ?attackAction ?scenario
+               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exposure)
+               ?expThreshold ?expUpperThreshold
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+            
+            # Get exposure rule and calculate dynamic thresholds
+            ?rule a csro:ExposureCalculationRule ;
+                  csro:appliesTo ?technique ;
+                  csro:hasWeight ?assumptionWeight .
+            
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+            
+            # Calculate sum of all weights for this rule to determine thresholds
+            {
+                SELECT ?rule (SUM(?w) AS ?totalWeight)
+                WHERE {
+                    ?rule csro:hasWeight ?aw .
+                    ?aw csro:weightValue ?w .
+                }
+                GROUP BY ?rule
+            }
+            
+            # Calculate dynamic thresholds: 1/3 and 2/3 of total weight
+            BIND(?totalWeight / 3.0 AS ?expThreshold)
+            BIND(2.0 * ?totalWeight / 3.0 AS ?expUpperThreshold)
+            
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+            
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?expThreshold ?expUpperThreshold
+    }
+    
+    # Calculate ratings from security scores
+    BIND(
+        IF(?securityScore_exploitability >= ?upperThreshold, csro:LowExploitability,
+           IF(?securityScore_exploitability >= ?threshold, csro:MediumExploitability, csro:HighExploitability)
+        ) AS ?exploitabilityRating
+    )
+    
+    BIND(
+        IF(?securityScore_exposure >= ?expUpperThreshold, csro:LowExposure,
+           IF(?securityScore_exposure >= ?expThreshold, csro:MediumExposure, csro:HighExposure)
+        ) AS ?exposureRating
+    )
+    
+    # Calculate likelihood from exploitability + exposure (for current scenario)
+    OPTIONAL {
+        ?currentLikelihoodRule a csro:LikelihoodCalculationRule ;
+                        csro:hasExploitabilityRating ?exploitabilityRating ;
+                        csro:hasExposureRating ?exposureRating ;
+                        csro:resultsIn ?likelihood .
+    }
+    
+    # Get rating descriptions and labels
+    ?exploitabilityRating csro:description ?exploitabilityRatingDescription .
+    ?exposureRating csro:description ?exposureRatingDescription .
+    OPTIONAL { ?likelihood rdfs:label ?likelihoodLabel . }
+    
+    # Calculate risk level from likelihood + impact (for current scenario)
+    OPTIONAL {
+        ?currentRiskRule a csro:RiskCalculationRule ;
+                  csro:hasLikelihoodRating ?likelihood ;
+                  csro:hasImpactRating ?impactRating ;
+                  csro:resultsIn ?riskLevel .
+    }
+    
+    # Get risk level label
+    OPTIONAL { ?riskLevel rdfs:label ?riskLevelLabel . }
+}
+ORDER BY ?scenario ?component ?riskTreatment
