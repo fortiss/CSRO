@@ -741,7 +741,7 @@ csro:BasicScenario rdf:type owl:NamedIndividual ,
                                csro:DeviceContainerRuntime ,
                                csro:DeviceOperatingSystem ,
                                csro:OtherApplications ;
-                  csro:includesAssumption csro:BasicScenario_IMG_2 ,
+                  csro:includesAssumption csro:BasicScenario_IMG_1 ,
                                          csro:BasicScenario_NET_1 ,
                                          csro:BasicScenario_NET_2 ,
                                          csro:BasicScenario_RTS_1 ,
@@ -750,10 +750,10 @@ csro:BasicScenario rdf:type owl:NamedIndividual ,
                   csro:description "Basic container deployment scenario with minimal security measures implemented." .
 
 
-###  https://w3id.org/csro/ontology#BasicScenario_IMG_2
-csro:BasicScenario_IMG_2 rdf:type owl:NamedIndividual ,
+###  https://w3id.org/csro/ontology#BasicScenario_IMG_1
+csro:BasicScenario_IMG_1 rdf:type owl:NamedIndividual ,
                                  csro:AssumptionInScenario ;
-                        csro:forAssumption csro:IMG_2 ;
+                        csro:forAssumption csro:IMG_1 ;
                         csro:hasSatisfactionState csro:Dissatisfied .
 
 
@@ -1407,7 +1407,7 @@ csro:ContainerPtraceInjectionAttack_MixedScenario rdf:type owl:NamedIndividual ,
 csro:ContainerPtraceInjectionExploitabilityRule rdf:type owl:NamedIndividual ,
                                                         csro:ExploitabilityCalculationRule ;
                                                csro:appliesTo csro:ContainerPtraceInjection ;
-                                               csro:hasWeight csro:ContainerPtrace_IMG_2_Weight ,
+                                               csro:hasWeight csro:ContainerPtrace_IMG_1_Weight ,
                                                              csro:ContainerPtrace_RTS_1_Weight ,
                                                              csro:ContainerPtrace_RTS_2_Weight ,
                                                              csro:ContainerPtrace_RTS_3_Weight ;
@@ -1423,10 +1423,10 @@ csro:ContainerPtraceInjectionExposureRule rdf:type owl:NamedIndividual ,
                                          csro:description "Rule for calculating exposure of container ptrace injection technique (T1055.008)" .
 
 
-###  https://w3id.org/csro/ontology#ContainerPtrace_IMG_2_Weight
-csro:ContainerPtrace_IMG_2_Weight rdf:type owl:NamedIndividual ,
+###  https://w3id.org/csro/ontology#ContainerPtrace_IMG_1_Weight
+csro:ContainerPtrace_IMG_1_Weight rdf:type owl:NamedIndividual ,
                                           csro:AssumptionWeight ;
-                                 csro:refersToAssumption csro:IMG_2 ;
+                                 csro:refersToAssumption csro:IMG_1 ;
                                  csro:description "Weight for vulnerability scanning assumption in container ptrace injection exploitability calculation" ;
                                  csro:weightValue 1.0 ;
                                  csro:effectDescription "Low effect - provides basic protection by ensuring container images are free of known vulnerabilities" .
@@ -1595,7 +1595,7 @@ csro:HardenedScenario rdf:type owl:NamedIndividual ,
                                   csro:DeviceContainerRuntime ,
                                   csro:DeviceOperatingSystem ,
                                   csro:OtherApplications ;
-                     csro:includesAssumption csro:HardenedScenario_IMG_2 ,
+                     csro:includesAssumption csro:HardenedScenario_IMG_1 ,
                                             csro:HardenedScenario_NET_1 ,
                                             csro:HardenedScenario_NET_2 ,
                                             csro:HardenedScenario_RTS_1 ,
@@ -1604,10 +1604,10 @@ csro:HardenedScenario rdf:type owl:NamedIndividual ,
                      csro:description "Hardened container deployment scenario with comprehensive security measures implemented." .
 
 
-###  https://w3id.org/csro/ontology#HardenedScenario_IMG_2
-csro:HardenedScenario_IMG_2 rdf:type owl:NamedIndividual ,
+###  https://w3id.org/csro/ontology#HardenedScenario_IMG_1
+csro:HardenedScenario_IMG_1 rdf:type owl:NamedIndividual ,
                                     csro:AssumptionInScenario ;
-                           csro:forAssumption csro:IMG_2 ;
+                           csro:forAssumption csro:IMG_1 ;
                            csro:hasSatisfactionState csro:Satisfied .
 
 
@@ -1714,20 +1714,8 @@ csro:HostProcessManipulationRisk rdf:type owl:NamedIndividual ,
                                 csro:description "Risk of container escape and host process manipulation through SysPtrace attack" ;
                                 rdfs:label "Host Process Manipulation Risk" .
 
-
 ###  https://w3id.org/csro/ontology#IMG_1
 csro:IMG_1 rdf:type owl:NamedIndividual ,
-                   csro:ContainerSecurityAssumption ;
-          csro:belongsToCategory csro:ContainerImageSecurity ;
-          csro:originatesFrom csro:CIS_Docker_Benchmark_4_3 ,
-                             csro:NIST_SP_800_190_Section_4_1_2 ,
-                             csro:OWASP_Docker_Top_10_D04 ;
-          csro:assumptionId "IMG-1" ;
-          csro:description "App uses minimal base images" .
-
-
-###  https://w3id.org/csro/ontology#IMG_2
-csro:IMG_2 rdf:type owl:NamedIndividual ,
                    csro:ContainerSecurityAssumption ;
           csro:belongsToCategory csro:ContainerImageSecurity ;
           csro:isVerifiableBy csro:dockerfile_no_findings ;
@@ -1735,8 +1723,18 @@ csro:IMG_2 rdf:type owl:NamedIndividual ,
                              csro:NIST_SP_800_190_Section_4_1_1 ,
                              csro:OWASP_Docker_Security_Cheat_Sheet_13 ,
                              csro:OWASP_Docker_Security_Cheat_Sheet_9 ;
-          csro:assumptionId "IMG-2" ;
+          csro:assumptionId "IMG-1" ;
           csro:description "App images are scanned for vulnerabilities" .
+
+###  https://w3id.org/csro/ontology#IMG_2
+csro:IMG_2 rdf:type owl:NamedIndividual ,
+                   csro:ContainerSecurityAssumption ;
+          csro:belongsToCategory csro:ContainerImageSecurity ;
+          csro:originatesFrom csro:CIS_Docker_Benchmark_4_3 ,
+                             csro:NIST_SP_800_190_Section_4_1_2 ,
+                             csro:OWASP_Docker_Top_10_D04 ;
+          csro:assumptionId "IMG-2" ;
+          csro:description "App uses minimal base images" .
 
 
 ###  https://w3id.org/csro/ontology#IMG_3
@@ -2024,7 +2022,7 @@ csro:MixedScenario rdf:type owl:NamedIndividual ,
                                csro:DeviceContainerRuntime ,
                                csro:DeviceOperatingSystem ,
                                csro:OtherApplications ;
-                  csro:includesAssumption csro:MixedScenario_IMG_2 ,
+                  csro:includesAssumption csro:MixedScenario_IMG_1 ,
                                          csro:MixedScenario_NET_1 ,
                                          csro:MixedScenario_NET_2 ,
                                          csro:MixedScenario_RTS_1 ,
@@ -2033,10 +2031,10 @@ csro:MixedScenario rdf:type owl:NamedIndividual ,
                   csro:description "Mixed container deployment scenario with partial security measures implemented to demonstrate medium ratings." .
 
 
-###  https://w3id.org/csro/ontology#MixedScenario_IMG_2
-csro:MixedScenario_IMG_2 rdf:type owl:NamedIndividual ,
+###  https://w3id.org/csro/ontology#MixedScenario_IMG_1
+csro:MixedScenario_IMG_1 rdf:type owl:NamedIndividual ,
                                  csro:AssumptionInScenario ;
-                        csro:forAssumption csro:IMG_2 ;
+                        csro:forAssumption csro:IMG_1 ;
                         csro:hasSatisfactionState csro:Dissatisfied .
 
 
@@ -2711,7 +2709,7 @@ csro:Satisfied rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#ScanContainerImages
 csro:ScanContainerImages rdf:type owl:NamedIndividual ,
                                  csro:RiskTreatment ;
-                        csro:addresses csro:IMG_2 ;
+                        csro:addresses csro:IMG_1 ;
                         csro:isImplementedBy csro:dockerfile_analyzed ,
                                             csro:dockerfile_no_findings ;
                         csro:description "Perform vulnerability scanning on container images to identify and address security issues" ;
