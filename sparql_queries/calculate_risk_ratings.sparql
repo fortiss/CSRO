@@ -4,7 +4,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
 
 ##
-## Container Security Risk Ontology Export Query
+## "Calculate Risk Ratings and Treatments" Query
 ## 
 ## This CONSTRUCT query exports comprehensive risk assessment data including
 ## attack actions, dynamic risk calculations, affected components, and treatments.

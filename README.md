@@ -16,9 +16,9 @@ The Container Security Risk Ontology (CSRO) provides a formal representation for
 
 - `csro.ttl` — The main ontology file in Turtle format.
 - `sparql_queries/`
+  - `calculate_risk_ratings.sparql` — Query to run the "Calculate Risk Ratings and Treatments" algorithm and export the AttackActions of the ontology.
   - `calculation_example.sparql` — Example query for risk calculation.
   - `calculation_rules_export.sparql` — Query to export calculation rules.
-  - `csro_export.sparql` — Query to export the ontology.
 - `container_security_assumptions/`
   - `container_security_assumptions.csv` — Curated list of container security assumptions from standards such as NIST SP 800-190.
 
