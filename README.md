@@ -19,6 +19,8 @@ The Container Security Risk Ontology (CSRO) provides a formal representation for
   - `calculation_example.sparql` — Example query for risk calculation.
   - `calculation_rules_export.sparql` — Query to export calculation rules.
   - `csro_export.sparql` — Query to export the ontology.
+- `container_security_assumptions/`
+  - `container_security_assumptions.csv` — Curated list of container security assumptions from standards such as NIST SP 800-190.
 
 ## Usage
 
@@ -29,6 +31,10 @@ The Container Security Risk Ontology (CSRO) provides a formal representation for
 2. **SPARQL Queries**
    - Run the queries in the `sparql_queries` folder against a CSRO-compliant dataset.
    - Adapt queries as needed for your use case.
+
+3. **Container Security Assumptions**
+   - Access the curated list of container security assumptions from established standards.
+   - Use these assumptions as reference for security assessments and risk modeling.
 
 ## Classes and Properties
 
