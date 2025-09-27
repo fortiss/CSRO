@@ -1351,6 +1351,24 @@ csro:ContainerPtraceExp_NET_2_Weight rdf:type owl:NamedIndividual ,
                                     csro:effectDescription "Medium effect - moderately reduces attack exposure by controlling network traffic and blocking unauthorized connections" .
 
 
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystem
+csro:ContainerDataFromLocalSystem rdf:type owl:NamedIndividual ,
+                                         csro:ContainerAttackTechnique ;
+                                 csro:hasBaseDifficulty csro:Low ;
+                                 csro:referencesAttackTechnique d3f:T1005 ;
+                                 csro:requiresTrait csro:privileged_host_volume ;
+                                 csro:description "Container-specific adaptation of MITRE ATT&CK T1005 (Data from Local System) where containers with privileged host volume mounts can access sensitive host system files and directories, potentially exposing confidential information." .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp
+csro:ContainerExploitPublicFacingApp rdf:type owl:NamedIndividual ,
+                                            csro:ContainerAttackTechnique ;
+                                    csro:hasBaseDifficulty csro:Medium ;
+                                    csro:referencesAttackTechnique d3f:T1190 ;
+                                    csro:requiresTrait csro:external_network ;
+                                    csro:description "Container-specific adaptation of MITRE ATT&CK T1190 (Exploit Public-Facing Application) where containers with external network exposure become vulnerable to exploitation of application vulnerabilities, leading to container process compromise." .
+
+
 ###  https://w3id.org/csro/ontology#ContainerPtraceInjection
 csro:ContainerPtraceInjection rdf:type owl:NamedIndividual ,
                                       csro:ContainerAttackTechnique ;
@@ -1403,6 +1421,84 @@ csro:ContainerPtraceInjectionAttack_MixedScenario rdf:type owl:NamedIndividual ,
                                                  csro:description "Container ptrace injection attack (T1055.008) applied in mixed scenario" .
 
 
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemAttack_BasicScenario
+csro:ContainerDataFromLocalSystemAttack_BasicScenario rdf:type owl:NamedIndividual ,
+                                                             csro:AttackAction ;
+                                                    csro:affects csro:Application ,
+                                                                csro:Device ,
+                                                                csro:DeviceContainerRuntime ,
+                                                                csro:DeviceOperatingSystem ;
+                                                    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+                                                    csro:causesImpact csro:HostSystemFilesExposed ;
+                                                    csro:inContext csro:BasicScenario ;
+                                                    csro:description "Container data from local system attack (T1005) applied in basic scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemAttack_HardenedScenario
+csro:ContainerDataFromLocalSystemAttack_HardenedScenario rdf:type owl:NamedIndividual ,
+                                                                csro:AttackAction ;
+                                                       csro:affects csro:Application ,
+                                                                   csro:Device ,
+                                                                   csro:DeviceContainerRuntime ,
+                                                                   csro:DeviceOperatingSystem ;
+                                                       csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+                                                       csro:causesImpact csro:HostSystemFilesExposed ;
+                                                       csro:inContext csro:HardenedScenario ;
+                                                       csro:description "Container data from local system attack (T1005) applied in hardened scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemAttack_MixedScenario
+csro:ContainerDataFromLocalSystemAttack_MixedScenario rdf:type owl:NamedIndividual ,
+                                                             csro:AttackAction ;
+                                                    csro:affects csro:Application ,
+                                                                csro:Device ,
+                                                                csro:DeviceContainerRuntime ,
+                                                                csro:DeviceOperatingSystem ;
+                                                    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+                                                    csro:causesImpact csro:HostSystemFilesExposed ;
+                                                    csro:inContext csro:MixedScenario ;
+                                                    csro:description "Container data from local system attack (T1005) applied in mixed scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppAttack_BasicScenario
+csro:ContainerExploitPublicFacingAppAttack_BasicScenario rdf:type owl:NamedIndividual ,
+                                                                csro:AttackAction ;
+                                                       csro:affects csro:Application ,
+                                                                   csro:Device ,
+                                                                   csro:DeviceContainerRuntime ,
+                                                                   csro:OtherApplications ;
+                                                       csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+                                                       csro:causesImpact csro:CompromisedContainerProcess ;
+                                                       csro:inContext csro:BasicScenario ;
+                                                       csro:description "Container exploit public-facing application attack (T1190) applied in basic scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppAttack_HardenedScenario
+csro:ContainerExploitPublicFacingAppAttack_HardenedScenario rdf:type owl:NamedIndividual ,
+                                                                   csro:AttackAction ;
+                                                          csro:affects csro:Application ,
+                                                                      csro:Device ,
+                                                                      csro:DeviceContainerRuntime ,
+                                                                      csro:OtherApplications ;
+                                                          csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+                                                          csro:causesImpact csro:CompromisedContainerProcess ;
+                                                          csro:inContext csro:HardenedScenario ;
+                                                          csro:description "Container exploit public-facing application attack (T1190) applied in hardened scenario" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppAttack_MixedScenario
+csro:ContainerExploitPublicFacingAppAttack_MixedScenario rdf:type owl:NamedIndividual ,
+                                                                csro:AttackAction ;
+                                                       csro:affects csro:Application ,
+                                                                   csro:Device ,
+                                                                   csro:DeviceContainerRuntime ,
+                                                                   csro:OtherApplications ;
+                                                       csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+                                                       csro:causesImpact csro:CompromisedContainerProcess ;
+                                                       csro:inContext csro:MixedScenario ;
+                                                       csro:description "Container exploit public-facing application attack (T1190) applied in mixed scenario" .
+
+
 ###  https://w3id.org/csro/ontology#ContainerPtraceInjectionExploitabilityRule
 csro:ContainerPtraceInjectionExploitabilityRule rdf:type owl:NamedIndividual ,
                                                         csro:ExploitabilityCalculationRule ;
@@ -1421,6 +1517,46 @@ csro:ContainerPtraceInjectionExposureRule rdf:type owl:NamedIndividual ,
                                          csro:hasWeight csro:ContainerPtraceExp_NET_1_Weight ,
                                                        csro:ContainerPtraceExp_NET_2_Weight ;
                                          csro:description "Rule for calculating exposure of container ptrace injection technique (T1055.008)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemExploitabilityRule
+csro:ContainerDataFromLocalSystemExploitabilityRule rdf:type owl:NamedIndividual ,
+                                                           csro:ExploitabilityCalculationRule ;
+                                                  csro:appliesTo csro:ContainerDataFromLocalSystem ;
+                                                  csro:hasWeight csro:ContainerDataFromLocalSystem_IMG_1_Weight ,
+                                                                csro:ContainerDataFromLocalSystem_RTS_1_Weight ,
+                                                                csro:ContainerDataFromLocalSystem_RTS_2_Weight ,
+                                                                csro:ContainerDataFromLocalSystem_RTS_3_Weight ;
+                                                  csro:description "Rule for calculating exploitability of container data from local system technique (T1005)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemExposureRule
+csro:ContainerDataFromLocalSystemExposureRule rdf:type owl:NamedIndividual ,
+                                                     csro:ExposureCalculationRule ;
+                                            csro:appliesTo csro:ContainerDataFromLocalSystem ;
+                                            csro:hasWeight csro:ContainerDataFromLocalSystemExp_NET_1_Weight ,
+                                                          csro:ContainerDataFromLocalSystemExp_NET_2_Weight ;
+                                            csro:description "Rule for calculating exposure of container data from local system technique (T1005)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppExploitabilityRule
+csro:ContainerExploitPublicFacingAppExploitabilityRule rdf:type owl:NamedIndividual ,
+                                                              csro:ExploitabilityCalculationRule ;
+                                                     csro:appliesTo csro:ContainerExploitPublicFacingApp ;
+                                                     csro:hasWeight csro:ContainerExploitPublicFacingApp_IMG_1_Weight ,
+                                                                   csro:ContainerExploitPublicFacingApp_RTS_1_Weight ,
+                                                                   csro:ContainerExploitPublicFacingApp_RTS_2_Weight ,
+                                                                   csro:ContainerExploitPublicFacingApp_RTS_3_Weight ;
+                                                     csro:description "Rule for calculating exploitability of container exploit public-facing application technique (T1190)" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppExposureRule
+csro:ContainerExploitPublicFacingAppExposureRule rdf:type owl:NamedIndividual ,
+                                                        csro:ExposureCalculationRule ;
+                                               csro:appliesTo csro:ContainerExploitPublicFacingApp ;
+                                               csro:hasWeight csro:ContainerExploitPublicFacingAppExp_NET_1_Weight ,
+                                                             csro:ContainerExploitPublicFacingAppExp_NET_2_Weight ;
+                                               csro:description "Rule for calculating exposure of container exploit public-facing application technique (T1190)" .
 
 
 ###  https://w3id.org/csro/ontology#ContainerPtrace_IMG_1_Weight
@@ -1457,6 +1593,114 @@ csro:ContainerPtrace_RTS_3_Weight rdf:type owl:NamedIndividual ,
                                  csro:description "Weight for minimal capabilities assumption in container ptrace injection exploitability calculation" ;
                                  csro:weightValue 1.0 ;
                                  csro:effectDescription "Low effect - provides basic protection by removing unnecessary Linux capabilities" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystem_IMG_1_Weight
+csro:ContainerDataFromLocalSystem_IMG_1_Weight rdf:type owl:NamedIndividual ,
+                                                       csro:AssumptionWeight ;
+                                              csro:refersToAssumption csro:IMG_1 ;
+                                              csro:description "Weight for vulnerability scanning assumption in container data from local system exploitability calculation" ;
+                                              csro:weightValue 2.0 ;
+                                              csro:effectDescription "Medium effect - makes initial access to the container more difficult" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystem_RTS_1_Weight
+csro:ContainerDataFromLocalSystem_RTS_1_Weight rdf:type owl:NamedIndividual ,
+                                                       csro:AssumptionWeight ;
+                                              csro:refersToAssumption csro:RTS_1 ;
+                                              csro:description "Weight for non-root user assumption in container data from local system exploitability calculation" ;
+                                              csro:weightValue 3.0 ;
+                                              csro:effectDescription "High effect - by default, non-root users cannot read files outside of the container's scope" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystem_RTS_2_Weight
+csro:ContainerDataFromLocalSystem_RTS_2_Weight rdf:type owl:NamedIndividual ,
+                                                       csro:AssumptionWeight ;
+                                              csro:refersToAssumption csro:RTS_2 ;
+                                              csro:description "Weight for read-only filesystem assumption in container data from local system exploitability calculation" ;
+                                              csro:weightValue 0.0 ;
+                                              csro:effectDescription "No effect - does not prevent reading the files" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystem_RTS_3_Weight
+csro:ContainerDataFromLocalSystem_RTS_3_Weight rdf:type owl:NamedIndividual ,
+                                                       csro:AssumptionWeight ;
+                                              csro:refersToAssumption csro:RTS_3 ;
+                                              csro:description "Weight for minimal capabilities assumption in container data from local system exploitability calculation" ;
+                                              csro:weightValue 3.0 ;
+                                              csro:effectDescription "High effect - if capabilities are dropped, files cannot easily be opened/read" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemExp_NET_1_Weight
+csro:ContainerDataFromLocalSystemExp_NET_1_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:NET_1 ;
+                                                 csro:description "Weight for network segmentation assumption in container data from local system exposure calculation" ;
+                                                 csro:weightValue 2.0 ;
+                                                 csro:effectDescription "Medium effect - restricts access to privileged container" .
+
+
+###  https://w3id.org/csro/ontology#ContainerDataFromLocalSystemExp_NET_2_Weight
+csro:ContainerDataFromLocalSystemExp_NET_2_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:NET_2 ;
+                                                 csro:description "Weight for firewall rules assumption in container data from local system exposure calculation" ;
+                                                 csro:weightValue 2.0 ;
+                                                 csro:effectDescription "Medium effect - also restricts access" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp_IMG_1_Weight
+csro:ContainerExploitPublicFacingApp_IMG_1_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:IMG_1 ;
+                                                 csro:description "Weight for vulnerability scanning assumption in container exploit public-facing application exploitability calculation" ;
+                                                 csro:weightValue 2.0 ;
+                                                 csro:effectDescription "Medium effect - makes compromising the exposed container more difficult" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp_RTS_1_Weight
+csro:ContainerExploitPublicFacingApp_RTS_1_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:RTS_1 ;
+                                                 csro:description "Weight for non-root user assumption in container exploit public-facing application exploitability calculation" ;
+                                                 csro:weightValue 0.0 ;
+                                                 csro:effectDescription "No effect - the container user does not matter for the exploitability of initial access" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp_RTS_2_Weight
+csro:ContainerExploitPublicFacingApp_RTS_2_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:RTS_2 ;
+                                                 csro:description "Weight for read-only filesystem assumption in container exploit public-facing application exploitability calculation" ;
+                                                 csro:weightValue 0.0 ;
+                                                 csro:effectDescription "No effect - does not prevent initial access" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp_RTS_3_Weight
+csro:ContainerExploitPublicFacingApp_RTS_3_Weight rdf:type owl:NamedIndividual ,
+                                                          csro:AssumptionWeight ;
+                                                 csro:refersToAssumption csro:RTS_3 ;
+                                                 csro:description "Weight for minimal capabilities assumption in container exploit public-facing application exploitability calculation" ;
+                                                 csro:weightValue 0.0 ;
+                                                 csro:effectDescription "No effect - does not prevent initial access" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppExp_NET_1_Weight
+csro:ContainerExploitPublicFacingAppExp_NET_1_Weight rdf:type owl:NamedIndividual ,
+                                                             csro:AssumptionWeight ;
+                                                    csro:refersToAssumption csro:NET_1 ;
+                                                    csro:description "Weight for network segmentation assumption in container exploit public-facing application exposure calculation" ;
+                                                    csro:weightValue 0.0 ;
+                                                    csro:effectDescription "No effect - since it requires the absence of external network access, which is a requirement for the attack" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingAppExp_NET_2_Weight
+csro:ContainerExploitPublicFacingAppExp_NET_2_Weight rdf:type owl:NamedIndividual ,
+                                                             csro:AssumptionWeight ;
+                                                    csro:refersToAssumption csro:NET_2 ;
+                                                    csro:description "Weight for firewall rules assumption in container exploit public-facing application exposure calculation" ;
+                                                    csro:weightValue 3.0 ;
+                                                    csro:effectDescription "High effect - critical to restrict initial access" .
 
 
 ###  https://w3id.org/csro/ontology#Critical
@@ -1713,6 +1957,42 @@ csro:HostProcessManipulationRisk rdf:type owl:NamedIndividual ,
                                                 csro:SegmentNetworks ;
                                 csro:description "Risk of container escape and host process manipulation through SysPtrace attack" ;
                                 rdfs:label "Host Process Manipulation Risk" .
+
+###  https://w3id.org/csro/ontology#HostSystemFilesExposed
+csro:HostSystemFilesExposed rdf:type owl:NamedIndividual ,
+                                   csro:Impact ;
+                          csro:hasImpactRating csro:Moderate ;
+                          csro:indicates csro:HostSystemFilesExposedRisk ;
+                          csro:description "Confidential host system files exposed through privileged container volume mounts, potentially revealing sensitive configuration, credentials, or data." .
+
+
+###  https://w3id.org/csro/ontology#HostSystemFilesExposedRisk
+csro:HostSystemFilesExposedRisk rdf:type owl:NamedIndividual ,
+                                       csro:Risk ;
+                              csro:isTreatedBy csro:EnableReadOnlyFilesystem ,
+                                              csro:MinimizeCapabilities ,
+                                              csro:RunAsNonRootUser ,
+                                              csro:ScanContainerImages ;
+                              csro:description "Risk of sensitive host system files being exposed through container with privileged volume mounts" ;
+                              rdfs:label "Host System Files Exposed Risk" .
+
+###  https://w3id.org/csro/ontology#CompromisedContainerProcess
+csro:CompromisedContainerProcess rdf:type owl:NamedIndividual ,
+                                        csro:Impact ;
+                               csro:hasImpactRating csro:Critical ;
+                               csro:indicates csro:CompromisedContainerProcessRisk ;
+                               csro:description "Compromised container process through exploitation of public-facing application vulnerabilities, allowing attackers to gain control of the container runtime environment." .
+
+
+###  https://w3id.org/csro/ontology#CompromisedContainerProcessRisk
+csro:CompromisedContainerProcessRisk rdf:type owl:NamedIndividual ,
+                                            csro:Risk ;
+                                   csro:isTreatedBy csro:ConfigureHostFirewall ,
+                                                   csro:ScanContainerImages ,
+                                                   csro:SegmentNetworks ,
+                                                   csro:RunAsNonRootUser ;
+                                   csro:description "Risk of container process compromise through exploitation of vulnerabilities in public-facing applications" ;
+                                   rdfs:label "Compromised Container Process Risk" .
 
 ###  https://w3id.org/csro/ontology#IMG_1
 csro:IMG_1 rdf:type owl:NamedIndividual ,
