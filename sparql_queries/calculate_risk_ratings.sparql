@@ -4,7 +4,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
 
 ##
-## "Calculate Risk Ratings and Treatments" Query
+## Container Security Risk Ontology Export Query
 ## 
 ## This CONSTRUCT query exports comprehensive risk assessment data including
 ## attack actions, dynamic risk calculations, affected components, and treatments.
@@ -33,8 +33,7 @@ CONSTRUCT {
     ?technique a csro:ContainerAttackTechnique ;
         csro:description ?techniqueDescription ;
         csro:referencesAttackTechnique ?attackTechnique ;
-        csro:requiresTrait ?requiredTrait ;
-        csro:hasBaseDifficulty ?baseDifficulty .
+        csro:requiresTrait ?requiredTrait .
     
     # Referenced MITRE ATT&CK technique
     ?attackTechnique a d3f:ATTACKEnterpriseTechnique ;
@@ -64,23 +63,20 @@ CONSTRUCT {
         csro:belongsToCategory ?assumptionCategory ;
         csro:isVerifiableBy ?verificationTrait ;
         csro:isVerifiableByAbsence ?verificationAbsenceTrait ;
-        csro:originatesFrom ?assumptionSecurityStandard .
-    
-    # Assumptions can also originate from specific standard sections
-    ?assumption csro:originatesFrom ?assumptionSecurityStandardSection .
+        csro:originatesFrom ?assumptionSecurityStandardSection .
 
     # Assumption categories
     ?assumptionCategory a csro:AssumptionCategory ;
         csro:description ?categoryDescription .
 
-    # Security standards for assumptions
-    ?assumptionSecurityStandard a csro:ContainerSecurityStandard ;
-        csro:description ?assumptionSecurityStandardDescription .
-    
     # Security standard sections for assumptions (granular references)
     ?assumptionSecurityStandardSection a csro:ContainerSecurityStandardSection ;
         csro:belongsToStandard ?sectionParentStandard ;
         csro:sectionId ?sectionId .
+    
+    # Security standards (accessible through sections)
+    ?sectionParentStandard a csro:ContainerSecurityStandard ;
+        csro:description ?assumptionSecurityStandardDescription .
         
     # Verification traits
     ?verificationTrait a csro:ContainerDeploymentTrait ;
@@ -181,7 +177,6 @@ WHERE {
                          d3f:attack-id ?attackTechniqueId ;
                          d3f:definition ?attackTechniqueDefinition .
     }
-    OPTIONAL { ?technique csro:hasBaseDifficulty ?baseDifficulty }
     
     # Required traits for attack technique
     OPTIONAL {
@@ -210,18 +205,16 @@ WHERE {
         # Assumption category information
         ?assumptionCategory csro:description ?categoryDescription .
         
-        # Security standards for assumptions (optional)
-        OPTIONAL {
-            ?assumption csro:originatesFrom ?assumptionSecurityStandard .
-            ?assumptionSecurityStandard csro:description ?assumptionSecurityStandardDescription .
-        }
-        
         # Security standard sections for assumptions (granular references - optional)
         OPTIONAL {
             ?assumption csro:originatesFrom ?assumptionSecurityStandardSection .
             ?assumptionSecurityStandardSection a csro:ContainerSecurityStandardSection ;
                                                csro:belongsToStandard ?sectionParentStandard ;
                                                csro:sectionId ?sectionId .
+            
+            # Get the parent standard information through the section
+            ?sectionParentStandard a csro:ContainerSecurityStandard ;
+                                   csro:description ?assumptionSecurityStandardDescription .
         }
         
         # Verification information for assumptions

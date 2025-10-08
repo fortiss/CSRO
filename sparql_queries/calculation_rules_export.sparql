@@ -18,8 +18,7 @@ CONSTRUCT {
     # Container attack technique information with ATT&CK reference
     ?technique a csro:ContainerAttackTechnique ;
         csro:description ?techniqueDescription ;
-        csro:referencesAttackTechnique ?attackTechnique ;
-        csro:hasBaseDifficulty ?baseDifficulty .
+        csro:referencesAttackTechnique ?attackTechnique .
     
     # Referenced MITRE ATT&CK technique
     ?attackTechnique a d3f:ATTACKEnterpriseTechnique ;
@@ -60,23 +59,20 @@ CONSTRUCT {
         csro:assumptionId ?assumptionId ;
         csro:description ?assumptionDescription ;
         csro:belongsToCategory ?assumptionCategory ;
-        csro:originatesFrom ?securityStandard .
-    
-    # Assumptions can also originate from specific standard sections
-    ?assumption csro:originatesFrom ?securityStandardSection .
+        csro:originatesFrom ?securityStandardSection .
 
     # Assumption categories
     ?assumptionCategory a csro:AssumptionCategory ;
         csro:description ?categoryDescription .
 
-    # Security standards (optional since not all assumptions may have them)
-    ?securityStandard a csro:ContainerSecurityStandard ;
-        csro:description ?securityStandardDescription .
-    
     # Security standard sections for assumptions (granular references)
     ?securityStandardSection a csro:ContainerSecurityStandardSection ;
         csro:belongsToStandard ?sectionParentStandard ;
         csro:sectionId ?sectionId .
+
+    # Security standards (accessible through sections)
+    ?sectionParentStandard a csro:ContainerSecurityStandard ;
+        csro:description ?securityStandardDescription .
 
     # Rating instances with descriptions
     ?exploitabilityRating a csro:ExploitabilityRating ;
@@ -107,8 +103,6 @@ WHERE {
                          d3f:definition ?attackTechniqueDefinition .
     }
     
-    OPTIONAL { ?technique csro:hasBaseDifficulty ?baseDifficulty }
-    
     # Get exploitability or exposure rules for this technique
     {
         # Exploitability rules
@@ -138,18 +132,16 @@ WHERE {
 
     ?assumptionCategory csro:description ?categoryDescription .
 
-    # Security standards (optional)
-    OPTIONAL {
-        ?assumption csro:originatesFrom ?securityStandard .
-        ?securityStandard csro:description ?securityStandardDescription .
-    }
-    
     # Security standard sections for assumptions (granular references - optional)
     OPTIONAL {
         ?assumption csro:originatesFrom ?securityStandardSection .
         ?securityStandardSection a csro:ContainerSecurityStandardSection ;
                                  csro:belongsToStandard ?sectionParentStandard ;
                                  csro:sectionId ?sectionId .
+        
+        # Get the parent standard information through the section
+        ?sectionParentStandard a csro:ContainerSecurityStandard ;
+                               csro:description ?securityStandardDescription .
     }
 
     # Get all likelihood calculation rules
