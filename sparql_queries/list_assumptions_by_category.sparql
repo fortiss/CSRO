@@ -1,0 +1,17 @@
+# List all assumptions grouped by category
+#
+# Useful for understanding which assumptions exist and planning scenario configurations
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+
+SELECT ?categoryName ?assumptionId ?description
+WHERE {
+  ?assumption a csro:ContainerSecurityAssumption ;
+              csro:belongsToCategory ?category ;
+              csro:assumptionId ?assumptionId ;
+              csro:description ?description .
+  
+  # Extract category name
+  BIND(REPLACE(STR(?category), ".*#", "") AS ?categoryName)
+}
+ORDER BY ?categoryName ?assumptionId

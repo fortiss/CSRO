@@ -1,0 +1,27 @@
+# Generate AssumptionInScenario instances for a new scenario
+# 
+# Instructions:
+# 1. Set ?scenarioName to your desired scenario name (e.g., "ProductionScenario")
+# 2. Set ?satisfactionState to default satisfaction state (Satisfied, Dissatisfied, or Unknown)
+# 3. Run query to generate Turtle syntax
+# 4. Copy output and paste into csro.ttl
+# 5. Manually adjust satisfaction states as needed for your scenario
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+
+SELECT 
+  (CONCAT("###  https://w3id.org/csro/ontology#", ?scenarioName, "_", REPLACE(?assumptionId, "-", "_"), "\n",
+          "csro:", ?scenarioName, "_", REPLACE(?assumptionId, "-", "_"), " rdf:type owl:NamedIndividual ,\n",
+          "                                  csro:AssumptionInScenario ;\n",
+          "                         csro:forAssumption csro:", REPLACE(?assumptionId, "-", "_"), " ;\n",
+          "                         csro:hasSatisfactionState csro:", ?satisfactionState, " .\n\n") AS ?turtle)
+WHERE {
+  ?assumption a csro:ContainerSecurityAssumption ;
+              csro:assumptionId ?assumptionId .
+  
+  # ========== CONFIGURE THESE VALUES ==========
+  BIND("NewScenario" AS ?scenarioName)
+  BIND("Unknown" AS ?satisfactionState)  # Options: Satisfied, Dissatisfied, Unknown
+  # ============================================
+}
+ORDER BY ?assumptionId

@@ -1,0 +1,34 @@
+# Generate AttackAction instances for all technique-scenario combinations
+#
+# Instructions:
+# 1. Run query to generate Turtle syntax for all possible AttackAction instances
+# 2. Review output - one AttackAction for each technique × scenario combination
+# 3. For each generated action, manually add:
+#    - csro:affects properties (which components are affected)
+#    - csro:causesImpact property (which impact is caused)
+# 4. Copy output and paste into csro.ttl
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?techniqueName ?scenarioName
+  (CONCAT(?techniqueName, "Attack_", ?scenarioName) AS ?attackActionName)
+  (CONCAT(
+    "###  https://w3id.org/csro/ontology#", ?techniqueName, "Attack_", ?scenarioName, "\n",
+    "csro:", ?techniqueName, "Attack_", ?scenarioName, " rdf:type owl:NamedIndividual ,\n",
+    "                                                                  csro:AttackAction ;\n",
+    "                                                         # TODO: Add csro:affects properties for affected components\n",
+    "                                                         csro:appliesTechnique csro:", ?techniqueName, " ;\n",
+    "                                                         # TODO: Add csro:causesImpact property\n",
+    "                                                         csro:inContext csro:", ?scenarioName, " ;\n",
+    "                                                         csro:description \"", ?techniqueName, " attack applied in ", ?scenarioName, " scenario\" .\n\n\n"
+  ) AS ?turtle)
+WHERE {
+  ?technique a csro:ContainerAttackTechnique .
+  ?scenario a csro:ContextScenario .
+  
+  # Extract local names (remove namespace prefix)
+  BIND(REPLACE(STR(?technique), ".*#", "") AS ?techniqueName)
+  BIND(REPLACE(STR(?scenario), ".*#", "") AS ?scenarioName)
+}
+ORDER BY ?techniqueName ?scenarioName

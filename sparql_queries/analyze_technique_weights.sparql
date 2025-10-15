@@ -1,0 +1,30 @@
+# Analyze assumption weights for a specific attack technique
+#
+# Shows which assumptions affect the technique and how much
+# Useful for understanding which assumptions to focus on when creating scenarios
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+
+SELECT DISTINCT ?ruleType ?assumptionId ?weightValue ?effectDescription
+WHERE {
+  {
+    # From exploitability rules
+    ?rule a csro:ExploitabilityCalculationRule ;
+          csro:appliesTo csro:ContainerExploitPublicFacingApp ;  # <-- CHANGE THIS to your technique
+          csro:hasWeight ?weight .
+    BIND("Exploitability" AS ?ruleType)
+  } UNION {
+    # From exposure rules
+    ?rule a csro:ExposureCalculationRule ;
+          csro:appliesTo csro:ContainerExploitPublicFacingApp ;  # <-- CHANGE THIS to your technique
+          csro:hasWeight ?weight .
+    BIND("Exposure" AS ?ruleType)
+  }
+  
+  ?weight csro:refersToAssumption ?assumption ;
+          csro:weightValue ?weightValue ;
+          csro:effectDescription ?effectDescription .
+  
+  ?assumption csro:assumptionId ?assumptionId .
+}
+ORDER BY ?ruleType DESC(?weightValue) ?assumptionId

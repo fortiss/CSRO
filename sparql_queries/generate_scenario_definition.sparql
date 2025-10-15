@@ -1,0 +1,35 @@
+# Generate the main scenario definition with all includesAssumption properties
+#
+# Instructions:
+# 1. Set ?scenarioName to match the name used in generate_scenario_template.sparql
+# 2. Set ?description to describe your scenario
+# 3. Run query to generate Turtle syntax for scenario definition
+# 4. Copy output and paste into csro.ttl BEFORE the AssumptionInScenario instances
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+
+SELECT 
+  (CONCAT(
+    "###  https://w3id.org/csro/ontology#", ?scenarioName, "\n",
+    "csro:", ?scenarioName, " rdf:type owl:NamedIndividual ,\n",
+    "                            csro:ContextScenario ;\n",
+    "                   csro:includes csro:Application ,\n",
+    "                                 csro:Device ,\n",
+    "                                 csro:DeviceContainerRuntime ,\n",
+    "                                 csro:DeviceOperatingSystem ,\n",
+    "                                 csro:OtherApplications ;\n",
+    "                   csro:includesAssumption ",
+    GROUP_CONCAT(CONCAT("csro:", ?scenarioName, "_", REPLACE(?assumptionId, "-", "_")); separator=" ,\n                                           "),
+    " ;\n",
+    "                   csro:description \"", ?description, "\" .\n\n"
+  ) AS ?scenarioTurtle)
+WHERE {
+  ?assumption a csro:ContainerSecurityAssumption ;
+              csro:assumptionId ?assumptionId .
+  
+  # ========== CONFIGURE THESE VALUES ==========
+  BIND("NewScenario" AS ?scenarioName)
+  BIND("Description of the scenario" AS ?description)
+  # ============================================
+}
+GROUP BY ?scenarioName ?description

@@ -1,0 +1,18 @@
+# Validate that all scenarios include all assumptions
+#
+# Each scenario should include AssumptionInScenario instances for all ContainerSecurityAssumptions
+# This query helps identify missing assumptions in scenarios
+
+PREFIX csro: <https://w3id.org/csro/ontology#>
+
+SELECT ?scenarioName 
+       (COUNT(DISTINCT ?ais) as ?assumptionCount)
+       ((SELECT COUNT(?allAssumptions) WHERE { ?allAssumptions a csro:ContainerSecurityAssumption }) AS ?totalAssumptions)
+WHERE {
+  ?scenario a csro:ContextScenario ;
+            csro:includesAssumption ?ais .
+  
+  BIND(REPLACE(STR(?scenario), ".*#", "") AS ?scenarioName)
+}
+GROUP BY ?scenarioName
+ORDER BY ?scenarioName

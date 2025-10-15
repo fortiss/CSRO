@@ -1,0 +1,138 @@
+feat: Add 12 new container attack techniques with comprehensive assumption weights
+
+## Overview
+Extended CSRO ontology from 3 to 15 ContainerAttackTechnique instances with complete 
+assumption weight assessments and calculation rules. Added 1,380 new ontology instances 
+(1,350 AssumptionWeights + 30 CalculationRules) and created automated workflow tools 
+for future technique additions.
+
+## New Attack Techniques Added
+1. **Escape to Host** (T1611) - Container breakout via exploit
+2. **Escape via Application Execution** (T1610) - Escape through application vulnerability
+3. **Escape via Exec API** (T1609) - Escape via container runtime exec API
+4. **Implant Internal Image** - Backdoored image in internal registry
+5. **Resource Hijacking** (T1496) - Cryptomining and resource abuse
+6. **System Network Configuration Discovery** (T1016) - Network reconnaissance
+7. **System Network Connections Discovery** (T1049) - Active connection enumeration
+8. **Privilege Escalation within Container** (CID-2016) - Container privilege escalation
+9. **Network Service Discovery** (T1046) - Service scanning and discovery
+10. **Container Backdoor Image Deployment** - Deploy backdoored container image
+11. **Abuse CI/CD Pipeline** - Exploit CI/CD for malicious deployment
+12. **Supply Chain Compromise** (T1195) - Compromise software supply chain
+
+## Ontology Changes
+
+### New Instances
+- **1,350 AssumptionWeight instances**
+  - 15 techniques × 48 assumptions × 2 types (Exploitability + Exposure)
+  - Each with documented rationale in `effectDescription` property
+  - Weight values on 0-3 scale (No/Low/Medium/High effect)
+
+- **30 CalculationRule instances**
+  - ExploitabilityCalculationRule for each technique (15)
+  - ExposureCalculationRule for each technique (15)
+  - Link techniques to their assumption weights
+
+### File Changes
+- **csro.ttl**: Expanded from 3,738 to 14,397 lines
+  - Lines 1398-10852: AssumptionWeight instances
+  - Lines 10853-12389: CalculationRule instances
+  - Clean production-ready format with section headers
+
+## Repository Reorganization
+
+### New Folder Structure
+Created `attack_techniques/` folder hierarchy for organized workflow:
+
+```
+attack_techniques/
+├── README.md                          # Workflow documentation
+├── weights/                           # Weight assessment data
+│   ├── assumption_weights_matrix.csv
+│   ├── assumption_weights_rationales.csv
+│   └── assumption_weights.csv
+├── scripts/                           # Automation tools
+│   ├── generate_ontology_instances.py
+│   ├── merge_instances_to_ontology.py
+│   ├── review_weights.py
+│   └── review_weights_by_category.py
+└── docs/                              # Process documentation
+    ├── WEIGHTS_EXPLANATION.md
+    ├── scenario_generation_strategy.md
+    └── README_SCENARIO_GENERATION.md
+```
+
+### Tool Development
+
+**review_weights.py** (366 lines)
+- Interactive assumption-by-assumption weight review
+- Context-aware prompts with technique descriptions
+- Update weights and rationales interactively
+- Navigation controls (skip, quit)
+
+**review_weights_by_category.py** (562 lines)
+- Fast category-based weight assessment
+- Set category defaults with exception handling
+- 9 categories: IMG, RTS, NET, AUTH, SCM, HIS, MON, CIC, CRM
+- Requires rationales for all weights (including 0)
+- Significantly faster than assumption-by-assumption review
+
+**generate_ontology_instances.py**
+- Converts CSV data to OWL Turtle format
+- Generates AssumptionWeight individuals with clean formatting
+- Generates CalculationRule individuals
+- Production-ready output (no development warnings)
+
+**merge_instances_to_ontology.py**
+- Merges generated instances into csro.ttl
+- Replaces old partial instances with comprehensive new ones
+- Maintains clean ontology structure
+- Atomic file operations for safety
+
+### Data Files
+
+**assumption_weights_matrix.csv**
+- Visual matrix: 15 rows × 98 columns
+- Columns: Technique, ATT&CK ID, 48 exploitability, 48 exposure weights
+- Excel-friendly format for overview/validation
+
+**assumption_weights_rationales.csv**
+- Sparse format: 1,350 documented weight decisions
+- Columns: Technique, Assumption ID, Name, Type, Value, Rationale
+- Source data for ontology instance generation
+
+**assumption_weights.csv**
+- Historical/reference file (maintained)
+
+### Documentation
+
+**attack_techniques/README.md** (new)
+- Complete workflow guide for adding techniques
+- Tool usage instructions
+- SPARQL query examples
+- Contributing guidelines
+
+**WEIGHTS_EXPLANATION.md**
+- Detailed weight assessment methodology
+- Examples and rationales
+- Best practices
+
+**scenario_generation_strategy.md**
+- Strategy for context scenario generation
+- Attack action modeling approach
+
+**README_SCENARIO_GENERATION.md**
+- Scenario generation tool documentation
+
+## Technical Details
+
+### Weight Assessment Approach
+- **Scale**: 0 (No effect) → 3 (High effect)
+- **Types**: Exploitability (difficulty to exploit) and Exposure (detectability)
+- **Assumptions**: 48 container security assumptions across 9 categories
+- **Documentation**: Every weight includes rationale explaining the assessment
+
+### Calculation Rules
+- Link techniques to their assumption weights
+- Enable dynamic risk calculation based on scenario assumptions
+- Support both exploitability and exposure calculations
