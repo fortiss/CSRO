@@ -1,0 +1,358 @@
+{
+  "scenarios": [
+    {
+      "name": "ProductionScenario",
+      "description": "Production deployment with comprehensive security controls implemented according to best practices",
+      "rules": {
+        "IMG": "Satisfied",
+        "RTS": "Satisfied",
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "SCM": "Satisfied",
+        "HIS": "Satisfied",
+        "MON": "Satisfied",
+        "CIC": "Satisfied",
+        "CRM": "Satisfied"
+      },
+      "default": "Satisfied"
+    },
+    {
+      "name": "DevelopmentScenario",
+      "description": "Development environment with minimal security controls for ease of development and debugging",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "NET": "Dissatisfied",
+        "AUTH": "Dissatisfied",
+        "SCM": "Unknown",
+        "HIS": "Dissatisfied",
+        "MON": "Dissatisfied",
+        "CIC": "Satisfied",
+        "CRM": "Dissatisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "HighRiskScenario",
+      "description": "High-risk deployment with most security controls disabled, representing worst-case scenario",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "NET": "Dissatisfied",
+        "AUTH": "Dissatisfied",
+        "SCM": "Dissatisfied",
+        "HIS": "Dissatisfied",
+        "MON": "Dissatisfied",
+        "CIC": "Dissatisfied",
+        "CRM": "Dissatisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "NetworkHardenedScenario",
+      "description": "Scenario with strong network security controls including network policies, segmentation, and egress filtering",
+      "rules": {
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "MON": "Satisfied",
+        "IMG": "Unknown",
+        "RTS": "Unknown"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "RuntimeHardenedScenario",
+      "description": "Scenario with strong runtime security controls including AppArmor, Seccomp, and read-only filesystems",
+      "rules": {
+        "RTS": "Satisfied",
+        "IMG": "Satisfied",
+        "MON": "Satisfied",
+        "NET": "Unknown",
+        "AUTH": "Unknown"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "ImageSecurityFocusedScenario",
+      "description": "Scenario with strong focus on container image security including scanning, signing, and minimal base images",
+      "rules": {
+        "IMG": "Satisfied",
+        "CIC": "Satisfied",
+        "SCM": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "BasicContainerSecurityScenario",
+      "description": "Scenario with only critical security controls implemented, representing minimal viable security",
+      "satisfaction_map": {
+        "IMG-1": "Satisfied",
+        "IMG-2": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-3": "Satisfied",
+        "NET-2": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied",
+        "MON-1": "Satisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "OutdatedContainersScenario",
+      "description": "Legacy container deployment with outdated security practices and limited monitoring",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "MON": "Dissatisfied",
+        "HIS": "Dissatisfied",
+        "CIC": "Dissatisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "MicroservicesScenario",
+      "description": "Microservices architecture with service-to-service authentication but limited runtime protection",
+      "rules": {
+        "AUTH": "Satisfied",
+        "NET": "Satisfied",
+        "MON": "Satisfied",
+        "RTS": "Dissatisfied",
+        "HIS": "Dissatisfied",
+        "IMG": "Unknown"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "EdgeComputingScenario",
+      "description": "Edge computing deployment with limited central monitoring and physical security constraints",
+      "rules": {
+        "MON": "Dissatisfied",
+        "HIS": "Dissatisfied",
+        "AUTH": "Satisfied",
+        "RTS": "Satisfied",
+        "NET": "Unknown"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "CICDSecurityScenario",
+      "description": "Environment with security integrated throughout CI/CD pipeline including automated scanning and policy enforcement",
+      "rules": {
+        "CIC": "Satisfied",
+        "IMG": "Satisfied",
+        "SCM": "Satisfied",
+        "MON": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "AirGappedScenario",
+      "description": "Air-gapped environment with no external connectivity but potentially outdated images and limited updates",
+      "rules": {
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "IMG": "Dissatisfied",
+        "CIC": "Dissatisfied",
+        "MON": "Unknown"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "RapidPrototypeScenario",
+      "description": "Rapid prototyping environment prioritizing speed over security with minimal controls",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "NET": "Dissatisfied",
+        "AUTH": "Dissatisfied",
+        "MON": "Dissatisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "HybridCloudScenario",
+      "description": "Hybrid cloud deployment with varying security controls across on-premises and cloud environments",
+      "satisfaction_map": {
+        "NET-1": "Satisfied",
+        "NET-2": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "AUTH-2": "Satisfied",
+        "MON-1": "Satisfied",
+        "MON-2": "Unknown",
+        "IMG-1": "Satisfied",
+        "IMG-3": "Unknown",
+        "RTS-1": "Satisfied",
+        "RTS-4": "Unknown",
+        "CIC-1": "Satisfied",
+        "SCM-1": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "BalancedContainerSecurityScenario",
+      "description": "Balanced approach with moderate security controls across all categories, typical for mid-sized organizations",
+      "rules": {
+        "IMG": "Satisfied",
+        "RTS": "Satisfied",
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "SCM": "Unknown",
+        "HIS": "Unknown",
+        "MON": "Satisfied",
+        "CIC": "Unknown",
+        "CRM": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "NISTCompliantScenario",
+      "description": "Scenario following NIST SP 800-190 Application Container Security Guide recommendations",
+      "satisfaction_map": {
+        "IMG-1": "Satisfied",
+        "IMG-2": "Satisfied",
+        "IMG-3": "Satisfied",
+        "IMG-4": "Satisfied",
+        "IMG-5": "Satisfied",
+        "IMG-6": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-2": "Satisfied",
+        "RTS-3": "Satisfied",
+        "RTS-4": "Satisfied",
+        "RTS-5": "Satisfied",
+        "RTS-6": "Satisfied",
+        "RTS-7": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "AUTH-2": "Satisfied",
+        "AUTH-3": "Satisfied",
+        "NET-1": "Satisfied",
+        "NET-3": "Satisfied",
+        "NET-4": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied",
+        "SCM-3": "Satisfied",
+        "SCM-4": "Satisfied",
+        "HIS-1": "Satisfied",
+        "HIS-2": "Satisfied",
+        "HIS-3": "Satisfied",
+        "MON-1": "Satisfied",
+        "MON-2": "Satisfied",
+        "MON-3": "Satisfied",
+        "MON-4": "Satisfied",
+        "MON-5": "Satisfied",
+        "MON-6": "Satisfied",
+        "MON-7": "Satisfied",
+        "MON-8": "Satisfied",
+        "CIC-4": "Satisfied",
+        "CIC-6": "Satisfied",
+        "CRM-1": "Satisfied",
+        "CRM-2": "Satisfied",
+        "CRM-3": "Satisfied",
+        "CRM-4": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "CISCompliantScenario",
+      "description": "Scenario following CIS Docker Benchmark recommendations",
+      "satisfaction_map": {
+        "IMG-1": "Satisfied",
+        "IMG-2": "Satisfied",
+        "IMG-3": "Satisfied",
+        "IMG-4": "Satisfied",
+        "IMG-5": "Satisfied",
+        "IMG-6": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-2": "Satisfied",
+        "RTS-3": "Satisfied",
+        "RTS-4": "Satisfied",
+        "RTS-5": "Satisfied",
+        "RTS-6": "Satisfied",
+        "RTS-7": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "AUTH-2": "Satisfied",
+        "AUTH-3": "Satisfied",
+        "NET-1": "Satisfied",
+        "NET-2": "Satisfied",
+        "NET-3": "Satisfied",
+        "NET-4": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied",
+        "SCM-4": "Satisfied",
+        "HIS-1": "Satisfied",
+        "MON-1": "Satisfied",
+        "MON-3": "Satisfied",
+        "MON-4": "Satisfied",
+        "MON-5": "Satisfied",
+        "CIC-4": "Satisfied",
+        "CIC-5": "Satisfied",
+        "CRM-3": "Satisfied",
+        "CRM-4": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "OWASPTop10CompliantScenario",
+      "description": "Scenario following OWASP Docker Top 10 security risks mitigation recommendations",
+      "satisfaction_map": {
+        "IMG-2": "Satisfied",
+        "IMG-3": "Satisfied",
+        "IMG-5": "Satisfied",
+        "IMG-6": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-2": "Satisfied",
+        "RTS-3": "Satisfied",
+        "RTS-4": "Satisfied",
+        "RTS-5": "Satisfied",
+        "RTS-6": "Satisfied",
+        "RTS-7": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "NET-1": "Satisfied",
+        "NET-2": "Satisfied",
+        "NET-4": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied",
+        "SCM-3": "Satisfied",
+        "HIS-1": "Satisfied",
+        "HIS-2": "Satisfied",
+        "MON-1": "Satisfied",
+        "MON-5": "Satisfied",
+        "CIC-4": "Satisfied",
+        "CIC-6": "Satisfied"
+      },
+      "default": "Unknown"
+    },
+    {
+      "name": "OWASPCheatSheetCompliantScenario",
+      "description": "Scenario following OWASP Docker Security Cheat Sheet recommendations",
+      "satisfaction_map": {
+        "IMG-1": "Satisfied",
+        "IMG-3": "Satisfied",
+        "IMG-4": "Satisfied",
+        "IMG-6": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-2": "Satisfied",
+        "RTS-3": "Satisfied",
+        "RTS-4": "Satisfied",
+        "RTS-5": "Satisfied",
+        "RTS-6": "Satisfied",
+        "RTS-7": "Satisfied",
+        "AUTH-3": "Satisfied",
+        "NET-1": "Satisfied",
+        "NET-2": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied",
+        "SCM-3": "Satisfied",
+        "HIS-1": "Satisfied",
+        "HIS-2": "Satisfied",
+        "MON-1": "Satisfied",
+        "CIC-1": "Satisfied",
+        "CIC-2": "Satisfied",
+        "CIC-3": "Satisfied",
+        "CIC-4": "Satisfied",
+        "CRM-3": "Satisfied"
+      },
+      "default": "Unknown"
+    }
+  ]
+}

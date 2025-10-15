@@ -203,8 +203,8 @@ def main():
     )
     parser.add_argument(
         '--ontology',
-        default='csro.ttl',
-        help='Path to CSRO ontology file (default: csro.ttl)'
+        default='../../csro.ttl',
+        help='Path to CSRO ontology file (default: ../../csro.ttl)'
     )
     parser.add_argument(
         '--config',
@@ -212,8 +212,8 @@ def main():
     )
     parser.add_argument(
         '--output',
-        default='generated_scenarios.ttl',
-        help='Output file path (default: generated_scenarios.ttl)'
+        default='../configs/generated_scenarios.ttl',
+        help='Output file path (default: ../configs/generated_scenarios.ttl)'
     )
     parser.add_argument(
         '--format',

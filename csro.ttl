@@ -560,6 +560,4432 @@ csro:ContextScenario rdf:type owl:Class ;
                      rdfs:comment "A scenario representing a collection of security assumptions with their satisfaction states. Scenarios are independent of specific attacks and represent different security postures."@en ;
                      rdfs:label "Context Scenario"@en .
 
+csro:AirGappedScenario a csro:ContextScenario ;
+    csro:description "Air-gapped environment with no external connectivity but potentially outdated images and limited updates" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:AirGappedScenario_AUTH_1,
+        csro:AirGappedScenario_AUTH_2,
+        csro:AirGappedScenario_AUTH_3,
+        csro:AirGappedScenario_CIC_1,
+        csro:AirGappedScenario_CIC_2,
+        csro:AirGappedScenario_CIC_3,
+        csro:AirGappedScenario_CIC_4,
+        csro:AirGappedScenario_CIC_5,
+        csro:AirGappedScenario_CIC_6,
+        csro:AirGappedScenario_CRM_1,
+        csro:AirGappedScenario_CRM_2,
+        csro:AirGappedScenario_CRM_3,
+        csro:AirGappedScenario_CRM_4,
+        csro:AirGappedScenario_HIS_1,
+        csro:AirGappedScenario_HIS_2,
+        csro:AirGappedScenario_HIS_3,
+        csro:AirGappedScenario_IMG_1,
+        csro:AirGappedScenario_IMG_2,
+        csro:AirGappedScenario_IMG_3,
+        csro:AirGappedScenario_IMG_4,
+        csro:AirGappedScenario_IMG_5,
+        csro:AirGappedScenario_IMG_6,
+        csro:AirGappedScenario_MON_1,
+        csro:AirGappedScenario_MON_2,
+        csro:AirGappedScenario_MON_3,
+        csro:AirGappedScenario_MON_4,
+        csro:AirGappedScenario_MON_5,
+        csro:AirGappedScenario_MON_6,
+        csro:AirGappedScenario_MON_7,
+        csro:AirGappedScenario_MON_8,
+        csro:AirGappedScenario_NET_1,
+        csro:AirGappedScenario_NET_2,
+        csro:AirGappedScenario_NET_3,
+        csro:AirGappedScenario_NET_4,
+        csro:AirGappedScenario_RTS_1,
+        csro:AirGappedScenario_RTS_2,
+        csro:AirGappedScenario_RTS_3,
+        csro:AirGappedScenario_RTS_4,
+        csro:AirGappedScenario_RTS_5,
+        csro:AirGappedScenario_RTS_6,
+        csro:AirGappedScenario_RTS_7,
+        csro:AirGappedScenario_SCM_1,
+        csro:AirGappedScenario_SCM_2,
+        csro:AirGappedScenario_SCM_3,
+        csro:AirGappedScenario_SCM_4 .
+
+csro:BalancedContainerSecurityScenario a csro:ContextScenario ;
+    csro:description "Balanced approach with moderate security controls across all categories, typical for mid-sized organizations" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:BalancedContainerSecurityScenario_AUTH_1,
+        csro:BalancedContainerSecurityScenario_AUTH_2,
+        csro:BalancedContainerSecurityScenario_AUTH_3,
+        csro:BalancedContainerSecurityScenario_CIC_1,
+        csro:BalancedContainerSecurityScenario_CIC_2,
+        csro:BalancedContainerSecurityScenario_CIC_3,
+        csro:BalancedContainerSecurityScenario_CIC_4,
+        csro:BalancedContainerSecurityScenario_CIC_5,
+        csro:BalancedContainerSecurityScenario_CIC_6,
+        csro:BalancedContainerSecurityScenario_CRM_1,
+        csro:BalancedContainerSecurityScenario_CRM_2,
+        csro:BalancedContainerSecurityScenario_CRM_3,
+        csro:BalancedContainerSecurityScenario_CRM_4,
+        csro:BalancedContainerSecurityScenario_HIS_1,
+        csro:BalancedContainerSecurityScenario_HIS_2,
+        csro:BalancedContainerSecurityScenario_HIS_3,
+        csro:BalancedContainerSecurityScenario_IMG_1,
+        csro:BalancedContainerSecurityScenario_IMG_2,
+        csro:BalancedContainerSecurityScenario_IMG_3,
+        csro:BalancedContainerSecurityScenario_IMG_4,
+        csro:BalancedContainerSecurityScenario_IMG_5,
+        csro:BalancedContainerSecurityScenario_IMG_6,
+        csro:BalancedContainerSecurityScenario_MON_1,
+        csro:BalancedContainerSecurityScenario_MON_2,
+        csro:BalancedContainerSecurityScenario_MON_3,
+        csro:BalancedContainerSecurityScenario_MON_4,
+        csro:BalancedContainerSecurityScenario_MON_5,
+        csro:BalancedContainerSecurityScenario_MON_6,
+        csro:BalancedContainerSecurityScenario_MON_7,
+        csro:BalancedContainerSecurityScenario_MON_8,
+        csro:BalancedContainerSecurityScenario_NET_1,
+        csro:BalancedContainerSecurityScenario_NET_2,
+        csro:BalancedContainerSecurityScenario_NET_3,
+        csro:BalancedContainerSecurityScenario_NET_4,
+        csro:BalancedContainerSecurityScenario_RTS_1,
+        csro:BalancedContainerSecurityScenario_RTS_2,
+        csro:BalancedContainerSecurityScenario_RTS_3,
+        csro:BalancedContainerSecurityScenario_RTS_4,
+        csro:BalancedContainerSecurityScenario_RTS_5,
+        csro:BalancedContainerSecurityScenario_RTS_6,
+        csro:BalancedContainerSecurityScenario_RTS_7,
+        csro:BalancedContainerSecurityScenario_SCM_1,
+        csro:BalancedContainerSecurityScenario_SCM_2,
+        csro:BalancedContainerSecurityScenario_SCM_3,
+        csro:BalancedContainerSecurityScenario_SCM_4 .
+
+csro:BasicContainerSecurityScenario a csro:ContextScenario ;
+    csro:description "Scenario with only critical security controls implemented, representing minimal viable security" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:BasicContainerSecurityScenario_AUTH_1,
+        csro:BasicContainerSecurityScenario_AUTH_2,
+        csro:BasicContainerSecurityScenario_AUTH_3,
+        csro:BasicContainerSecurityScenario_CIC_1,
+        csro:BasicContainerSecurityScenario_CIC_2,
+        csro:BasicContainerSecurityScenario_CIC_3,
+        csro:BasicContainerSecurityScenario_CIC_4,
+        csro:BasicContainerSecurityScenario_CIC_5,
+        csro:BasicContainerSecurityScenario_CIC_6,
+        csro:BasicContainerSecurityScenario_CRM_1,
+        csro:BasicContainerSecurityScenario_CRM_2,
+        csro:BasicContainerSecurityScenario_CRM_3,
+        csro:BasicContainerSecurityScenario_CRM_4,
+        csro:BasicContainerSecurityScenario_HIS_1,
+        csro:BasicContainerSecurityScenario_HIS_2,
+        csro:BasicContainerSecurityScenario_HIS_3,
+        csro:BasicContainerSecurityScenario_IMG_1,
+        csro:BasicContainerSecurityScenario_IMG_2,
+        csro:BasicContainerSecurityScenario_IMG_3,
+        csro:BasicContainerSecurityScenario_IMG_4,
+        csro:BasicContainerSecurityScenario_IMG_5,
+        csro:BasicContainerSecurityScenario_IMG_6,
+        csro:BasicContainerSecurityScenario_MON_1,
+        csro:BasicContainerSecurityScenario_MON_2,
+        csro:BasicContainerSecurityScenario_MON_3,
+        csro:BasicContainerSecurityScenario_MON_4,
+        csro:BasicContainerSecurityScenario_MON_5,
+        csro:BasicContainerSecurityScenario_MON_6,
+        csro:BasicContainerSecurityScenario_MON_7,
+        csro:BasicContainerSecurityScenario_MON_8,
+        csro:BasicContainerSecurityScenario_NET_1,
+        csro:BasicContainerSecurityScenario_NET_2,
+        csro:BasicContainerSecurityScenario_NET_3,
+        csro:BasicContainerSecurityScenario_NET_4,
+        csro:BasicContainerSecurityScenario_RTS_1,
+        csro:BasicContainerSecurityScenario_RTS_2,
+        csro:BasicContainerSecurityScenario_RTS_3,
+        csro:BasicContainerSecurityScenario_RTS_4,
+        csro:BasicContainerSecurityScenario_RTS_5,
+        csro:BasicContainerSecurityScenario_RTS_6,
+        csro:BasicContainerSecurityScenario_RTS_7,
+        csro:BasicContainerSecurityScenario_SCM_1,
+        csro:BasicContainerSecurityScenario_SCM_2,
+        csro:BasicContainerSecurityScenario_SCM_3,
+        csro:BasicContainerSecurityScenario_SCM_4 .
+
+csro:CICDSecurityScenario a csro:ContextScenario ;
+    csro:description "Environment with security integrated throughout CI/CD pipeline including automated scanning and policy enforcement" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:CICDSecurityScenario_AUTH_1,
+        csro:CICDSecurityScenario_AUTH_2,
+        csro:CICDSecurityScenario_AUTH_3,
+        csro:CICDSecurityScenario_CIC_1,
+        csro:CICDSecurityScenario_CIC_2,
+        csro:CICDSecurityScenario_CIC_3,
+        csro:CICDSecurityScenario_CIC_4,
+        csro:CICDSecurityScenario_CIC_5,
+        csro:CICDSecurityScenario_CIC_6,
+        csro:CICDSecurityScenario_CRM_1,
+        csro:CICDSecurityScenario_CRM_2,
+        csro:CICDSecurityScenario_CRM_3,
+        csro:CICDSecurityScenario_CRM_4,
+        csro:CICDSecurityScenario_HIS_1,
+        csro:CICDSecurityScenario_HIS_2,
+        csro:CICDSecurityScenario_HIS_3,
+        csro:CICDSecurityScenario_IMG_1,
+        csro:CICDSecurityScenario_IMG_2,
+        csro:CICDSecurityScenario_IMG_3,
+        csro:CICDSecurityScenario_IMG_4,
+        csro:CICDSecurityScenario_IMG_5,
+        csro:CICDSecurityScenario_IMG_6,
+        csro:CICDSecurityScenario_MON_1,
+        csro:CICDSecurityScenario_MON_2,
+        csro:CICDSecurityScenario_MON_3,
+        csro:CICDSecurityScenario_MON_4,
+        csro:CICDSecurityScenario_MON_5,
+        csro:CICDSecurityScenario_MON_6,
+        csro:CICDSecurityScenario_MON_7,
+        csro:CICDSecurityScenario_MON_8,
+        csro:CICDSecurityScenario_NET_1,
+        csro:CICDSecurityScenario_NET_2,
+        csro:CICDSecurityScenario_NET_3,
+        csro:CICDSecurityScenario_NET_4,
+        csro:CICDSecurityScenario_RTS_1,
+        csro:CICDSecurityScenario_RTS_2,
+        csro:CICDSecurityScenario_RTS_3,
+        csro:CICDSecurityScenario_RTS_4,
+        csro:CICDSecurityScenario_RTS_5,
+        csro:CICDSecurityScenario_RTS_6,
+        csro:CICDSecurityScenario_RTS_7,
+        csro:CICDSecurityScenario_SCM_1,
+        csro:CICDSecurityScenario_SCM_2,
+        csro:CICDSecurityScenario_SCM_3,
+        csro:CICDSecurityScenario_SCM_4 .
+
+csro:CISCompliantScenario a csro:ContextScenario ;
+    csro:description "Scenario following CIS Docker Benchmark recommendations" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:CISCompliantScenario_AUTH_1,
+        csro:CISCompliantScenario_AUTH_2,
+        csro:CISCompliantScenario_AUTH_3,
+        csro:CISCompliantScenario_CIC_1,
+        csro:CISCompliantScenario_CIC_2,
+        csro:CISCompliantScenario_CIC_3,
+        csro:CISCompliantScenario_CIC_4,
+        csro:CISCompliantScenario_CIC_5,
+        csro:CISCompliantScenario_CIC_6,
+        csro:CISCompliantScenario_CRM_1,
+        csro:CISCompliantScenario_CRM_2,
+        csro:CISCompliantScenario_CRM_3,
+        csro:CISCompliantScenario_CRM_4,
+        csro:CISCompliantScenario_HIS_1,
+        csro:CISCompliantScenario_HIS_2,
+        csro:CISCompliantScenario_HIS_3,
+        csro:CISCompliantScenario_IMG_1,
+        csro:CISCompliantScenario_IMG_2,
+        csro:CISCompliantScenario_IMG_3,
+        csro:CISCompliantScenario_IMG_4,
+        csro:CISCompliantScenario_IMG_5,
+        csro:CISCompliantScenario_IMG_6,
+        csro:CISCompliantScenario_MON_1,
+        csro:CISCompliantScenario_MON_2,
+        csro:CISCompliantScenario_MON_3,
+        csro:CISCompliantScenario_MON_4,
+        csro:CISCompliantScenario_MON_5,
+        csro:CISCompliantScenario_MON_6,
+        csro:CISCompliantScenario_MON_7,
+        csro:CISCompliantScenario_MON_8,
+        csro:CISCompliantScenario_NET_1,
+        csro:CISCompliantScenario_NET_2,
+        csro:CISCompliantScenario_NET_3,
+        csro:CISCompliantScenario_NET_4,
+        csro:CISCompliantScenario_RTS_1,
+        csro:CISCompliantScenario_RTS_2,
+        csro:CISCompliantScenario_RTS_3,
+        csro:CISCompliantScenario_RTS_4,
+        csro:CISCompliantScenario_RTS_5,
+        csro:CISCompliantScenario_RTS_6,
+        csro:CISCompliantScenario_RTS_7,
+        csro:CISCompliantScenario_SCM_1,
+        csro:CISCompliantScenario_SCM_2,
+        csro:CISCompliantScenario_SCM_3,
+        csro:CISCompliantScenario_SCM_4 .
+
+csro:DevelopmentScenario a csro:ContextScenario ;
+    csro:description "Development environment with minimal security controls for ease of development and debugging" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:DevelopmentScenario_AUTH_1,
+        csro:DevelopmentScenario_AUTH_2,
+        csro:DevelopmentScenario_AUTH_3,
+        csro:DevelopmentScenario_CIC_1,
+        csro:DevelopmentScenario_CIC_2,
+        csro:DevelopmentScenario_CIC_3,
+        csro:DevelopmentScenario_CIC_4,
+        csro:DevelopmentScenario_CIC_5,
+        csro:DevelopmentScenario_CIC_6,
+        csro:DevelopmentScenario_CRM_1,
+        csro:DevelopmentScenario_CRM_2,
+        csro:DevelopmentScenario_CRM_3,
+        csro:DevelopmentScenario_CRM_4,
+        csro:DevelopmentScenario_HIS_1,
+        csro:DevelopmentScenario_HIS_2,
+        csro:DevelopmentScenario_HIS_3,
+        csro:DevelopmentScenario_IMG_1,
+        csro:DevelopmentScenario_IMG_2,
+        csro:DevelopmentScenario_IMG_3,
+        csro:DevelopmentScenario_IMG_4,
+        csro:DevelopmentScenario_IMG_5,
+        csro:DevelopmentScenario_IMG_6,
+        csro:DevelopmentScenario_MON_1,
+        csro:DevelopmentScenario_MON_2,
+        csro:DevelopmentScenario_MON_3,
+        csro:DevelopmentScenario_MON_4,
+        csro:DevelopmentScenario_MON_5,
+        csro:DevelopmentScenario_MON_6,
+        csro:DevelopmentScenario_MON_7,
+        csro:DevelopmentScenario_MON_8,
+        csro:DevelopmentScenario_NET_1,
+        csro:DevelopmentScenario_NET_2,
+        csro:DevelopmentScenario_NET_3,
+        csro:DevelopmentScenario_NET_4,
+        csro:DevelopmentScenario_RTS_1,
+        csro:DevelopmentScenario_RTS_2,
+        csro:DevelopmentScenario_RTS_3,
+        csro:DevelopmentScenario_RTS_4,
+        csro:DevelopmentScenario_RTS_5,
+        csro:DevelopmentScenario_RTS_6,
+        csro:DevelopmentScenario_RTS_7,
+        csro:DevelopmentScenario_SCM_1,
+        csro:DevelopmentScenario_SCM_2,
+        csro:DevelopmentScenario_SCM_3,
+        csro:DevelopmentScenario_SCM_4 .
+
+csro:EdgeComputingScenario a csro:ContextScenario ;
+    csro:description "Edge computing deployment with limited central monitoring and physical security constraints" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:EdgeComputingScenario_AUTH_1,
+        csro:EdgeComputingScenario_AUTH_2,
+        csro:EdgeComputingScenario_AUTH_3,
+        csro:EdgeComputingScenario_CIC_1,
+        csro:EdgeComputingScenario_CIC_2,
+        csro:EdgeComputingScenario_CIC_3,
+        csro:EdgeComputingScenario_CIC_4,
+        csro:EdgeComputingScenario_CIC_5,
+        csro:EdgeComputingScenario_CIC_6,
+        csro:EdgeComputingScenario_CRM_1,
+        csro:EdgeComputingScenario_CRM_2,
+        csro:EdgeComputingScenario_CRM_3,
+        csro:EdgeComputingScenario_CRM_4,
+        csro:EdgeComputingScenario_HIS_1,
+        csro:EdgeComputingScenario_HIS_2,
+        csro:EdgeComputingScenario_HIS_3,
+        csro:EdgeComputingScenario_IMG_1,
+        csro:EdgeComputingScenario_IMG_2,
+        csro:EdgeComputingScenario_IMG_3,
+        csro:EdgeComputingScenario_IMG_4,
+        csro:EdgeComputingScenario_IMG_5,
+        csro:EdgeComputingScenario_IMG_6,
+        csro:EdgeComputingScenario_MON_1,
+        csro:EdgeComputingScenario_MON_2,
+        csro:EdgeComputingScenario_MON_3,
+        csro:EdgeComputingScenario_MON_4,
+        csro:EdgeComputingScenario_MON_5,
+        csro:EdgeComputingScenario_MON_6,
+        csro:EdgeComputingScenario_MON_7,
+        csro:EdgeComputingScenario_MON_8,
+        csro:EdgeComputingScenario_NET_1,
+        csro:EdgeComputingScenario_NET_2,
+        csro:EdgeComputingScenario_NET_3,
+        csro:EdgeComputingScenario_NET_4,
+        csro:EdgeComputingScenario_RTS_1,
+        csro:EdgeComputingScenario_RTS_2,
+        csro:EdgeComputingScenario_RTS_3,
+        csro:EdgeComputingScenario_RTS_4,
+        csro:EdgeComputingScenario_RTS_5,
+        csro:EdgeComputingScenario_RTS_6,
+        csro:EdgeComputingScenario_RTS_7,
+        csro:EdgeComputingScenario_SCM_1,
+        csro:EdgeComputingScenario_SCM_2,
+        csro:EdgeComputingScenario_SCM_3,
+        csro:EdgeComputingScenario_SCM_4 .
+
+csro:HighRiskScenario a csro:ContextScenario ;
+    csro:description "High-risk deployment with most security controls disabled, representing worst-case scenario" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:HighRiskScenario_AUTH_1,
+        csro:HighRiskScenario_AUTH_2,
+        csro:HighRiskScenario_AUTH_3,
+        csro:HighRiskScenario_CIC_1,
+        csro:HighRiskScenario_CIC_2,
+        csro:HighRiskScenario_CIC_3,
+        csro:HighRiskScenario_CIC_4,
+        csro:HighRiskScenario_CIC_5,
+        csro:HighRiskScenario_CIC_6,
+        csro:HighRiskScenario_CRM_1,
+        csro:HighRiskScenario_CRM_2,
+        csro:HighRiskScenario_CRM_3,
+        csro:HighRiskScenario_CRM_4,
+        csro:HighRiskScenario_HIS_1,
+        csro:HighRiskScenario_HIS_2,
+        csro:HighRiskScenario_HIS_3,
+        csro:HighRiskScenario_IMG_1,
+        csro:HighRiskScenario_IMG_2,
+        csro:HighRiskScenario_IMG_3,
+        csro:HighRiskScenario_IMG_4,
+        csro:HighRiskScenario_IMG_5,
+        csro:HighRiskScenario_IMG_6,
+        csro:HighRiskScenario_MON_1,
+        csro:HighRiskScenario_MON_2,
+        csro:HighRiskScenario_MON_3,
+        csro:HighRiskScenario_MON_4,
+        csro:HighRiskScenario_MON_5,
+        csro:HighRiskScenario_MON_6,
+        csro:HighRiskScenario_MON_7,
+        csro:HighRiskScenario_MON_8,
+        csro:HighRiskScenario_NET_1,
+        csro:HighRiskScenario_NET_2,
+        csro:HighRiskScenario_NET_3,
+        csro:HighRiskScenario_NET_4,
+        csro:HighRiskScenario_RTS_1,
+        csro:HighRiskScenario_RTS_2,
+        csro:HighRiskScenario_RTS_3,
+        csro:HighRiskScenario_RTS_4,
+        csro:HighRiskScenario_RTS_5,
+        csro:HighRiskScenario_RTS_6,
+        csro:HighRiskScenario_RTS_7,
+        csro:HighRiskScenario_SCM_1,
+        csro:HighRiskScenario_SCM_2,
+        csro:HighRiskScenario_SCM_3,
+        csro:HighRiskScenario_SCM_4 .
+
+csro:HybridCloudScenario a csro:ContextScenario ;
+    csro:description "Hybrid cloud deployment with varying security controls across on-premises and cloud environments" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:HybridCloudScenario_AUTH_1,
+        csro:HybridCloudScenario_AUTH_2,
+        csro:HybridCloudScenario_AUTH_3,
+        csro:HybridCloudScenario_CIC_1,
+        csro:HybridCloudScenario_CIC_2,
+        csro:HybridCloudScenario_CIC_3,
+        csro:HybridCloudScenario_CIC_4,
+        csro:HybridCloudScenario_CIC_5,
+        csro:HybridCloudScenario_CIC_6,
+        csro:HybridCloudScenario_CRM_1,
+        csro:HybridCloudScenario_CRM_2,
+        csro:HybridCloudScenario_CRM_3,
+        csro:HybridCloudScenario_CRM_4,
+        csro:HybridCloudScenario_HIS_1,
+        csro:HybridCloudScenario_HIS_2,
+        csro:HybridCloudScenario_HIS_3,
+        csro:HybridCloudScenario_IMG_1,
+        csro:HybridCloudScenario_IMG_2,
+        csro:HybridCloudScenario_IMG_3,
+        csro:HybridCloudScenario_IMG_4,
+        csro:HybridCloudScenario_IMG_5,
+        csro:HybridCloudScenario_IMG_6,
+        csro:HybridCloudScenario_MON_1,
+        csro:HybridCloudScenario_MON_2,
+        csro:HybridCloudScenario_MON_3,
+        csro:HybridCloudScenario_MON_4,
+        csro:HybridCloudScenario_MON_5,
+        csro:HybridCloudScenario_MON_6,
+        csro:HybridCloudScenario_MON_7,
+        csro:HybridCloudScenario_MON_8,
+        csro:HybridCloudScenario_NET_1,
+        csro:HybridCloudScenario_NET_2,
+        csro:HybridCloudScenario_NET_3,
+        csro:HybridCloudScenario_NET_4,
+        csro:HybridCloudScenario_RTS_1,
+        csro:HybridCloudScenario_RTS_2,
+        csro:HybridCloudScenario_RTS_3,
+        csro:HybridCloudScenario_RTS_4,
+        csro:HybridCloudScenario_RTS_5,
+        csro:HybridCloudScenario_RTS_6,
+        csro:HybridCloudScenario_RTS_7,
+        csro:HybridCloudScenario_SCM_1,
+        csro:HybridCloudScenario_SCM_2,
+        csro:HybridCloudScenario_SCM_3,
+        csro:HybridCloudScenario_SCM_4 .
+
+csro:ImageSecurityFocusedScenario a csro:ContextScenario ;
+    csro:description "Scenario with strong focus on container image security including scanning, signing, and minimal base images" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:ImageSecurityFocusedScenario_AUTH_1,
+        csro:ImageSecurityFocusedScenario_AUTH_2,
+        csro:ImageSecurityFocusedScenario_AUTH_3,
+        csro:ImageSecurityFocusedScenario_CIC_1,
+        csro:ImageSecurityFocusedScenario_CIC_2,
+        csro:ImageSecurityFocusedScenario_CIC_3,
+        csro:ImageSecurityFocusedScenario_CIC_4,
+        csro:ImageSecurityFocusedScenario_CIC_5,
+        csro:ImageSecurityFocusedScenario_CIC_6,
+        csro:ImageSecurityFocusedScenario_CRM_1,
+        csro:ImageSecurityFocusedScenario_CRM_2,
+        csro:ImageSecurityFocusedScenario_CRM_3,
+        csro:ImageSecurityFocusedScenario_CRM_4,
+        csro:ImageSecurityFocusedScenario_HIS_1,
+        csro:ImageSecurityFocusedScenario_HIS_2,
+        csro:ImageSecurityFocusedScenario_HIS_3,
+        csro:ImageSecurityFocusedScenario_IMG_1,
+        csro:ImageSecurityFocusedScenario_IMG_2,
+        csro:ImageSecurityFocusedScenario_IMG_3,
+        csro:ImageSecurityFocusedScenario_IMG_4,
+        csro:ImageSecurityFocusedScenario_IMG_5,
+        csro:ImageSecurityFocusedScenario_IMG_6,
+        csro:ImageSecurityFocusedScenario_MON_1,
+        csro:ImageSecurityFocusedScenario_MON_2,
+        csro:ImageSecurityFocusedScenario_MON_3,
+        csro:ImageSecurityFocusedScenario_MON_4,
+        csro:ImageSecurityFocusedScenario_MON_5,
+        csro:ImageSecurityFocusedScenario_MON_6,
+        csro:ImageSecurityFocusedScenario_MON_7,
+        csro:ImageSecurityFocusedScenario_MON_8,
+        csro:ImageSecurityFocusedScenario_NET_1,
+        csro:ImageSecurityFocusedScenario_NET_2,
+        csro:ImageSecurityFocusedScenario_NET_3,
+        csro:ImageSecurityFocusedScenario_NET_4,
+        csro:ImageSecurityFocusedScenario_RTS_1,
+        csro:ImageSecurityFocusedScenario_RTS_2,
+        csro:ImageSecurityFocusedScenario_RTS_3,
+        csro:ImageSecurityFocusedScenario_RTS_4,
+        csro:ImageSecurityFocusedScenario_RTS_5,
+        csro:ImageSecurityFocusedScenario_RTS_6,
+        csro:ImageSecurityFocusedScenario_RTS_7,
+        csro:ImageSecurityFocusedScenario_SCM_1,
+        csro:ImageSecurityFocusedScenario_SCM_2,
+        csro:ImageSecurityFocusedScenario_SCM_3,
+        csro:ImageSecurityFocusedScenario_SCM_4 .
+
+csro:MicroservicesScenario a csro:ContextScenario ;
+    csro:description "Microservices architecture with service-to-service authentication but limited runtime protection" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:MicroservicesScenario_AUTH_1,
+        csro:MicroservicesScenario_AUTH_2,
+        csro:MicroservicesScenario_AUTH_3,
+        csro:MicroservicesScenario_CIC_1,
+        csro:MicroservicesScenario_CIC_2,
+        csro:MicroservicesScenario_CIC_3,
+        csro:MicroservicesScenario_CIC_4,
+        csro:MicroservicesScenario_CIC_5,
+        csro:MicroservicesScenario_CIC_6,
+        csro:MicroservicesScenario_CRM_1,
+        csro:MicroservicesScenario_CRM_2,
+        csro:MicroservicesScenario_CRM_3,
+        csro:MicroservicesScenario_CRM_4,
+        csro:MicroservicesScenario_HIS_1,
+        csro:MicroservicesScenario_HIS_2,
+        csro:MicroservicesScenario_HIS_3,
+        csro:MicroservicesScenario_IMG_1,
+        csro:MicroservicesScenario_IMG_2,
+        csro:MicroservicesScenario_IMG_3,
+        csro:MicroservicesScenario_IMG_4,
+        csro:MicroservicesScenario_IMG_5,
+        csro:MicroservicesScenario_IMG_6,
+        csro:MicroservicesScenario_MON_1,
+        csro:MicroservicesScenario_MON_2,
+        csro:MicroservicesScenario_MON_3,
+        csro:MicroservicesScenario_MON_4,
+        csro:MicroservicesScenario_MON_5,
+        csro:MicroservicesScenario_MON_6,
+        csro:MicroservicesScenario_MON_7,
+        csro:MicroservicesScenario_MON_8,
+        csro:MicroservicesScenario_NET_1,
+        csro:MicroservicesScenario_NET_2,
+        csro:MicroservicesScenario_NET_3,
+        csro:MicroservicesScenario_NET_4,
+        csro:MicroservicesScenario_RTS_1,
+        csro:MicroservicesScenario_RTS_2,
+        csro:MicroservicesScenario_RTS_3,
+        csro:MicroservicesScenario_RTS_4,
+        csro:MicroservicesScenario_RTS_5,
+        csro:MicroservicesScenario_RTS_6,
+        csro:MicroservicesScenario_RTS_7,
+        csro:MicroservicesScenario_SCM_1,
+        csro:MicroservicesScenario_SCM_2,
+        csro:MicroservicesScenario_SCM_3,
+        csro:MicroservicesScenario_SCM_4 .
+
+csro:NISTCompliantScenario a csro:ContextScenario ;
+    csro:description "Scenario following NIST SP 800-190 Application Container Security Guide recommendations" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:NISTCompliantScenario_AUTH_1,
+        csro:NISTCompliantScenario_AUTH_2,
+        csro:NISTCompliantScenario_AUTH_3,
+        csro:NISTCompliantScenario_CIC_1,
+        csro:NISTCompliantScenario_CIC_2,
+        csro:NISTCompliantScenario_CIC_3,
+        csro:NISTCompliantScenario_CIC_4,
+        csro:NISTCompliantScenario_CIC_5,
+        csro:NISTCompliantScenario_CIC_6,
+        csro:NISTCompliantScenario_CRM_1,
+        csro:NISTCompliantScenario_CRM_2,
+        csro:NISTCompliantScenario_CRM_3,
+        csro:NISTCompliantScenario_CRM_4,
+        csro:NISTCompliantScenario_HIS_1,
+        csro:NISTCompliantScenario_HIS_2,
+        csro:NISTCompliantScenario_HIS_3,
+        csro:NISTCompliantScenario_IMG_1,
+        csro:NISTCompliantScenario_IMG_2,
+        csro:NISTCompliantScenario_IMG_3,
+        csro:NISTCompliantScenario_IMG_4,
+        csro:NISTCompliantScenario_IMG_5,
+        csro:NISTCompliantScenario_IMG_6,
+        csro:NISTCompliantScenario_MON_1,
+        csro:NISTCompliantScenario_MON_2,
+        csro:NISTCompliantScenario_MON_3,
+        csro:NISTCompliantScenario_MON_4,
+        csro:NISTCompliantScenario_MON_5,
+        csro:NISTCompliantScenario_MON_6,
+        csro:NISTCompliantScenario_MON_7,
+        csro:NISTCompliantScenario_MON_8,
+        csro:NISTCompliantScenario_NET_1,
+        csro:NISTCompliantScenario_NET_2,
+        csro:NISTCompliantScenario_NET_3,
+        csro:NISTCompliantScenario_NET_4,
+        csro:NISTCompliantScenario_RTS_1,
+        csro:NISTCompliantScenario_RTS_2,
+        csro:NISTCompliantScenario_RTS_3,
+        csro:NISTCompliantScenario_RTS_4,
+        csro:NISTCompliantScenario_RTS_5,
+        csro:NISTCompliantScenario_RTS_6,
+        csro:NISTCompliantScenario_RTS_7,
+        csro:NISTCompliantScenario_SCM_1,
+        csro:NISTCompliantScenario_SCM_2,
+        csro:NISTCompliantScenario_SCM_3,
+        csro:NISTCompliantScenario_SCM_4 .
+
+csro:NetworkHardenedScenario a csro:ContextScenario ;
+    csro:description "Scenario with strong network security controls including network policies, segmentation, and egress filtering" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:NetworkHardenedScenario_AUTH_1,
+        csro:NetworkHardenedScenario_AUTH_2,
+        csro:NetworkHardenedScenario_AUTH_3,
+        csro:NetworkHardenedScenario_CIC_1,
+        csro:NetworkHardenedScenario_CIC_2,
+        csro:NetworkHardenedScenario_CIC_3,
+        csro:NetworkHardenedScenario_CIC_4,
+        csro:NetworkHardenedScenario_CIC_5,
+        csro:NetworkHardenedScenario_CIC_6,
+        csro:NetworkHardenedScenario_CRM_1,
+        csro:NetworkHardenedScenario_CRM_2,
+        csro:NetworkHardenedScenario_CRM_3,
+        csro:NetworkHardenedScenario_CRM_4,
+        csro:NetworkHardenedScenario_HIS_1,
+        csro:NetworkHardenedScenario_HIS_2,
+        csro:NetworkHardenedScenario_HIS_3,
+        csro:NetworkHardenedScenario_IMG_1,
+        csro:NetworkHardenedScenario_IMG_2,
+        csro:NetworkHardenedScenario_IMG_3,
+        csro:NetworkHardenedScenario_IMG_4,
+        csro:NetworkHardenedScenario_IMG_5,
+        csro:NetworkHardenedScenario_IMG_6,
+        csro:NetworkHardenedScenario_MON_1,
+        csro:NetworkHardenedScenario_MON_2,
+        csro:NetworkHardenedScenario_MON_3,
+        csro:NetworkHardenedScenario_MON_4,
+        csro:NetworkHardenedScenario_MON_5,
+        csro:NetworkHardenedScenario_MON_6,
+        csro:NetworkHardenedScenario_MON_7,
+        csro:NetworkHardenedScenario_MON_8,
+        csro:NetworkHardenedScenario_NET_1,
+        csro:NetworkHardenedScenario_NET_2,
+        csro:NetworkHardenedScenario_NET_3,
+        csro:NetworkHardenedScenario_NET_4,
+        csro:NetworkHardenedScenario_RTS_1,
+        csro:NetworkHardenedScenario_RTS_2,
+        csro:NetworkHardenedScenario_RTS_3,
+        csro:NetworkHardenedScenario_RTS_4,
+        csro:NetworkHardenedScenario_RTS_5,
+        csro:NetworkHardenedScenario_RTS_6,
+        csro:NetworkHardenedScenario_RTS_7,
+        csro:NetworkHardenedScenario_SCM_1,
+        csro:NetworkHardenedScenario_SCM_2,
+        csro:NetworkHardenedScenario_SCM_3,
+        csro:NetworkHardenedScenario_SCM_4 .
+
+csro:OWASPCheatSheetCompliantScenario a csro:ContextScenario ;
+    csro:description "Scenario following OWASP Docker Security Cheat Sheet recommendations" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:OWASPCheatSheetCompliantScenario_AUTH_1,
+        csro:OWASPCheatSheetCompliantScenario_AUTH_2,
+        csro:OWASPCheatSheetCompliantScenario_AUTH_3,
+        csro:OWASPCheatSheetCompliantScenario_CIC_1,
+        csro:OWASPCheatSheetCompliantScenario_CIC_2,
+        csro:OWASPCheatSheetCompliantScenario_CIC_3,
+        csro:OWASPCheatSheetCompliantScenario_CIC_4,
+        csro:OWASPCheatSheetCompliantScenario_CIC_5,
+        csro:OWASPCheatSheetCompliantScenario_CIC_6,
+        csro:OWASPCheatSheetCompliantScenario_CRM_1,
+        csro:OWASPCheatSheetCompliantScenario_CRM_2,
+        csro:OWASPCheatSheetCompliantScenario_CRM_3,
+        csro:OWASPCheatSheetCompliantScenario_CRM_4,
+        csro:OWASPCheatSheetCompliantScenario_HIS_1,
+        csro:OWASPCheatSheetCompliantScenario_HIS_2,
+        csro:OWASPCheatSheetCompliantScenario_HIS_3,
+        csro:OWASPCheatSheetCompliantScenario_IMG_1,
+        csro:OWASPCheatSheetCompliantScenario_IMG_2,
+        csro:OWASPCheatSheetCompliantScenario_IMG_3,
+        csro:OWASPCheatSheetCompliantScenario_IMG_4,
+        csro:OWASPCheatSheetCompliantScenario_IMG_5,
+        csro:OWASPCheatSheetCompliantScenario_IMG_6,
+        csro:OWASPCheatSheetCompliantScenario_MON_1,
+        csro:OWASPCheatSheetCompliantScenario_MON_2,
+        csro:OWASPCheatSheetCompliantScenario_MON_3,
+        csro:OWASPCheatSheetCompliantScenario_MON_4,
+        csro:OWASPCheatSheetCompliantScenario_MON_5,
+        csro:OWASPCheatSheetCompliantScenario_MON_6,
+        csro:OWASPCheatSheetCompliantScenario_MON_7,
+        csro:OWASPCheatSheetCompliantScenario_MON_8,
+        csro:OWASPCheatSheetCompliantScenario_NET_1,
+        csro:OWASPCheatSheetCompliantScenario_NET_2,
+        csro:OWASPCheatSheetCompliantScenario_NET_3,
+        csro:OWASPCheatSheetCompliantScenario_NET_4,
+        csro:OWASPCheatSheetCompliantScenario_RTS_1,
+        csro:OWASPCheatSheetCompliantScenario_RTS_2,
+        csro:OWASPCheatSheetCompliantScenario_RTS_3,
+        csro:OWASPCheatSheetCompliantScenario_RTS_4,
+        csro:OWASPCheatSheetCompliantScenario_RTS_5,
+        csro:OWASPCheatSheetCompliantScenario_RTS_6,
+        csro:OWASPCheatSheetCompliantScenario_RTS_7,
+        csro:OWASPCheatSheetCompliantScenario_SCM_1,
+        csro:OWASPCheatSheetCompliantScenario_SCM_2,
+        csro:OWASPCheatSheetCompliantScenario_SCM_3,
+        csro:OWASPCheatSheetCompliantScenario_SCM_4 .
+
+csro:OWASPTop10CompliantScenario a csro:ContextScenario ;
+    csro:description "Scenario following OWASP Docker Top 10 security risks mitigation recommendations" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:OWASPTop10CompliantScenario_AUTH_1,
+        csro:OWASPTop10CompliantScenario_AUTH_2,
+        csro:OWASPTop10CompliantScenario_AUTH_3,
+        csro:OWASPTop10CompliantScenario_CIC_1,
+        csro:OWASPTop10CompliantScenario_CIC_2,
+        csro:OWASPTop10CompliantScenario_CIC_3,
+        csro:OWASPTop10CompliantScenario_CIC_4,
+        csro:OWASPTop10CompliantScenario_CIC_5,
+        csro:OWASPTop10CompliantScenario_CIC_6,
+        csro:OWASPTop10CompliantScenario_CRM_1,
+        csro:OWASPTop10CompliantScenario_CRM_2,
+        csro:OWASPTop10CompliantScenario_CRM_3,
+        csro:OWASPTop10CompliantScenario_CRM_4,
+        csro:OWASPTop10CompliantScenario_HIS_1,
+        csro:OWASPTop10CompliantScenario_HIS_2,
+        csro:OWASPTop10CompliantScenario_HIS_3,
+        csro:OWASPTop10CompliantScenario_IMG_1,
+        csro:OWASPTop10CompliantScenario_IMG_2,
+        csro:OWASPTop10CompliantScenario_IMG_3,
+        csro:OWASPTop10CompliantScenario_IMG_4,
+        csro:OWASPTop10CompliantScenario_IMG_5,
+        csro:OWASPTop10CompliantScenario_IMG_6,
+        csro:OWASPTop10CompliantScenario_MON_1,
+        csro:OWASPTop10CompliantScenario_MON_2,
+        csro:OWASPTop10CompliantScenario_MON_3,
+        csro:OWASPTop10CompliantScenario_MON_4,
+        csro:OWASPTop10CompliantScenario_MON_5,
+        csro:OWASPTop10CompliantScenario_MON_6,
+        csro:OWASPTop10CompliantScenario_MON_7,
+        csro:OWASPTop10CompliantScenario_MON_8,
+        csro:OWASPTop10CompliantScenario_NET_1,
+        csro:OWASPTop10CompliantScenario_NET_2,
+        csro:OWASPTop10CompliantScenario_NET_3,
+        csro:OWASPTop10CompliantScenario_NET_4,
+        csro:OWASPTop10CompliantScenario_RTS_1,
+        csro:OWASPTop10CompliantScenario_RTS_2,
+        csro:OWASPTop10CompliantScenario_RTS_3,
+        csro:OWASPTop10CompliantScenario_RTS_4,
+        csro:OWASPTop10CompliantScenario_RTS_5,
+        csro:OWASPTop10CompliantScenario_RTS_6,
+        csro:OWASPTop10CompliantScenario_RTS_7,
+        csro:OWASPTop10CompliantScenario_SCM_1,
+        csro:OWASPTop10CompliantScenario_SCM_2,
+        csro:OWASPTop10CompliantScenario_SCM_3,
+        csro:OWASPTop10CompliantScenario_SCM_4 .
+
+csro:OutdatedContainersScenario a csro:ContextScenario ;
+    csro:description "Legacy container deployment with outdated security practices and limited monitoring" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:OutdatedContainersScenario_AUTH_1,
+        csro:OutdatedContainersScenario_AUTH_2,
+        csro:OutdatedContainersScenario_AUTH_3,
+        csro:OutdatedContainersScenario_CIC_1,
+        csro:OutdatedContainersScenario_CIC_2,
+        csro:OutdatedContainersScenario_CIC_3,
+        csro:OutdatedContainersScenario_CIC_4,
+        csro:OutdatedContainersScenario_CIC_5,
+        csro:OutdatedContainersScenario_CIC_6,
+        csro:OutdatedContainersScenario_CRM_1,
+        csro:OutdatedContainersScenario_CRM_2,
+        csro:OutdatedContainersScenario_CRM_3,
+        csro:OutdatedContainersScenario_CRM_4,
+        csro:OutdatedContainersScenario_HIS_1,
+        csro:OutdatedContainersScenario_HIS_2,
+        csro:OutdatedContainersScenario_HIS_3,
+        csro:OutdatedContainersScenario_IMG_1,
+        csro:OutdatedContainersScenario_IMG_2,
+        csro:OutdatedContainersScenario_IMG_3,
+        csro:OutdatedContainersScenario_IMG_4,
+        csro:OutdatedContainersScenario_IMG_5,
+        csro:OutdatedContainersScenario_IMG_6,
+        csro:OutdatedContainersScenario_MON_1,
+        csro:OutdatedContainersScenario_MON_2,
+        csro:OutdatedContainersScenario_MON_3,
+        csro:OutdatedContainersScenario_MON_4,
+        csro:OutdatedContainersScenario_MON_5,
+        csro:OutdatedContainersScenario_MON_6,
+        csro:OutdatedContainersScenario_MON_7,
+        csro:OutdatedContainersScenario_MON_8,
+        csro:OutdatedContainersScenario_NET_1,
+        csro:OutdatedContainersScenario_NET_2,
+        csro:OutdatedContainersScenario_NET_3,
+        csro:OutdatedContainersScenario_NET_4,
+        csro:OutdatedContainersScenario_RTS_1,
+        csro:OutdatedContainersScenario_RTS_2,
+        csro:OutdatedContainersScenario_RTS_3,
+        csro:OutdatedContainersScenario_RTS_4,
+        csro:OutdatedContainersScenario_RTS_5,
+        csro:OutdatedContainersScenario_RTS_6,
+        csro:OutdatedContainersScenario_RTS_7,
+        csro:OutdatedContainersScenario_SCM_1,
+        csro:OutdatedContainersScenario_SCM_2,
+        csro:OutdatedContainersScenario_SCM_3,
+        csro:OutdatedContainersScenario_SCM_4 .
+
+csro:ProductionScenario a csro:ContextScenario ;
+    csro:description "Production deployment with comprehensive security controls implemented according to best practices" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:ProductionScenario_AUTH_1,
+        csro:ProductionScenario_AUTH_2,
+        csro:ProductionScenario_AUTH_3,
+        csro:ProductionScenario_CIC_1,
+        csro:ProductionScenario_CIC_2,
+        csro:ProductionScenario_CIC_3,
+        csro:ProductionScenario_CIC_4,
+        csro:ProductionScenario_CIC_5,
+        csro:ProductionScenario_CIC_6,
+        csro:ProductionScenario_CRM_1,
+        csro:ProductionScenario_CRM_2,
+        csro:ProductionScenario_CRM_3,
+        csro:ProductionScenario_CRM_4,
+        csro:ProductionScenario_HIS_1,
+        csro:ProductionScenario_HIS_2,
+        csro:ProductionScenario_HIS_3,
+        csro:ProductionScenario_IMG_1,
+        csro:ProductionScenario_IMG_2,
+        csro:ProductionScenario_IMG_3,
+        csro:ProductionScenario_IMG_4,
+        csro:ProductionScenario_IMG_5,
+        csro:ProductionScenario_IMG_6,
+        csro:ProductionScenario_MON_1,
+        csro:ProductionScenario_MON_2,
+        csro:ProductionScenario_MON_3,
+        csro:ProductionScenario_MON_4,
+        csro:ProductionScenario_MON_5,
+        csro:ProductionScenario_MON_6,
+        csro:ProductionScenario_MON_7,
+        csro:ProductionScenario_MON_8,
+        csro:ProductionScenario_NET_1,
+        csro:ProductionScenario_NET_2,
+        csro:ProductionScenario_NET_3,
+        csro:ProductionScenario_NET_4,
+        csro:ProductionScenario_RTS_1,
+        csro:ProductionScenario_RTS_2,
+        csro:ProductionScenario_RTS_3,
+        csro:ProductionScenario_RTS_4,
+        csro:ProductionScenario_RTS_5,
+        csro:ProductionScenario_RTS_6,
+        csro:ProductionScenario_RTS_7,
+        csro:ProductionScenario_SCM_1,
+        csro:ProductionScenario_SCM_2,
+        csro:ProductionScenario_SCM_3,
+        csro:ProductionScenario_SCM_4 .
+
+csro:RapidPrototypeScenario a csro:ContextScenario ;
+    csro:description "Rapid prototyping environment prioritizing speed over security with minimal controls" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:RapidPrototypeScenario_AUTH_1,
+        csro:RapidPrototypeScenario_AUTH_2,
+        csro:RapidPrototypeScenario_AUTH_3,
+        csro:RapidPrototypeScenario_CIC_1,
+        csro:RapidPrototypeScenario_CIC_2,
+        csro:RapidPrototypeScenario_CIC_3,
+        csro:RapidPrototypeScenario_CIC_4,
+        csro:RapidPrototypeScenario_CIC_5,
+        csro:RapidPrototypeScenario_CIC_6,
+        csro:RapidPrototypeScenario_CRM_1,
+        csro:RapidPrototypeScenario_CRM_2,
+        csro:RapidPrototypeScenario_CRM_3,
+        csro:RapidPrototypeScenario_CRM_4,
+        csro:RapidPrototypeScenario_HIS_1,
+        csro:RapidPrototypeScenario_HIS_2,
+        csro:RapidPrototypeScenario_HIS_3,
+        csro:RapidPrototypeScenario_IMG_1,
+        csro:RapidPrototypeScenario_IMG_2,
+        csro:RapidPrototypeScenario_IMG_3,
+        csro:RapidPrototypeScenario_IMG_4,
+        csro:RapidPrototypeScenario_IMG_5,
+        csro:RapidPrototypeScenario_IMG_6,
+        csro:RapidPrototypeScenario_MON_1,
+        csro:RapidPrototypeScenario_MON_2,
+        csro:RapidPrototypeScenario_MON_3,
+        csro:RapidPrototypeScenario_MON_4,
+        csro:RapidPrototypeScenario_MON_5,
+        csro:RapidPrototypeScenario_MON_6,
+        csro:RapidPrototypeScenario_MON_7,
+        csro:RapidPrototypeScenario_MON_8,
+        csro:RapidPrototypeScenario_NET_1,
+        csro:RapidPrototypeScenario_NET_2,
+        csro:RapidPrototypeScenario_NET_3,
+        csro:RapidPrototypeScenario_NET_4,
+        csro:RapidPrototypeScenario_RTS_1,
+        csro:RapidPrototypeScenario_RTS_2,
+        csro:RapidPrototypeScenario_RTS_3,
+        csro:RapidPrototypeScenario_RTS_4,
+        csro:RapidPrototypeScenario_RTS_5,
+        csro:RapidPrototypeScenario_RTS_6,
+        csro:RapidPrototypeScenario_RTS_7,
+        csro:RapidPrototypeScenario_SCM_1,
+        csro:RapidPrototypeScenario_SCM_2,
+        csro:RapidPrototypeScenario_SCM_3,
+        csro:RapidPrototypeScenario_SCM_4 .
+
+csro:RuntimeHardenedScenario a csro:ContextScenario ;
+    csro:description "Scenario with strong runtime security controls including AppArmor, Seccomp, and read-only filesystems" ;
+    csro:includes csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:includesAssumption csro:RuntimeHardenedScenario_AUTH_1,
+        csro:RuntimeHardenedScenario_AUTH_2,
+        csro:RuntimeHardenedScenario_AUTH_3,
+        csro:RuntimeHardenedScenario_CIC_1,
+        csro:RuntimeHardenedScenario_CIC_2,
+        csro:RuntimeHardenedScenario_CIC_3,
+        csro:RuntimeHardenedScenario_CIC_4,
+        csro:RuntimeHardenedScenario_CIC_5,
+        csro:RuntimeHardenedScenario_CIC_6,
+        csro:RuntimeHardenedScenario_CRM_1,
+        csro:RuntimeHardenedScenario_CRM_2,
+        csro:RuntimeHardenedScenario_CRM_3,
+        csro:RuntimeHardenedScenario_CRM_4,
+        csro:RuntimeHardenedScenario_HIS_1,
+        csro:RuntimeHardenedScenario_HIS_2,
+        csro:RuntimeHardenedScenario_HIS_3,
+        csro:RuntimeHardenedScenario_IMG_1,
+        csro:RuntimeHardenedScenario_IMG_2,
+        csro:RuntimeHardenedScenario_IMG_3,
+        csro:RuntimeHardenedScenario_IMG_4,
+        csro:RuntimeHardenedScenario_IMG_5,
+        csro:RuntimeHardenedScenario_IMG_6,
+        csro:RuntimeHardenedScenario_MON_1,
+        csro:RuntimeHardenedScenario_MON_2,
+        csro:RuntimeHardenedScenario_MON_3,
+        csro:RuntimeHardenedScenario_MON_4,
+        csro:RuntimeHardenedScenario_MON_5,
+        csro:RuntimeHardenedScenario_MON_6,
+        csro:RuntimeHardenedScenario_MON_7,
+        csro:RuntimeHardenedScenario_MON_8,
+        csro:RuntimeHardenedScenario_NET_1,
+        csro:RuntimeHardenedScenario_NET_2,
+        csro:RuntimeHardenedScenario_NET_3,
+        csro:RuntimeHardenedScenario_NET_4,
+        csro:RuntimeHardenedScenario_RTS_1,
+        csro:RuntimeHardenedScenario_RTS_2,
+        csro:RuntimeHardenedScenario_RTS_3,
+        csro:RuntimeHardenedScenario_RTS_4,
+        csro:RuntimeHardenedScenario_RTS_5,
+        csro:RuntimeHardenedScenario_RTS_6,
+        csro:RuntimeHardenedScenario_RTS_7,
+        csro:RuntimeHardenedScenario_SCM_1,
+        csro:RuntimeHardenedScenario_SCM_2,
+        csro:RuntimeHardenedScenario_SCM_3,
+        csro:RuntimeHardenedScenario_SCM_4 .
+
+csro:AirGappedScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:AirGappedScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:AirGappedScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:AirGappedScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BalancedContainerSecurityScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BalancedContainerSecurityScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:BasicContainerSecurityScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:BasicContainerSecurityScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:BasicContainerSecurityScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:CICDSecurityScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CICDSecurityScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CICDSecurityScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:CISCompliantScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:CISCompliantScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:DevelopmentScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:DevelopmentScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:DevelopmentScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:DevelopmentScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:DevelopmentScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:EdgeComputingScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:EdgeComputingScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:EdgeComputingScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HighRiskScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HighRiskScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:HybridCloudScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:HybridCloudScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:HybridCloudScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ImageSecurityFocusedScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ImageSecurityFocusedScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:MicroservicesScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:MicroservicesScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:MicroservicesScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NISTCompliantScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NISTCompliantScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:NetworkHardenedScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:NetworkHardenedScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:NetworkHardenedScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OWASPCheatSheetCompliantScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPCheatSheetCompliantScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OWASPTop10CompliantScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:OWASPTop10CompliantScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:OutdatedContainersScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:OutdatedContainersScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:ProductionScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:ProductionScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RapidPrototypeScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RapidPrototypeScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RapidPrototypeScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_AUTH_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_AUTH_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_AUTH_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:AUTH_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_CIC_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CIC_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CIC_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CIC_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CIC_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_5 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CIC_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CIC_6 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CRM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CRM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CRM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_CRM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:CRM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_HIS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_HIS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_HIS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:HIS_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_IMG_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_IMG_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_IMG_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_IMG_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_IMG_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_IMG_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:IMG_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_MON_8 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:MON_8 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_NET_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_1 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_NET_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_2 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_NET_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_3 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_NET_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:NET_4 ;
+    csro:hasSatisfactionState csro:Unknown .
+
+csro:RuntimeHardenedScenario_RTS_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_1 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_2 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_3 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_4 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_5 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_5 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_6 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_6 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_RTS_7 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:RTS_7 ;
+    csro:hasSatisfactionState csro:Satisfied .
+
+csro:RuntimeHardenedScenario_SCM_1 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_1 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_SCM_2 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_2 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_SCM_3 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_3 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
+
+csro:RuntimeHardenedScenario_SCM_4 a csro:AssumptionInScenario ;
+    csro:forAssumption csro:SCM_4 ;
+    csro:hasSatisfactionState csro:Dissatisfied .
 
 ###  https://w3id.org/csro/ontology#DifficultyLevel
 csro:DifficultyLevel rdf:type owl:Class ;
