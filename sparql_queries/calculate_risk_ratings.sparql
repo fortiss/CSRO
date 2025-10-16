@@ -13,7 +13,7 @@ PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
 ## Key Features:
 ## - Dynamic threshold calculations based on assumption weights
 ## - Scenario-specific impact and risk instances 
-## - Context-aware risk treatment filtering
+## - Dynamic risk treatment selection based on calculation rules
 ## - Integration with MITRE ATT&CK techniques via D3FEND ontology
 ##
 
@@ -168,7 +168,7 @@ WHERE {
                   csro:description ?attackDescription ;
                   csro:affects ?component ;
                   csro:causesImpact ?impact .
-    
+            
     # Container attack technique information
     ?technique csro:description ?techniqueDescription .
     OPTIONAL { 
@@ -258,33 +258,39 @@ WHERE {
     BIND(URI(CONCAT(STR(?impact), "_", REPLACE(STR(?scenario), ".*[:#]", ""))) AS ?scenarioSpecificImpact)
     BIND(CONCAT(REPLACE(STR(?impact), ".*[:#]", ""), " (", REPLACE(STR(?scenario), ".*[:#]", ""), ")") AS ?scenarioSpecificImpactLabel)
     
-    # Risk treatments filtered by scenario
+    # Dynamic risk treatments based on calculation rule weights
     OPTIONAL {
-        ?risk csro:isTreatedBy ?riskTreatment .
-        ?riskTreatment rdfs:label ?treatmentLabel ;
-                       csro:description ?treatmentDescription .
+        # Find treatments that address assumptions with positive weights in calculation rules
+        ?riskTreatment a csro:RiskTreatment ;
+                       rdfs:label ?treatmentLabel ;
+                       csro:description ?treatmentDescription ;
+                       csro:addresses ?treatmentAddressedAssumption .
         
-        # Only include treatments that are applicable in this scenario
+        # Check if the assumption addressed by the treatment has positive weight 
+        # in either exploitability or exposure calculation rules for this technique
         {
-            # Case 1: General treatments (don't address specific assumptions)
-            FILTER NOT EXISTS { ?riskTreatment csro:addresses ?anyAssumption }
+            # Check exploitability calculation rules
+            ?exploitabilityRule a csro:ExploitabilityCalculationRule ;
+                                csro:appliesTo ?technique ;
+                                csro:hasWeight ?assumptionWeight .
+            ?assumptionWeight csro:refersToAssumption ?treatmentAddressedAssumption ;
+                              csro:weightValue ?weight .
+            FILTER(?weight > 0)
         }
         UNION
         {
-            # Case 2: Treatments for unsatisfied assumptions in current scenario
-            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
-            ?scenario csro:includesAssumption ?addressedAssumptionInScenario .
-            ?addressedAssumptionInScenario csro:forAssumption ?treatmentAddressedAssumption ;
-                                           csro:hasSatisfactionState ?addressedAssumptionSatisfactionState .
-            FILTER(?addressedAssumptionSatisfactionState != csro:Satisfied)
+            # Check exposure calculation rules
+            ?exposureRule a csro:ExposureCalculationRule ;
+                          csro:appliesTo ?technique ;
+                          csro:hasWeight ?assumptionWeight .
+            ?assumptionWeight csro:refersToAssumption ?treatmentAddressedAssumption ;
+                              csro:weightValue ?weight .
+            FILTER(?weight > 0)
         }
         
-        # Treatment details
-        OPTIONAL {
-            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
-            ?treatmentAddressedAssumption csro:assumptionId ?treatmentAddressedAssumptionId ;
-                                          csro:description ?treatmentAddressedAssumptionDescription .
-        }
+        # Get treatment details
+        ?treatmentAddressedAssumption csro:assumptionId ?treatmentAddressedAssumptionId ;
+                                      csro:description ?treatmentAddressedAssumptionDescription .
         
         OPTIONAL {
             ?riskTreatment csro:isImplementedBy ?treatmentImplementationTrait .

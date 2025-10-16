@@ -37,3 +37,6 @@ ENV/
 context_scenarios/configs/generated_scenarios.ttl
 attack_techniques/weights/generated_ontology_instances.ttl
 attack_actions/configs/generated_attack_actions.ttl
+
+# Protégé auto-generated files
+catalog-v001.xml
