@@ -1,9 +1,11 @@
 """
 Generate AssumptionWeight instances and CalculationRule instances for CSRO ontology
-from the assumption_weights_rationales.csv file.
+from the assumption_weights_rationales.csv file. Can also generate ContainerAttackTechnique
+instances with rdfs:label properties.
 """
 
 import csv
+import re
 from collections import defaultdict
 
 # File paths
@@ -55,15 +57,67 @@ csro:{rule_id} rdf:type owl:NamedIndividual ,
 """
     return ttl
 
+def generate_technique_label(technique_name: str) -> str:
+    """Generate a human-readable label for a technique."""
+    # Remove 'Container' prefix if present
+    if technique_name.startswith('Container'):
+        technique_name = technique_name[9:]  # Remove 'Container'
+    
+    # Convert CamelCase to space-separated words
+    spaced = re.sub(r'(?<!^)(?=[A-Z])', ' ', technique_name)
+    return f"Container {spaced}"
+
+def generate_technique_instance(technique_name: str, description: str = None) -> str:
+    """Generate a ContainerAttackTechnique instance with rdfs:label."""
+    label = generate_technique_label(technique_name)
+    
+    # Basic template - can be expanded with more properties
+    ttl = f"""
+###  https://w3id.org/csro/ontology#{technique_name}
+csro:{technique_name} rdf:type owl:NamedIndividual ,
+                             csro:ContainerAttackTechnique ;
+                     rdfs:label "{label}" ;"""
+    
+    if description:
+        escaped_desc = escape_ttl_string(description)
+        ttl += f'\n                     csro:description "{escaped_desc}" ;'
+    
+    ttl += "\n                     .\n"
+    return ttl
+
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='Generate ontology instances for CSRO',
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    parser.add_argument(
+        '--include-technique-templates',
+        action='store_true',
+        help='Generate ContainerAttackTechnique templates with labels'
+    )
+    parser.add_argument(
+        '--rationales',
+        default=RATIONALES_CSV,
+        help=f'Path to rationales CSV file (default: {RATIONALES_CSV})'
+    )
+    parser.add_argument(
+        '--output',
+        default=OUTPUT_FILE,
+        help=f'Output file path (default: {OUTPUT_FILE})'
+    )
+    
+    args = parser.parse_args()
+    
     print("Loading rationales CSV...")
     
     # Data structures to organize the information
     weights_by_technique = defaultdict(lambda: {'Exploitability': [], 'Exposure': []})
     weight_instances = []
+    techniques_found = set()
     
     # Read the CSV and generate weight instances
-    with open(RATIONALES_CSV, 'r', encoding='utf-8') as f:
+    with open(args.rationales, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
             technique = row['Technique']
@@ -71,6 +125,9 @@ def main():
             weight_type = row['Weight Type']
             value = row['Value']
             rationale = row['Rationale']
+            
+            # Track unique techniques
+            techniques_found.add(technique)
             
             # Generate weight instance
             weight_id, weight_ttl = generate_weight_instance(
@@ -101,11 +158,30 @@ def main():
     
     print(f"Generated {len(calculation_rules)} CalculationRule instances")
     
+    # Generate technique templates if requested
+    technique_templates = []
+    if args.include_technique_templates:
+        print(f"Generating ContainerAttackTechnique templates...")
+        for technique in sorted(techniques_found):
+            template = generate_technique_instance(technique)
+            technique_templates.append(template)
+        print(f"Generated {len(technique_templates)} technique templates")
+    
     # Write output file
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+    with open(args.output, 'w', encoding='utf-8') as f:
         f.write("@prefix csro: <https://w3id.org/csro/ontology#> .\n")
         f.write("@prefix owl: <http://www.w3.org/2002/07/owl#> .\n")
-        f.write("@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n\n")
+        f.write("@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n")
+        f.write("@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .\n\n")
+        
+        # Write technique templates if generated
+        if technique_templates:
+            f.write("#" * 80 + "\n")
+            f.write("#    ContainerAttackTechnique Templates (with labels)\n")
+            f.write("#" * 80 + "\n")
+            for template in technique_templates:
+                f.write(template)
+        
         f.write("#" * 80 + "\n")
         f.write("#    AssumptionWeight Individuals\n")
         f.write("#" * 80 + "\n")
@@ -122,12 +198,18 @@ def main():
         for rule_ttl in calculation_rules:
             f.write(rule_ttl)
     
-    print(f"\n✅ Successfully generated {OUTPUT_FILE}")
+    print(f"\n✅ Successfully generated {args.output}")
+    if technique_templates:
+        print(f"   - {len(technique_templates)} ContainerAttackTechnique templates")
     print(f"   - {len(weight_instances)} AssumptionWeight instances")
     print(f"   - {len(calculation_rules)} CalculationRule instances")
     print(f"\nNext steps:")
-    print(f"1. Review the generated file: {OUTPUT_FILE}")
-    print(f"2. Insert the content into csro.ttl at the appropriate location")
+    print(f"1. Review the generated file: {args.output}")
+    if technique_templates:
+        print(f"2. Use merge_technique_labels.py to add labels to existing techniques in csro.ttl")
+        print(f"3. Or manually merge technique templates into csro.ttl")
+    else:
+        print(f"2. Insert the content into csro.ttl at the appropriate location")
     print(f"3. Validate the ontology with a reasoner")
     
     # Print summary statistics
@@ -140,6 +222,9 @@ def main():
         print(f"{technique}:")
         print(f"  - Exploitability weights: {exp_count}")
         print(f"  - Exposure weights: {exp_count}")
+        if args.include_technique_templates:
+            label = generate_technique_label(technique)
+            print(f"  - Generated label: '{label}'")
 
 if __name__ == '__main__':
     main()

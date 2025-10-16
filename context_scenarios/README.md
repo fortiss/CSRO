@@ -11,7 +11,8 @@ context_scenarios/
 │   ├── representative_scenarios.json  # 20 representative scenarios
 │   └── example_scenarios.json         # Basic examples
 ├── scripts/                           # Generation scripts
-│   └── generate_scenarios.py          # Scenario generator tool
+│   ├── generate_scenarios.py          # Scenario generator tool
+│   └── merge_scenarios_to_ontology.py # Merge generated scenarios into csro.ttl
 └── docs/                              # Process documentation
     ├── README_SCENARIO_GENERATION.md
     └── scenario_generation_strategy.md
@@ -216,7 +217,7 @@ These states directly affect risk calculations:
 
 Creates complete scenario instances including:
 
-- `ContextScenario` individual with description
+- `ContextScenario` individual with description and human-readable `rdfs:label`
 - Component inclusions (Application, Device, Runtime, OS, etc.)
 - 48 `AssumptionInScenario` instances (one per security assumption)
 - Satisfaction state assignments based on configuration
@@ -226,6 +227,7 @@ Creates complete scenario instances including:
 - rdflib >= 7.0.0 (specified in `requirements.txt`)
 
 **Key Features:**
+- Automatic label generation (e.g., "CICDSecurityScenario" → "CICD Security Scenario")
 - Category-based rules (set entire categories at once)
 - Explicit assumption mapping (override individual assumptions)
 - Default state for unconfigured assumptions

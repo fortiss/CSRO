@@ -81,6 +81,14 @@ class ScenarioGenerator:
         
         return assumptions
     
+    def _generate_scenario_label(self, scenario_name: str) -> str:
+        """Generate a human-readable label for a scenario."""
+        # Convert CamelCase to space-separated words
+        import re
+        # Insert space before uppercase letters (except at the start)
+        spaced = re.sub(r'(?<!^)(?=[A-Z])', ' ', scenario_name)
+        return spaced
+    
     def generate_scenario(self, 
                          name: str, 
                          description: str,
@@ -108,6 +116,10 @@ class ScenarioGenerator:
         # Add scenario instance
         scenario_graph.add((scenario_uri, RDF.type, CSRO.ContextScenario))
         scenario_graph.add((scenario_uri, CSRO.description, Literal(description)))
+        
+        # Generate a human-readable label
+        label = self._generate_scenario_label(name)
+        scenario_graph.add((scenario_uri, RDFS.label, Literal(label)))
         
         # Add standard components
         components = [

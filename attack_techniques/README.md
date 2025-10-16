@@ -14,6 +14,8 @@ attack_techniques/
 ├── scripts/                   # Automation scripts
 │   ├── generate_ontology_instances.py
 │   ├── merge_instances_to_ontology.py
+│   ├── generate_attack_techniques.py
+│   ├── merge_technique_labels.py
 │   ├── review_weights.py
 │   └── review_weights_by_category.py
 └── docs/                      # Process documentation
@@ -29,10 +31,19 @@ Add new `ContainerAttackTechnique` instances to `../../csro.ttl`:
 ```turtle
 csro:NewTechnique rdf:type owl:NamedIndividual ,
                           csro:ContainerAttackTechnique ;
+                 rdfs:label "Container New Technique" ;
                  csro:hasBaseDifficulty csro:Medium ;
                  csro:referencesAttackTechnique d3f:TXX ;
                  csro:requiresTrait csro:some_trait ;
                  csro:description "Description of the technique" .
+```
+
+**Alternative: Generate technique templates with labels**
+```bash
+cd scripts
+python generate_ontology_instances.py --include-technique-templates
+# or
+python generate_attack_techniques.py --config techniques.json
 ```
 
 ### 2. Assess Assumption Weights
@@ -76,6 +87,19 @@ python merge_instances_to_ontology.py
 
 This updates `../../csro.ttl` with the new instances.
 
+## 🏷️ Label Management
+
+Add human-readable labels to existing ContainerAttackTechnique instances:
+```bash
+cd scripts
+python merge_technique_labels.py --ontology ../../csro.ttl --backup
+```
+
+This automatically generates labels like:
+- `ContainerCgroupDoS` → "Container Cgroup Do S"
+- `ContainerKernelModuleLoading` → "Container Kernel Module Loading"
+- `ContainerPtraceProcessDiscovery` → "Container Ptrace Process Discovery"
+
 ## 📊 Weight Scale
 
 - **0 = No effect**: Assumption has no impact on the attack
@@ -110,7 +134,22 @@ Converts weight CSV data into OWL Turtle format.
 - Reads `assumption_weights_rationales.csv`
 - Generates `AssumptionWeight` individuals
 - Generates `CalculationRule` individuals
+- **New**: `--include-technique-templates` to generate technique templates with labels
 - Output: `generated_ontology_instances.ttl`
+
+### generate_attack_techniques.py
+Standalone script for generating ContainerAttackTechnique instances.
+- Supports JSON configuration files for technique definitions
+- Automatically generates human-readable `rdfs:label` properties
+- `--add-labels` option to add labels to existing techniques
+- `--config` to generate from JSON configuration
+
+### merge_technique_labels.py
+Specialized script for adding `rdfs:label` properties to existing techniques.
+- Automatically detects techniques that need labels
+- Preserves existing ontology structure
+- `--backup` creates timestamped backup
+- `--dry-run` shows what would be changed
 
 ### merge_instances_to_ontology.py
 Merges generated instances into the main ontology.
@@ -122,19 +161,32 @@ Merges generated instances into the main ontology.
 
 ```bash
 # 1. Add technique definition to csro.ttl manually
-
-# 2. Assess weights interactively
+# OR generate from template:
 cd attack_techniques/scripts
+python generate_attack_techniques.py --config new_technique.json
+
+# 2. Add labels to techniques (if needed)
+python merge_technique_labels.py --ontology ../../csro.ttl --backup
+
+# 3. Assess weights interactively
 python review_weights_by_category.py
 
-# 3. Generate ontology instances
+# 4. Generate ontology instances
 python generate_ontology_instances.py
 
-# 4. Merge into ontology
+# 5. Merge into ontology
 python merge_instances_to_ontology.py
 
-# 5. Validate (use Protégé or GraphDB)
-# 6. Commit changes
+# 6. Validate (use Protégé or GraphDB)
+# 7. Commit changes
+```
+
+## 📝 Example: Adding Labels to Existing Techniques
+
+```bash
+cd attack_techniques/scripts
+python merge_technique_labels.py --ontology ../../csro.ttl --backup --dry-run  # Preview changes
+python merge_technique_labels.py --ontology ../../csro.ttl --backup            # Apply changes
 ```
 
 ## 🔍 Querying Weights

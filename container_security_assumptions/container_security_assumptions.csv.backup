@@ -1,0 +1,46 @@
+﻿Assumption ID;Security Assumption Category;Security Assumption;Application Container Security Guide (NIST SP 800-190);CIS Docker Benchmark;OWASP Docker Top 10;OWASP Docker Security Cheat Sheet
+IMG-1;Container Image Security;App images are scanned for vulnerabilities;§4.1.1;4.4;;#9, #13
+IMG-2;Container Image Security;App uses minimal base images;§4.1.2;4.3;D04;
+IMG-3;Container Image Security;App images are signed and verified;§4.1.5;4.2, 4.5;D08;#13
+IMG-4;Container Image Security;Dockerfiles of the app pin the base image version;$4.2.2;6.1;;#9
+IMG-5;Container Image Security;App images are rebuilt and updated regularly;§4.1.1;4.4, 5.28;D02;
+IMG-6;Container Image Security;Device orchestration only uses trusted image registries;§4.2;2.5, 4.5;D08;#13 
+RTS-1;Runtime Security;App containers are run as non-root user;§4.1.2;4.1, 5.24, 5.31;D01;#2, #9, #11
+RTS-2;Runtime Security;App containers use read-only file systems;§4.4.4;5.13;D09;#8
+RTS-3;Runtime Security;App containers are deployed with minimal Linux capabilities;§4.4.3;4.8, 5.4;D04;#3
+RTS-4;Runtime Security;Seccomp is implemented on the device;§4.4.3;2.17, 5.22;D04;#6
+RTS-5;Runtime Security;AppArmor is implemented on the device;§4.4.3;5.2;D04;#6
+RTS-6;Runtime Security;SELinux is implemented on the device;§4.4.3;5.3;D04;#6
+RTS-7;Runtime Security;App containers have minimal access to host resources;§4.4.3;5.6, 5.10, 5.11, 5.12, 5.16, 5.17, 5.18, 5.21, 5.25, 5.31;D07;#7, #11
+AUTH-1;Authentication & Access;Authentication for exposed container APIs is enforced;§4.3.2;2.7;D04;
+AUTH-2;Authentication & Access;Role-based access control is used for orchestration and container management;§4.3.1;2.12;;
+AUTH-3;Authentication & Access;Access to container management interfaces (e.g., Docker socket) is restricted;§4.3.1;3.3, 3.4, 3.23, 3.24, 5.32;;#1
+NET-1;Network Security;App container networks are segmented;§4.3.3;5.10, 5.30;D03;#5
+NET-2;Network Security;Host-level firewall rules and network policies are applied;;2.2, 5.14;D03;#5
+NET-3;Network Security;Inter-container communication is encrypted;§4.3.3;7.3;;
+NET-4;Network Security;Ingress/egress controls for containers are implemented;§4.4.2;2.2, 5.14;D03, D04;
+SCM-1;Secrets & Config Management;Secure secrets management tools (e.g. vaults or secrets manager) are used;§4.1.4;7.4;D06;#12
+SCM-2;Secrets & Config Management;Apps do not contain any hardcoded secrets;§4.1.4;4.10;D06;#12
+SCM-3;Secrets & Config Management;Secrets at rest and in transit are encrypted;§4.1.4;;D06;#12
+SCM-4;Secrets & Config Management;Automatic secret rotation and revocation policies are implemented;§4.1.4;7.6, 7.7, 7.8;;
+HIS-1;Host & Infrastructure Security;The container runtime on the host device is up to date;§4.5.3;1.2.2;D02;#0
+HIS-2;Host & Infrastructure Security;The host device is deployed as an immutable infrastructure (e.g. read-only file system);§4.5.3;;D09;#8
+HIS-3;Host & Infrastructure Security;The host device is monitored for unauthorized changes;§4.5.5;;;
+MON-1;Monitoring, Detection & Response;Container-level logging is enabled;§4.4.4;1.1, 2.3;D10;#10
+MON-2;Monitoring, Detection & Response;Processes on the host device are monitored for anomalous behavior;§4.4.4;;;
+MON-3;Monitoring, Detection & Response;Runtime security tools (e.g. Falco, Trivy) are used;§4.4.4;2.17, 5.2, 5.3, 5.22;;
+MON-4;Monitoring, Detection & Response;Incident response procedures are implemented;§4.4.4;4.6, 5.27;;
+MON-5;Monitoring, Detection & Response;Logs are centralized and protected;§4.4.4;2.13;D10;
+MON-6;Monitoring, Detection & Response;Decoy containers (honeypots) are deployed on the device to detect malicious activity;§4.4.4;;;
+MON-7;Monitoring, Detection & Response;Container API calls and orchestration events are monitored for anomalies;§4.4.4;;;
+MON-8;Monitoring, Detection & Response;Alerts are triggered for unauthorized access attempts to container registries or APIs;§4.4.4;;;
+CIC-1;CI/CD & Supply Chain;The CI/CD pipeline for the app is secured (regarding code repositories, build environments, secrets, vulnerabilities, signing, auditing ...);;;;#13
+CIC-2;CI/CD & Supply Chain;SBOMs are used for the app to track code dependencies;;;;#13
+CIC-3;CI/CD & Supply Chain;Code reviews and automated testing of the app are enforced;;;;#9
+CIC-4;CI/CD & Supply Chain;Third-party components used by the app are validated;§4.1.5;4.11;D04;#13
+CIC-5;CI/CD & Supply Chain;The CI/CD pipeline for the app enables reproducible builds;;4.7;;
+CIC-6;CI/CD & Supply Chain;Apps for development and production are not deployed in the same environment;§4.4.5;;D05;
+CRM-1;Compliance & Risk Management;Regular risk assessments of apps and host devices are performed;§6;;;
+CRM-2;Compliance & Risk Management;The operation's asset inventory is maintained;§6;;;
+CRM-3;Compliance & Risk Management;Container security policies along the app lifecycle are documented and enforced;§4.1.2, §4.3.1, §4.4.3, §6;2.17, 5.2, 5.3, 5.22;;#5
+CRM-4;Compliance & Risk Management;Periodic audits and reviews of apps and host devices are conducted;§4.1.2, §4.3.1, §4.4.3;;;

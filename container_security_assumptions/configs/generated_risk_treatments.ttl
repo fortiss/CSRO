@@ -1,0 +1,328 @@
+@prefix : <https://w3id.org/csro/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix csro: <https://w3id.org/csro/ontology#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://w3id.org/csro/ontology#> .
+
+################################################################################
+#    RiskTreatment Individuals (Generated from container_security_assumptions.csv)
+################################################################################
+
+###  https://w3id.org/csro/ontology#ScanContainerImages
+csro:ScanContainerImages rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_1 ;
+                    csro:description "Perform vulnerability scanning on container images to identify and address security issues" ;
+                    rdfs:label "Scan Container Images" .
+
+###  https://w3id.org/csro/ontology#UseMinimalBaseImages
+csro:UseMinimalBaseImages rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_2 ;
+                    csro:description "Use minimal base images to reduce attack surface and container footprint" ;
+                    rdfs:label "Use Minimal Base Images" .
+
+###  https://w3id.org/csro/ontology#SignAndVerifyImages
+csro:SignAndVerifyImages rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_3 ;
+                    csro:description "Sign and verify container images to ensure authenticity and integrity" ;
+                    rdfs:label "Sign And Verify Images" .
+
+###  https://w3id.org/csro/ontology#PinBaseImageVersions
+csro:PinBaseImageVersions rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_4 ;
+                    csro:description "Pin base image versions in Dockerfiles to ensure reproducibility and control updates" ;
+                    rdfs:label "Pin Base Image Versions" .
+
+###  https://w3id.org/csro/ontology#RebuildImagesRegularly
+csro:RebuildImagesRegularly rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_5 ;
+                    csro:description "Rebuild and update container images regularly to address vulnerabilities and apply patches" ;
+                    rdfs:label "Rebuild Images Regularly" .
+
+###  https://w3id.org/csro/ontology#UseTrustedRegistries
+csro:UseTrustedRegistries rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:IMG_6 ;
+                    csro:description "Use only trusted and verified image registries for container deployment" ;
+                    rdfs:label "Use Trusted Registries" .
+
+###  https://w3id.org/csro/ontology#RunAsNonRootUser
+csro:RunAsNonRootUser rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_1 ;
+                    csro:description "Configure containers to run with non-root user privileges to limit potential damage" ;
+                    rdfs:label "Run As Non Root User" .
+
+###  https://w3id.org/csro/ontology#EnableReadOnlyFilesystem
+csro:EnableReadOnlyFilesystem rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_2 ;
+                    csro:description "Mount container filesystem as read-only to prevent malicious file modifications" ;
+                    rdfs:label "Enable Read Only Filesystem" .
+
+###  https://w3id.org/csro/ontology#MinimizeCapabilities
+csro:MinimizeCapabilities rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_3 ;
+                    csro:description "Deploy containers with minimal Linux capabilities to reduce attack surface" ;
+                    rdfs:label "Minimize Capabilities" .
+
+###  https://w3id.org/csro/ontology#ImplementSeccomp
+csro:ImplementSeccomp rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_4 ;
+                    csro:description "Implement Seccomp profiles to restrict system calls available to containers" ;
+                    rdfs:label "Implement Seccomp" .
+
+###  https://w3id.org/csro/ontology#ImplementAppArmor
+csro:ImplementAppArmor rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_5 ;
+                    csro:description "Implement AppArmor profiles to enforce mandatory access control for containers" ;
+                    rdfs:label "Implement App Armor" .
+
+###  https://w3id.org/csro/ontology#ImplementSELinux
+csro:ImplementSELinux rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_6 ;
+                    csro:description "Implement SELinux policies to provide mandatory access control for containers" ;
+                    rdfs:label "Implement S E Linux" .
+
+###  https://w3id.org/csro/ontology#MinimizeHostResourceAccess
+csro:MinimizeHostResourceAccess rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:RTS_7 ;
+                    csro:description "Minimize container access to host resources through proper isolation and restrictions" ;
+                    rdfs:label "Minimize Host Resource Access" .
+
+###  https://w3id.org/csro/ontology#EnforceAPIAuthentication
+csro:EnforceAPIAuthentication rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:AUTH_1 ;
+                    csro:description "Enforce authentication mechanisms for all exposed container APIs" ;
+                    rdfs:label "Enforce A P I Authentication" .
+
+###  https://w3id.org/csro/ontology#ImplementRBAC
+csro:ImplementRBAC rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:AUTH_2 ;
+                    csro:description "Implement role-based access control for container orchestration and management" ;
+                    rdfs:label "Implement R B A C" .
+
+###  https://w3id.org/csro/ontology#RestrictManagementAccess
+csro:RestrictManagementAccess rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:AUTH_3 ;
+                    csro:description "Restrict access to container management interfaces to authorized users and processes" ;
+                    rdfs:label "Restrict Management Access" .
+
+###  https://w3id.org/csro/ontology#SegmentNetworks
+csro:SegmentNetworks rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:NET_1 ;
+                    csro:description "Implement network segmentation to limit container communication and reduce attack spread" ;
+                    rdfs:label "Segment Networks" .
+
+###  https://w3id.org/csro/ontology#ConfigureHostFirewall
+csro:ConfigureHostFirewall rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:NET_2 ;
+                    csro:description "Configure host-level firewall rules and network policies to control traffic" ;
+                    rdfs:label "Configure Host Firewall" .
+
+###  https://w3id.org/csro/ontology#EncryptInterContainerCommunication
+csro:EncryptInterContainerCommunication rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:NET_3 ;
+                    csro:description "Encrypt inter-container communication to protect data in transit" ;
+                    rdfs:label "Encrypt Inter Container Communication" .
+
+###  https://w3id.org/csro/ontology#ImplementIngressEgressControls
+csro:ImplementIngressEgressControls rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:NET_4 ;
+                    csro:description "Implement ingress and egress controls to restrict container network traffic" ;
+                    rdfs:label "Implement Ingress Egress Controls" .
+
+###  https://w3id.org/csro/ontology#UseSecureSecretsManagement
+csro:UseSecureSecretsManagement rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:SCM_1 ;
+                    csro:description "Use secure secrets management tools for credential storage and handling" ;
+                    rdfs:label "Use Secure Secrets Management" .
+
+###  https://w3id.org/csro/ontology#ProhibitHardcodedSecrets
+csro:ProhibitHardcodedSecrets rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:SCM_2 ;
+                    csro:description "Prohibit hardcoded secrets in application code and container images" ;
+                    rdfs:label "Prohibit Hardcoded Secrets" .
+
+###  https://w3id.org/csro/ontology#EncryptSecrets
+csro:EncryptSecrets rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:SCM_3 ;
+                    csro:description "Encrypt secrets both at rest and in transit to protect sensitive data" ;
+                    rdfs:label "Encrypt Secrets" .
+
+###  https://w3id.org/csro/ontology#ImplementSecretRotation
+csro:ImplementSecretRotation rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:SCM_4 ;
+                    csro:description "Implement automatic secret rotation and revocation policies for credentials" ;
+                    rdfs:label "Implement Secret Rotation" .
+
+###  https://w3id.org/csro/ontology#UpdateContainerRuntime
+csro:UpdateContainerRuntime rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:HIS_1 ;
+                    csro:description "Keep container runtime on host devices up to date with security patches" ;
+                    rdfs:label "Update Container Runtime" .
+
+###  https://w3id.org/csro/ontology#DeployImmutableInfrastructure
+csro:DeployImmutableInfrastructure rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:HIS_2 ;
+                    csro:description "Deploy host devices as immutable infrastructure to prevent unauthorized modifications" ;
+                    rdfs:label "Deploy Immutable Infrastructure" .
+
+###  https://w3id.org/csro/ontology#MonitorHostForChanges
+csro:MonitorHostForChanges rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:HIS_3 ;
+                    csro:description "Monitor host devices for unauthorized changes and configuration drift" ;
+                    rdfs:label "Monitor Host For Changes" .
+
+###  https://w3id.org/csro/ontology#EnableContainerLogging
+csro:EnableContainerLogging rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_1 ;
+                    csro:description "Enable comprehensive container-level logging for security monitoring and audit" ;
+                    rdfs:label "Enable Container Logging" .
+
+###  https://w3id.org/csro/ontology#MonitorProcessBehavior
+csro:MonitorProcessBehavior rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_2 ;
+                    csro:description "Monitor host processes for anomalous behavior and suspicious activities" ;
+                    rdfs:label "Monitor Process Behavior" .
+
+###  https://w3id.org/csro/ontology#UseRuntimeSecurityTools
+csro:UseRuntimeSecurityTools rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_3 ;
+                    csro:description "Deploy runtime security tools to detect and respond to container threats" ;
+                    rdfs:label "Use Runtime Security Tools" .
+
+###  https://w3id.org/csro/ontology#ImplementIncidentResponse
+csro:ImplementIncidentResponse rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_4 ;
+                    csro:description "Implement and maintain incident response procedures for container security events" ;
+                    rdfs:label "Implement Incident Response" .
+
+###  https://w3id.org/csro/ontology#CentralizeAndProtectLogs
+csro:CentralizeAndProtectLogs rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_5 ;
+                    csro:description "Centralize logs and implement protection mechanisms to ensure integrity" ;
+                    rdfs:label "Centralize And Protect Logs" .
+
+###  https://w3id.org/csro/ontology#DeployDecoyContainers
+csro:DeployDecoyContainers rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_6 ;
+                    csro:description "Deploy decoy containers as honeypots to detect malicious activities" ;
+                    rdfs:label "Deploy Decoy Containers" .
+
+###  https://w3id.org/csro/ontology#MonitorAPIAndOrchestration
+csro:MonitorAPIAndOrchestration rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_7 ;
+                    csro:description "Monitor container API calls and orchestration events for anomalous patterns" ;
+                    rdfs:label "Monitor A P I And Orchestration" .
+
+###  https://w3id.org/csro/ontology#AlertUnauthorizedAccess
+csro:AlertUnauthorizedAccess rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:MON_8 ;
+                    csro:description "Configure alerts for unauthorized access attempts to registries and APIs" ;
+                    rdfs:label "Alert Unauthorized Access" .
+
+###  https://w3id.org/csro/ontology#SecureCICDPipeline
+csro:SecureCICDPipeline rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_1 ;
+                    csro:description "Secure CI/CD pipeline to prevent supply chain attacks and ensure build integrity" ;
+                    rdfs:label "Secure C I C D Pipeline" .
+
+###  https://w3id.org/csro/ontology#UseSBOMs
+csro:UseSBOMs rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_2 ;
+                    csro:description "Use Software Bill of Materials to track and manage application dependencies" ;
+                    rdfs:label "Use S B O Ms" .
+
+###  https://w3id.org/csro/ontology#EnforceCodeReviewsAndTesting
+csro:EnforceCodeReviewsAndTesting rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_3 ;
+                    csro:description "Enforce code reviews and automated testing to identify security issues early" ;
+                    rdfs:label "Enforce Code Reviews And Testing" .
+
+###  https://w3id.org/csro/ontology#ValidateThirdPartyComponents
+csro:ValidateThirdPartyComponents rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_4 ;
+                    csro:description "Validate third-party components for security vulnerabilities and trustworthiness" ;
+                    rdfs:label "Validate Third Party Components" .
+
+###  https://w3id.org/csro/ontology#EnableReproducibleBuilds
+csro:EnableReproducibleBuilds rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_5 ;
+                    csro:description "Enable reproducible builds in CI/CD pipeline to ensure build consistency" ;
+                    rdfs:label "Enable Reproducible Builds" .
+
+###  https://w3id.org/csro/ontology#SeparateDevelopmentProduction
+csro:SeparateDevelopmentProduction rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CIC_6 ;
+                    csro:description "Separate development and production environments to reduce security risks" ;
+                    rdfs:label "Separate Development Production" .
+
+###  https://w3id.org/csro/ontology#PerformRegularRiskAssessments
+csro:PerformRegularRiskAssessments rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CRM_1 ;
+                    csro:description "Perform regular risk assessments of applications and host infrastructure" ;
+                    rdfs:label "Perform Regular Risk Assessments" .
+
+###  https://w3id.org/csro/ontology#MaintainAssetInventory
+csro:MaintainAssetInventory rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CRM_2 ;
+                    csro:description "Maintain comprehensive asset inventory for container infrastructure" ;
+                    rdfs:label "Maintain Asset Inventory" .
+
+###  https://w3id.org/csro/ontology#DocumentSecurityPolicies
+csro:DocumentSecurityPolicies rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CRM_3 ;
+                    csro:description "Document and enforce container security policies throughout application lifecycle" ;
+                    rdfs:label "Document Security Policies" .
+
+###  https://w3id.org/csro/ontology#ConductPeriodicAudits
+csro:ConductPeriodicAudits rdf:type owl:NamedIndividual ,
+                             csro:RiskTreatment ;
+                    csro:addresses csro:CRM_4 ;
+                    csro:description "Conduct periodic security audits and reviews of containers and host devices" ;
+                    rdfs:label "Conduct Periodic Audits" .
+
