@@ -133,8 +133,8 @@ csro:appliesTechnique rdf:type owl:ObjectProperty ;
 
 ###  https://w3id.org/csro/ontology#appliesTo
 csro:appliesTo rdf:type owl:ObjectProperty ;
-               rdfs:domain csro:AttackPatternCalculationRule ;
-               rdfs:comment "Indicates which attack pattern a calculation rule applies to."@en ;
+               rdfs:domain csro:ContainerAttackTechniqueCalculationRule ;
+               rdfs:comment "Indicates which container attack technique a calculation rule applies to."@en ;
                rdfs:label "applies to"@en .
 
 
@@ -239,7 +239,7 @@ csro:hasSatisfactionState rdf:type owl:ObjectProperty ;
 
 ###  https://w3id.org/csro/ontology#hasWeight
 csro:hasWeight rdf:type owl:ObjectProperty ;
-               rdfs:domain csro:AttackPatternCalculationRule ;
+               rdfs:domain csro:ContainerAttackTechniqueCalculationRule ;
                rdfs:range csro:AssumptionWeight ;
                rdfs:comment "Associates a calculation rule with assumption weights."@en ;
                rdfs:label "has weight"@en .
@@ -359,7 +359,7 @@ csro:requiresTrait rdf:type owl:ObjectProperty ;
 
 ###  https://w3id.org/csro/ontology#resultsIn
 csro:resultsIn rdf:type owl:ObjectProperty ;
-               rdfs:domain csro:AttackPatternCalculationRule ;
+               rdfs:domain csro:ContainerAttackTechniqueCalculationRule ;
                rdfs:comment "Indicates the result produced by a calculation rule."@en ;
                rdfs:label "results in"@en .
 
@@ -485,11 +485,11 @@ csro:AttackAction rdf:type owl:Class ;
                   rdfs:label "Attack Action"@en .
 
 
-###  https://w3id.org/csro/ontology#AttackPatternCalculationRule
-csro:AttackPatternCalculationRule rdf:type owl:Class ;
-                                  rdfs:subClassOf csro:ContainerSecurityRiskThing ;
-                                  rdfs:comment "A rule for dynamically calculating risk assessment values based on attack patterns and context scenarios."@en ;
-                                  rdfs:label "Attack Pattern Calculation Rule"@en .
+###  https://w3id.org/csro/ontology#ContainerAttackTechniqueCalculationRule
+csro:ContainerAttackTechniqueCalculationRule rdf:type owl:Class ;
+                                             rdfs:subClassOf csro:ContainerSecurityRiskThing ;
+                                             rdfs:comment "A rule for dynamically calculating risk assessment values based on container attack techniques and context scenarios."@en ;
+                                             rdfs:label "Container Attack Technique Calculation Rule"@en .
 
 
 ###  https://w3id.org/csro/ontology#Component
@@ -5003,8 +5003,8 @@ csro:DockerComposeSetting rdf:type owl:Class ;
 
 ###  https://w3id.org/csro/ontology#ExploitabilityCalculationRule
 csro:ExploitabilityCalculationRule rdf:type owl:Class ;
-                                   rdfs:subClassOf csro:AttackPatternCalculationRule ;
-                                   rdfs:comment "A rule for calculating exploitability ratings based on attack patterns and security assumptions."@en ;
+                                   rdfs:subClassOf csro:ContainerAttackTechniqueCalculationRule ;
+                                   rdfs:comment "A rule for calculating exploitability ratings based on container attack techniques and security assumptions."@en ;
                                    rdfs:label "Exploitability Calculation Rule"@en .
 
 
@@ -5017,8 +5017,8 @@ csro:ExploitabilityRating rdf:type owl:Class ;
 
 ###  https://w3id.org/csro/ontology#ExposureCalculationRule
 csro:ExposureCalculationRule rdf:type owl:Class ;
-                             rdfs:subClassOf csro:AttackPatternCalculationRule ;
-                             rdfs:comment "A rule for calculating exposure ratings based on attack patterns and security assumptions."@en ;
+                             rdfs:subClassOf csro:ContainerAttackTechniqueCalculationRule ;
+                             rdfs:comment "A rule for calculating exposure ratings based on container attack techniques and security assumptions."@en ;
                              rdfs:label "Exposure Calculation Rule"@en .
 
 
@@ -5748,7 +5748,7 @@ csro:CompromisedContainerProcess rdf:type owl:NamedIndividual ,
                                           csro:Impact ;
                                  csro:hasImpactRating csro:Critical ;
                                  csro:indicates csro:CompromisedContainerProcessRisk ;
-                                 csro:description "Compromised container process through exploitation of public-facing application vulnerabilities, allowing attackers to gain control of the container runtime environment." .
+                                 csro:description "Integrity and confidentiality of application process compromised through exploitation of public-facing vulnerabilities, enabling unauthorized control of the compromised application" .
 
 
 ###  https://w3id.org/csro/ontology#CompromisedContainerProcessRisk
@@ -16861,7 +16861,7 @@ csro:ContainerPtraceProcessDiscovery rdf:type owl:NamedIndividual ,
                                      csro:referencesAttackTechnique d3f:T1057 ;
                                      csro:requiresTrait csro:cap_add_CAP_SYS_PTRACE ,
                                                         csro:host_pid ;
-                                     csro:description "Leveraging CAP_SYS_PTRACE and host PID namespace to discover and enumerate host processes for reconnaissance" .
+                                     csro:description "Leveraging CAP_SYS_PTRACE and host PID namespace to discover and enumerate host processes for information gathering" .
 
 
 ###  https://w3id.org/csro/ontology#ContainerKernelModuleLoading
@@ -16966,6 +16966,25 @@ csro:ContainerSystemAdminEscape rdf:type owl:NamedIndividual ,
                                 csro:referencesAttackTechnique d3f:T1611 ;
                                 csro:requiresTrait csro:cap_add_CAP_SYS_ADMIN ;
                                 csro:description "Leveraging CAP_SYS_ADMIN capability to perform container escape through mounting host filesystems, manipulating namespaces, or exploiting kernel interfaces" .
+
+
+###  https://w3id.org/csro/ontology#ContainerPtraceInjection
+csro:ContainerPtraceInjection rdf:type owl:NamedIndividual ,
+                                       csro:ContainerAttackTechnique ;
+                              csro:hasBaseDifficulty csro:Medium ;
+                              csro:referencesAttackTechnique d3f:T1055.008 ;
+                              csro:requiresTrait csro:cap_add_CAP_SYS_PTRACE ,
+                                                 csro:host_pid ;
+                              csro:description "Container-specific adaptation of MITRE ATT&CK T1055.008 (Ptrace System Calls) targeting container escape scenarios through process injection in containerized environments" .
+
+
+###  https://w3id.org/csro/ontology#ContainerExploitPublicFacingApp
+csro:ContainerExploitPublicFacingApp rdf:type owl:NamedIndividual ,
+                                              csro:ContainerAttackTechnique ;
+                                     csro:hasBaseDifficulty csro:Medium ;
+                                     csro:referencesAttackTechnique d3f:T1190 ;
+                                     csro:requiresTrait csro:external_network ;
+                                     csro:description "Container-specific adaptation of MITRE ATT&CK T1190 (Exploit Public-Facing Application) where containers with external network exposure become vulnerable to exploitation of application vulnerabilities, leading to container process compromise." .
 
 
 ###  https://w3id.org/csro/ontology#EnableReadOnlyFilesystem
@@ -17162,7 +17181,7 @@ csro:HostProcessManipulation rdf:type owl:NamedIndividual ,
                                       csro:Impact ;
                              csro:hasImpactRating csro:Disastrous ;
                              csro:indicates csro:HostProcessManipulationRisk ;
-                             csro:description "Ability to manipulate and inject code into host processes, potentially compromising the entire host system." .
+                             csro:description "Integrity and confidentiality of host processes compromised through code injection, enabling unauthorized control and data access at host level" .
 
 
 ###  https://w3id.org/csro/ontology#HostProcessManipulationRisk
@@ -18818,5 +18837,3120 @@ csro:read_only_filesystem rdf:type owl:NamedIndividual ,
               )
 ] .
 
+###  Impact Instances
+
+csro:ComputeResourceTheft a csro:Impact ;
+    csro:description "Availability of compute resources degraded through unauthorized resource consumption, causing performance degradation for legitimate applications and services" ;
+    csro:hasImpactRating csro:Moderate ;
+    csro:indicates csro:ResourceMisuseRisk .
+
+csro:ContainerEscapeImpact a csro:Impact ;
+    csro:description "Complete loss of confidentiality, integrity, and availability of host system through container escape, enabling full unauthorized control over all system resources and data" ;
+    csro:hasImpactRating csro:Disastrous ;
+    csro:indicates csro:HostCompromiseRisk .
+
+csro:FirewallIntegrityViolation a csro:Impact ;
+    csro:description "Integrity of network security controls compromised, exposing all system components and applications to unauthorized network access and potential confidentiality and availability impacts" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:NetworkSecurityControlsRemovalRisk .
+
+csro:HostProcessInformationDisclosure a csro:Impact ;
+    csro:description "Confidentiality of host process information compromised, exposing system architecture, running services, and potential security weaknesses" ;
+    csro:hasImpactRating csro:Moderate ;
+    csro:indicates csro:SystemInformationExposureRisk .
+
+csro:KernelIntegrityCompromise a csro:Impact ;
+    csro:description "Complete loss of system integrity and confidentiality at kernel level, enabling persistent unauthorized control over all system operations and data" ;
+    csro:hasImpactRating csro:Disastrous ;
+    csro:indicates csro:SystemIntegrityLossRisk .
+
+csro:Layer2TrafficInterception a csro:Impact ;
+    csro:description "Confidentiality and integrity of network communications compromised through unauthorized traffic interception and potential modification at Layer 2" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:NetworkCommunicationCompromiseRisk .
+
+csro:NetworkSegmentationBypass a csro:Impact ;
+    csro:description "Integrity of network isolation controls compromised, enabling unauthorized network access to segmented assets and confidentiality breach across network boundaries" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:NetworkIsolationBreachRisk .
+
+csro:OTSystemCompromise a csro:Impact ;
+    csro:description "Integrity and availability of operational technology systems compromised, potentially causing physical process disruption, equipment damage, or safety-critical failures" ;
+    csro:hasImpactRating csro:Disastrous ;
+    csro:indicates csro:IndustrialSystemCompromiseRisk .
+
+csro:PortHijackingDoS a csro:Impact ;
+    csro:description "Availability of network services compromised through port blocking, preventing legitimate applications from accepting connections" ;
+    csro:hasImpactRating csro:Moderate ;
+    csro:indicates csro:ServiceDisruptionRisk .
+
+csro:ResourceExhaustionDoS a csro:Impact ;
+    csro:description "Complete loss of availability for host system and all hosted applications due to critical resource exhaustion" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:ServiceAvailabilityLossRisk .
+
+csro:RootkitPersistence a csro:Impact ;
+    csro:description "Integrity of kernel compromised through rootkit installation, providing undetectable persistent access bypassing all user-space security controls" ;
+    csro:hasImpactRating csro:Disastrous ;
+    csro:indicates csro:StealthyPersistenceRisk .
+
+csro:ServiceImpersonation a csro:Impact ;
+    csro:description "Integrity and confidentiality of service authentication compromised through impersonation, enabling unauthorized access and credential theft" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:AuthenticationBypassRisk .
+
+csro:TrafficInterception a csro:Impact ;
+    csro:description "Confidentiality of network communications compromised through unauthorized interception, exposing credentials, sensitive data, and application secrets" ;
+    csro:hasImpactRating csro:Critical ;
+    csro:indicates csro:CredentialTheftRisk .
+
+###  Risk Instances
+
+csro:AuthenticationBypassRisk a csro:Risk ;
+    csro:description "Risk of integrity and confidentiality breach through service impersonation enabling authentication bypass" .
+
+csro:CredentialTheftRisk a csro:Risk ;
+    csro:description "Risk of confidentiality breach through network traffic interception exposing authentication data" .
+
+csro:HostCompromiseRisk a csro:Risk ;
+    csro:description "Risk of total system compromise with complete CIA triad violation through container escape" .
+
+csro:IndustrialSystemCompromiseRisk a csro:Risk ;
+    csro:description "Risk of integrity and availability loss in industrial control systems causing physical harm or operational disruption" .
+
+csro:NetworkCommunicationCompromiseRisk a csro:Risk ;
+    csro:description "Risk of confidentiality and integrity breach through man-in-the-middle attacks on network communications" .
+
+csro:NetworkIsolationBreachRisk a csro:Risk ;
+    csro:description "Risk of integrity violation in network segmentation enabling unauthorized access and confidentiality breach" .
+
+csro:NetworkSecurityControlsRemovalRisk a csro:Risk ;
+    csro:description "Risk of integrity violation in network security controls exposing system to comprehensive network-based attacks" .
+
+csro:ResourceMisuseRisk a csro:Risk ;
+    csro:description "Risk of availability degradation through unauthorized compute resource consumption" .
+
+csro:ServiceAvailabilityLossRisk a csro:Risk ;
+    csro:description "Risk of total availability loss through system resource exhaustion" .
+
+csro:ServiceDisruptionRisk a csro:Risk ;
+    csro:description "Risk of availability loss for network services through port resource denial" .
+
+csro:StealthyPersistenceRisk a csro:Risk ;
+    csro:description "Risk of undetectable persistent compromise with complete system integrity violation" .
+
+csro:SystemInformationExposureRisk a csro:Risk ;
+    csro:description "Risk of confidentiality breach through unauthorized access to host process details enabling targeted attacks" .
+
+csro:SystemIntegrityLossRisk a csro:Risk ;
+    csro:description "Risk of total system integrity and confidentiality compromise through persistent kernel-level access" .
+
+###  AttackAction Instances
+
+csro:ContainerCgroupDoSAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerCgroupDoSAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerCgroupDoSAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerCgroupDoSAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerCgroupDoSAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerCgroupDoSAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerCgroupDoSAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerCgroupDoSAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerCgroupDoSAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerCgroupDoSAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerCgroupDoSAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerCgroupDoSAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerCgroupDoSAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerCgroupDoSAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerCgroupDoSAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerCgroupDoSAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerCgroupDoSAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerCgroupDoSAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerCgroupDoSAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerCgroupDoSAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerCgroupDoSAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerCgroupDoSAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupDoS ;
+    csro:causesImpact csro:ResourceExhaustionDoS ;
+    csro:description "ContainerCgroupDoS attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerCgroupResourceHijackingAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerCgroupResourceHijacking ;
+    csro:causesImpact csro:ComputeResourceTheft ;
+    csro:description "ContainerCgroupResourceHijacking attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerDataFromLocalSystemAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerDataFromLocalSystemAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerDataFromLocalSystemAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerDataFromLocalSystemAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerDataFromLocalSystemAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerDataFromLocalSystemAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerDataFromLocalSystemAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerDataFromLocalSystemAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerDataFromLocalSystemAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerDataFromLocalSystemAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerDataFromLocalSystemAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerDataFromLocalSystemAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerDataFromLocalSystemAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerDataFromLocalSystemAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerDataFromLocalSystemAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerDataFromLocalSystemAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerDataFromLocalSystemAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerDataFromLocalSystemAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerDataFromLocalSystemAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerDataFromLocalSystem ;
+    csro:causesImpact csro:HostSystemFilesExposed ;
+    csro:description "ContainerDataFromLocalSystem attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerExploitPublicFacingAppAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application ;
+    csro:appliesTechnique csro:ContainerExploitPublicFacingApp ;
+    csro:causesImpact csro:CompromisedContainerProcess ;
+    csro:description "ContainerExploitPublicFacingApp attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerFirewallDisableAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerFirewallDisableAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerFirewallDisableAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerFirewallDisableAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerFirewallDisableAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerFirewallDisableAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerFirewallDisableAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerFirewallDisableAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerFirewallDisableAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerFirewallDisableAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerFirewallDisableAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerFirewallDisableAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerFirewallDisableAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerFirewallDisableAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerFirewallDisableAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerFirewallDisableAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerFirewallDisableAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerFirewallDisableAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerFirewallDisableAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerFirewallDisableAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerFirewallDisableAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerFirewallDisableAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerFirewallDisable ;
+    csro:causesImpact csro:FirewallIntegrityViolation ;
+    csro:description "ContainerFirewallDisable attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerKernelModuleLoadingAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerKernelModuleLoadingAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerKernelModuleLoadingAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerKernelModuleLoadingAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerKernelModuleLoadingAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerKernelModuleLoadingAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerKernelModuleLoadingAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerKernelModuleLoadingAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerKernelModuleLoadingAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerKernelModuleLoadingAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerKernelModuleLoadingAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerKernelModuleLoadingAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerKernelModuleLoadingAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerKernelModuleLoadingAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerKernelModuleLoadingAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerKernelModuleLoadingAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerKernelModuleLoadingAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem ;
+    csro:appliesTechnique csro:ContainerKernelModuleLoading ;
+    csro:causesImpact csro:KernelIntegrityCompromise,
+        csro:RootkitPersistence ;
+    csro:description "ContainerKernelModuleLoading attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerLayer2MitMAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerLayer2MitMAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerLayer2MitMAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerLayer2MitMAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerLayer2MitMAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerLayer2MitMAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerLayer2MitMAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerLayer2MitMAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerLayer2MitMAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerLayer2MitMAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerLayer2MitMAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerLayer2MitMAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerLayer2MitMAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerLayer2MitMAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerLayer2MitMAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerLayer2MitMAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerLayer2MitMAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerLayer2MitMAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerLayer2MitMAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerLayer2MitMAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerLayer2MitMAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerLayer2MitMAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerLayer2MitM ;
+    csro:causesImpact csro:Layer2TrafficInterception ;
+    csro:description "ContainerLayer2MitM attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerNetworkBridgeEvasionAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerNetworkBridgeEvasion ;
+    csro:causesImpact csro:NetworkSegmentationBypass ;
+    csro:description "ContainerNetworkBridgeEvasion attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerOTNetworkAttackAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerOTNetworkAttackAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerOTNetworkAttackAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerOTNetworkAttackAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerOTNetworkAttackAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerOTNetworkAttackAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerOTNetworkAttackAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerOTNetworkAttackAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerOTNetworkAttackAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerOTNetworkAttackAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerOTNetworkAttackAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerOTNetworkAttackAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerOTNetworkAttackAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerOTNetworkAttackAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerOTNetworkAttackAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerOTNetworkAttackAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerOTNetworkAttackAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerOTNetworkAttackAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerOTNetworkAttackAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerOTNetworkAttackAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerOTNetworkAttackAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerOTNetworkAttackAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerOTNetworkAttack ;
+    csro:causesImpact csro:OTSystemCompromise ;
+    csro:description "ContainerOTNetworkAttack attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerPrivilegedPortNetworkDoSAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortNetworkDoS ;
+    csro:causesImpact csro:PortHijackingDoS ;
+    csro:description "ContainerPrivilegedPortNetworkDoS attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerPrivilegedPortServiceImpersonationAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortServiceImpersonation ;
+    csro:causesImpact csro:ServiceImpersonation ;
+    csro:description "ContainerPrivilegedPortServiceImpersonation attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerPrivilegedPortTrafficCaptureAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPrivilegedPortTrafficCapture ;
+    csro:causesImpact csro:TrafficInterception ;
+    csro:description "ContainerPrivilegedPortTrafficCapture attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerPtraceInjectionAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerPtraceInjectionAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerPtraceInjectionAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerPtraceInjectionAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerPtraceInjectionAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerPtraceInjectionAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerPtraceInjectionAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerPtraceInjectionAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerPtraceInjectionAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerPtraceInjectionAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerPtraceInjectionAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerPtraceInjectionAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerPtraceInjectionAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerPtraceInjectionAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerPtraceInjectionAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerPtraceInjectionAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerPtraceInjectionAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerPtraceInjectionAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerPtraceInjectionAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerPtraceInjectionAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerPtraceInjectionAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerPtraceInjectionAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceInjection ;
+    csro:causesImpact csro:HostProcessManipulation ;
+    csro:description "ContainerPtraceInjection attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerPtraceProcessDiscoveryAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerPtraceProcessDiscovery ;
+    csro:causesImpact csro:HostProcessInformationDisclosure ;
+    csro:description "ContainerPtraceProcessDiscovery attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_AirGappedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in AirGappedScenario context" ;
+    csro:inContext csro:AirGappedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_BalancedContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in BalancedContainerSecurityScenario context" ;
+    csro:inContext csro:BalancedContainerSecurityScenario .
+
+csro:ContainerSystemAdminEscapeAttack_BasicContainerSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in BasicContainerSecurityScenario context" ;
+    csro:inContext csro:BasicContainerSecurityScenario .
+
+csro:ContainerSystemAdminEscapeAttack_BasicScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in BasicScenario context" ;
+    csro:inContext csro:BasicScenario .
+
+csro:ContainerSystemAdminEscapeAttack_CICDSecurityScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in CICDSecurityScenario context" ;
+    csro:inContext csro:CICDSecurityScenario .
+
+csro:ContainerSystemAdminEscapeAttack_CISCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in CISCompliantScenario context" ;
+    csro:inContext csro:CISCompliantScenario .
+
+csro:ContainerSystemAdminEscapeAttack_DevelopmentScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in DevelopmentScenario context" ;
+    csro:inContext csro:DevelopmentScenario .
+
+csro:ContainerSystemAdminEscapeAttack_EdgeComputingScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in EdgeComputingScenario context" ;
+    csro:inContext csro:EdgeComputingScenario .
+
+csro:ContainerSystemAdminEscapeAttack_HardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in HardenedScenario context" ;
+    csro:inContext csro:HardenedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_HighRiskScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in HighRiskScenario context" ;
+    csro:inContext csro:HighRiskScenario .
+
+csro:ContainerSystemAdminEscapeAttack_HybridCloudScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in HybridCloudScenario context" ;
+    csro:inContext csro:HybridCloudScenario .
+
+csro:ContainerSystemAdminEscapeAttack_ImageSecurityFocusedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in ImageSecurityFocusedScenario context" ;
+    csro:inContext csro:ImageSecurityFocusedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_MicroservicesScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in MicroservicesScenario context" ;
+    csro:inContext csro:MicroservicesScenario .
+
+csro:ContainerSystemAdminEscapeAttack_MixedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in MixedScenario context" ;
+    csro:inContext csro:MixedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_NISTCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in NISTCompliantScenario context" ;
+    csro:inContext csro:NISTCompliantScenario .
+
+csro:ContainerSystemAdminEscapeAttack_NetworkHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in NetworkHardenedScenario context" ;
+    csro:inContext csro:NetworkHardenedScenario .
+
+csro:ContainerSystemAdminEscapeAttack_OWASPCheatSheetCompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in OWASPCheatSheetCompliantScenario context" ;
+    csro:inContext csro:OWASPCheatSheetCompliantScenario .
+
+csro:ContainerSystemAdminEscapeAttack_OWASPTop10CompliantScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in OWASPTop10CompliantScenario context" ;
+    csro:inContext csro:OWASPTop10CompliantScenario .
+
+csro:ContainerSystemAdminEscapeAttack_OutdatedContainersScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in OutdatedContainersScenario context" ;
+    csro:inContext csro:OutdatedContainersScenario .
+
+csro:ContainerSystemAdminEscapeAttack_ProductionScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in ProductionScenario context" ;
+    csro:inContext csro:ProductionScenario .
+
+csro:ContainerSystemAdminEscapeAttack_RapidPrototypeScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in RapidPrototypeScenario context" ;
+    csro:inContext csro:RapidPrototypeScenario .
+
+csro:ContainerSystemAdminEscapeAttack_RuntimeHardenedScenario a csro:AttackAction ;
+    csro:affects csro:Application,
+        csro:Device,
+        csro:DeviceContainerRuntime,
+        csro:DeviceOperatingSystem,
+        csro:OtherApplications ;
+    csro:appliesTechnique csro:ContainerSystemAdminEscape ;
+    csro:causesImpact csro:ContainerEscapeImpact ;
+    csro:description "ContainerSystemAdminEscape attack applied in RuntimeHardenedScenario context" ;
+    csro:inContext csro:RuntimeHardenedScenario .
 
 ###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

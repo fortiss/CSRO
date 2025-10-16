@@ -1,0 +1,37 @@
+{
+  "attack_techniques": [
+    {
+      "technique_id": "ContainerDataFromLocalSystem",
+      "affected_components": [
+        "DeviceOperatingSystem",
+        "Application"
+      ],
+      "impacts": [
+        {
+          "impact_id": "HostDataExfiltration",
+          "description": "Container accesses and exfiltrates sensitive data from the host file system",
+          "impact_rating": "Critical",
+          "risk_id": "DataExfiltrationRisk",
+          "risk_description": "Risk of sensitive host data being accessed and stolen through container escape or volume mounts"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerCgroupDoS",
+      "affected_components": [
+        "Device",
+        "DeviceContainerRuntime",
+        "OtherApplications"
+      ],
+      "impacts": [
+        {
+          "impact_id": "ResourceExhaustionImpact",
+          "description": "Container exhausts system resources (CPU, memory, I/O) affecting host and other containers",
+          "impact_rating": "Moderate",
+          "risk_id": "ResourceExhaustionRisk",
+          "risk_description": "Risk of system-wide service degradation or denial of service through resource exhaustion"
+        }
+      ]
+    }
+  ]
+}
