@@ -54,7 +54,7 @@ CONSTRUCT {
     ?scenario a csro:ContextScenario ;
         csro:description ?scenarioDescription ;
         csro:includesAssumption ?assumptionInScenario ;
-        csro:includes ?component .
+        csro:includesComponent ?component .
     
     # Security assumptions with verification information
     ?assumption a csro:ContainerSecurityAssumption ;
@@ -284,7 +284,7 @@ WHERE {
 
     # Scenario information
     ?scenario csro:description ?scenarioDescription ;
-              csro:includes ?component .
+              csro:includesComponent ?component .
 
     # Component information
     ?component rdfs:label ?componentLabel ;
