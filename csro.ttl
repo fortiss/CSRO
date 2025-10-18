@@ -21,15 +21,15 @@
                                   dc:creator "Yannick Landeck"@en ;
                                   dc:description "The Container Security Risk Ontology (CSRO) provides a formal vocabulary for modeling security risks in containerized deployments, particularly in operational technology (OT) contexts. This ontology includes both the conceptual schema and concrete instances with enhancements for attack techniques and dynamic risk assessment. Integrated with MITRE D3FEND ontology for ATT&CK technique references."@en ;
                                   dc:issued "2025-09-24"^^xsd:date ;
-                                  dc:modified "2025-09-24T00:00:00Z" ;
+                                  dc:modified "2025-10-18T00:00:00Z" ;
                                   dc:publisher "Yannick Landeck"@en ;
                                   dc:title "Container Security Risk Ontology"@en ;
                                   terms:created "24th September 2025"@en ;
                                   vann:preferredNamespacePrefix "csro" ;
                                   schema:url "https://w3id.org/csro/ontology"^^xsd:anyURI ;
-                                  schema:version "1.0" ;
-                                  owl:versionInfo "1.0" ;
-                                  skos:definition "A comprehensive ontology for assessing and modeling security risks in container deployments using context scenarios and attack patterns for dynamic risk calculation."@en .
+                                  schema:version "1.1" ;
+                                  owl:versionInfo "1.1" ;
+                                  skos:definition "A comprehensive ontology for modeling and assessing security risks in container deployments using context scenarios and attack techniques for dynamic risk calculation."@en .
 
 #################################################################
 #    Annotation properties
