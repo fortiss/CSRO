@@ -5473,9 +5473,8 @@ csro:ContainerDataFromLocalSystem rdf:type owl:NamedIndividual ,
                                            csro:ContainerAttackTechnique ;
                                   csro:hasBaseDifficulty csro:Low ;
                                   csro:referencesAttackTechnique d3f:T1005 ;
-                                  csro:requiresTrait csro:cap_add_CAP_DAC_READ_SEARCH ,
-                                                     csro:privileged_host_volume ;
-                                  csro:description "Container-specific adaptation of MITRE ATT&CK T1005 (Data from Local System) where containers with privileged host volume mounts can access sensitive host system files and directories, potentially exposing confidential information." ;
+                                  csro:requiresTrait csro:privileged_host_volume ;
+                                  csro:description "Accessing sensitive host system files and directories through privileged host volume mounts to exfiltrate confidential information" ;
                                   rdfs:label "Container Data from Local System" .
 
 
@@ -6604,7 +6603,7 @@ csro:ContainerExploitPublicFacingApp rdf:type owl:NamedIndividual ,
                                      csro:hasBaseDifficulty csro:Medium ;
                                      csro:referencesAttackTechnique d3f:T1190 ;
                                      csro:requiresTrait csro:external_network ;
-                                     csro:description "Container-specific adaptation of MITRE ATT&CK T1190 (Exploit Public-Facing Application) where containers with external network exposure become vulnerable to exploitation of application vulnerabilities, leading to container process compromise." ;
+                                     csro:description "Exploiting application vulnerabilities in containers with external network exposure to compromise the container process" ;
                                      rdfs:label "Container Exploit Public-Facing App" .
 
 
@@ -16452,7 +16451,7 @@ csro:ContainerPtraceInjection rdf:type owl:NamedIndividual ,
                               csro:referencesAttackTechnique d3f:T1055.008 ;
                               csro:requiresTrait csro:cap_add_CAP_SYS_PTRACE ,
                                                  csro:host_pid ;
-                              csro:description "Container-specific adaptation of MITRE ATT&CK T1055.008 (Ptrace System Calls) targeting container escape scenarios through process injection in containerized environments" ;
+                              csro:description "Using ptrace system calls for process injection to achieve container escape in environments with CAP_SYS_PTRACE capability and host PID namespace access" ;
                               rdfs:label "Container Ptrace Injection" .
 
 
