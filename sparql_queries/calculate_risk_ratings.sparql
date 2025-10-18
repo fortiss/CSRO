@@ -52,6 +52,7 @@ CONSTRUCT {
     
     # Scenario information with assumptions
     ?scenario a csro:ContextScenario ;
+        rdfs:label ?scenarioLabel ;
         csro:description ?scenarioDescription ;
         csro:includesAssumption ?assumptionInScenario ;
         csro:includesComponent ?component .
@@ -283,7 +284,8 @@ WHERE {
     ?technique csro:description ?techniqueDescription .
 
     # Scenario information
-    ?scenario csro:description ?scenarioDescription ;
+    ?scenario rdfs:label ?scenarioLabel ;
+              csro:description ?scenarioDescription ;
               csro:includesComponent ?component .
 
     # Component information
