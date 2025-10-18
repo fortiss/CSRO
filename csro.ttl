@@ -8751,7 +8751,10 @@ csro:ContainerFirewallDisable_Exposure_SCM-4_Weight rdf:type owl:NamedIndividual
 
 
 ###  https://w3id.org/csro/ontology#ContainerImageSecurity
-csro:ContainerImageSecurity rdf:type owl:NamedIndividual .
+csro:ContainerImageSecurity rdf:type owl:NamedIndividual ,
+                                     csro:AssumptionCategory ;
+                            csro:description "Security assumptions related to container image security and integrity." ;
+                            rdfs:label "Container Image Security" .
 
 
 ###  https://w3id.org/csro/ontology#ContainerKernelModuleLoading
