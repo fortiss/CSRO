@@ -1,0 +1,206 @@
+{
+  "attack_techniques": [
+    {
+      "technique_id": "ContainerDataFromLocalSystem",
+      "affected_components": ["DeviceOperatingSystem", "Application", "Device", "DeviceContainerRuntime"],
+      "impacts": [
+        {
+          "impact_id": "HostSystemFilesExposed",
+          "description": "Confidential host system files exposed through privileged container volume mounts, potentially revealing sensitive configuration, credentials, or data",
+          "impact_rating": "Moderate",
+          "risk_id": "HostSystemFilesExposedRisk",
+          "risk_description": "Risk of confidentiality breach through unauthorized read access to host file system containing sensitive data"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerPtraceProcessDiscovery",
+      "affected_components": ["DeviceOperatingSystem", "DeviceContainerRuntime", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "HostProcessInformationDisclosure",
+          "description": "Confidentiality of host process information compromised, exposing system architecture, running services, and potential security weaknesses",
+          "impact_rating": "Moderate",
+          "risk_id": "SystemInformationExposureRisk",
+          "risk_description": "Risk of confidentiality breach through unauthorized access to host process details enabling targeted attacks"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerKernelModuleLoading",
+      "affected_components": ["DeviceOperatingSystem", "Device"],
+      "impacts": [
+        {
+          "impact_id": "KernelIntegrityCompromise",
+          "description": "Complete loss of system integrity and confidentiality at kernel level, enabling persistent unauthorized control over all system operations and data",
+          "impact_rating": "Disastrous",
+          "risk_id": "SystemIntegrityLossRisk",
+          "risk_description": "Risk of total system integrity and confidentiality compromise through persistent kernel-level access"
+        },
+        {
+          "impact_id": "RootkitPersistence",
+          "description": "Integrity of kernel compromised through rootkit installation, providing undetectable persistent access bypassing all user-space security controls",
+          "impact_rating": "Disastrous",
+          "risk_id": "StealthyPersistenceRisk",
+          "risk_description": "Risk of undetectable persistent compromise with complete system integrity violation"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerNetworkBridgeEvasion",
+      "affected_components": ["Device", "DeviceOperatingSystem", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "NetworkSegmentationBypass",
+          "description": "Integrity of network isolation controls compromised, enabling unauthorized network access to segmented assets and confidentiality breach across network boundaries",
+          "impact_rating": "Critical",
+          "risk_id": "NetworkIsolationBreachRisk",
+          "risk_description": "Risk of integrity violation in network segmentation enabling unauthorized access and confidentiality breach"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerFirewallDisable",
+      "affected_components": ["Device", "DeviceOperatingSystem", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "FirewallIntegrityViolation",
+          "description": "Integrity of network security controls compromised, exposing all system components and applications to unauthorized network access and potential confidentiality and availability impacts",
+          "impact_rating": "Critical",
+          "risk_id": "NetworkSecurityControlsRemovalRisk",
+          "risk_description": "Risk of integrity violation in network security controls exposing system to comprehensive network-based attacks"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerCgroupResourceHijacking",
+      "affected_components": ["Device", "DeviceContainerRuntime", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "ComputeResourceTheft",
+          "description": "Availability of compute resources degraded through unauthorized resource consumption, causing performance degradation for legitimate applications and services",
+          "impact_rating": "Moderate",
+          "risk_id": "ResourceMisuseRisk",
+          "risk_description": "Risk of availability degradation through unauthorized compute resource consumption"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerCgroupDoS",
+      "affected_components": ["Device", "DeviceContainerRuntime", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "ResourceExhaustionDoS",
+          "description": "Complete loss of availability for host system and all hosted applications due to critical resource exhaustion",
+          "impact_rating": "Critical",
+          "risk_id": "ServiceAvailabilityLossRisk",
+          "risk_description": "Risk of total availability loss through system resource exhaustion"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerPrivilegedPortTrafficCapture",
+      "affected_components": ["Device", "Application", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "TrafficInterception",
+          "description": "Confidentiality of network communications compromised through unauthorized interception, exposing credentials, sensitive data, and application secrets",
+          "impact_rating": "Critical",
+          "risk_id": "CredentialTheftRisk",
+          "risk_description": "Risk of confidentiality breach through network traffic interception exposing authentication data"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerPrivilegedPortServiceImpersonation",
+      "affected_components": ["Device", "Application", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "ServiceImpersonation",
+          "description": "Integrity and confidentiality of service authentication compromised through impersonation, enabling unauthorized access and credential theft",
+          "impact_rating": "Critical",
+          "risk_id": "AuthenticationBypassRisk",
+          "risk_description": "Risk of integrity and confidentiality breach through service impersonation enabling authentication bypass"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerPrivilegedPortNetworkDoS",
+      "affected_components": ["Device", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "PortHijackingDoS",
+          "description": "Availability of network services compromised through port blocking, preventing legitimate applications from accepting connections",
+          "impact_rating": "Moderate",
+          "risk_id": "ServiceDisruptionRisk",
+          "risk_description": "Risk of availability loss for network services through port resource denial"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerLayer2MitM",
+      "affected_components": ["Device", "DeviceOperatingSystem", "Application", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "Layer2TrafficInterception",
+          "description": "Confidentiality and integrity of network communications compromised through unauthorized traffic interception and potential modification at Layer 2",
+          "impact_rating": "Critical",
+          "risk_id": "NetworkCommunicationCompromiseRisk",
+          "risk_description": "Risk of confidentiality and integrity breach through man-in-the-middle attacks on network communications"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerOTNetworkAttack",
+      "affected_components": ["Device", "DeviceOperatingSystem", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "OTSystemCompromise",
+          "description": "Integrity and availability of operational technology systems compromised, potentially causing physical process disruption, equipment damage, or safety-critical failures",
+          "impact_rating": "Disastrous",
+          "risk_id": "IndustrialSystemCompromiseRisk",
+          "risk_description": "Risk of integrity and availability loss in industrial control systems causing physical harm or operational disruption"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerSystemAdminEscape",
+      "affected_components": ["Application", "Device", "DeviceContainerRuntime", "DeviceOperatingSystem", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "ContainerEscapeImpact",
+          "description": "Complete loss of confidentiality, integrity, and availability of host system through container escape, enabling full unauthorized control over all system resources and data",
+          "impact_rating": "Disastrous",
+          "risk_id": "HostCompromiseRisk",
+          "risk_description": "Risk of total system compromise with complete CIA triad violation through container escape"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerPtraceInjection",
+      "affected_components": ["Application", "Device", "DeviceContainerRuntime", "DeviceOperatingSystem", "OtherApplications"],
+      "impacts": [
+        {
+          "impact_id": "HostProcessManipulation",
+          "description": "Integrity and confidentiality of host processes compromised through code injection, enabling unauthorized control and data access at host level",
+          "impact_rating": "Disastrous",
+          "risk_id": "HostProcessManipulationRisk",
+          "risk_description": "Risk of complete host system compromise through process manipulation and code injection"
+        }
+      ]
+    },
+    {
+      "technique_id": "ContainerExploitPublicFacingApp",
+      "affected_components": ["Application"],
+      "impacts": [
+        {
+          "impact_id": "CompromisedContainerProcess",
+          "description": "Integrity and confidentiality of application process compromised through exploitation of public-facing vulnerabilities, enabling unauthorized control of the compromised application",
+          "impact_rating": "Critical",
+          "risk_id": "CompromisedContainerProcessRisk",
+          "risk_description": "Risk of application process compromise through exploitation of public-facing application vulnerabilities"
+        }
+      ]
+    }
+  ]
+}

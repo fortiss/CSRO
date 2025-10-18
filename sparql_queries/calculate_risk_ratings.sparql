@@ -13,7 +13,7 @@ PREFIX d3f: <http://d3fend.mitre.org/ontologies/d3fend.owl#>
 ## Key Features:
 ## - Dynamic threshold calculations based on assumption weights
 ## - Scenario-specific impact and risk instances 
-## - Context-aware risk treatment filtering
+## - Dynamic risk treatment selection based on calculation rules
 ## - Integration with MITRE ATT&CK techniques via D3FEND ontology
 ##
 
@@ -161,6 +161,114 @@ CONSTRUCT {
 
 }
 WHERE {
+    # Calculate sum of all weights for this rule to determine thresholds
+    {
+        SELECT ?rule (SUM(?w) AS ?totalWeight)
+        WHERE {
+            ?rule a csro:ExploitabilityCalculationRule ;
+                  csro:hasWeight ?aw .
+            ?aw csro:weightValue ?w .
+        }
+        GROUP BY ?rule
+    }
+
+    # Calculate sum of all weights for this rule to determine thresholds
+    {
+        SELECT ?expRule (SUM(?w) AS ?expTotalWeight)
+        WHERE {
+            ?expRule a csro:ExposureCalculationRule ;
+                     csro:hasWeight ?aw .
+            ?aw csro:weightValue ?w .
+        }
+        GROUP BY ?expRule
+    }
+
+    # Dynamic calculations for exploitability with dynamic thresholds
+    {
+        SELECT ?attackAction ?scenario ?rule
+        (SUM(?satisfactionScore * ?weight) AS ?securityScore_exploitability)
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+
+            # Get exploitability rule and calculate dynamic thresholds
+            ?rule a csro:ExploitabilityCalculationRule ;
+                  csro:appliesTo ?technique ;
+                  csro:hasWeight ?assumptionWeight .
+
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                    IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?rule
+    }
+
+    # Dynamic calculations for exposure with dynamic thresholds
+    {
+        SELECT ?attackAction ?scenario ?expRule
+        (SUM(?satisfactionScore * ?weight) AS ?securityScore_exposure)
+        WHERE {
+            ?attackAction a csro:AttackAction ;
+                          csro:appliesTechnique ?technique ;
+                          csro:inContext ?scenario .
+
+            # Get exposure rule and calculate dynamic thresholds
+            ?expRule a csro:ExposureCalculationRule ;
+                     csro:appliesTo ?technique ;
+                     csro:hasWeight ?assumptionWeight .
+
+            ?assumptionWeight csro:refersToAssumption ?assumption ;
+                              csro:weightValue ?weight .
+
+            # Get satisfaction states from scenario-assumption relationship
+            ?scenario csro:includesAssumption ?assumptionInScenario .
+            ?assumptionInScenario csro:forAssumption ?assumption ;
+                                  csro:hasSatisfactionState ?satisfactionState .
+
+            BIND(
+                IF(?satisfactionState = csro:Satisfied, 1.0,
+                    IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
+                ) AS ?satisfactionScore
+            )
+        }
+        GROUP BY ?attackAction ?scenario ?expRule
+    }
+
+    # Calculate dynamic thresholds: 1/3 and 2/3 of total weight
+    BIND(?totalWeight / 3.0 AS ?threshold)
+    BIND(2.0 * ?totalWeight / 3.0 AS ?upperThreshold)
+
+    BIND(?expTotalWeight / 3.0 AS ?expThreshold)
+    BIND(2.0 * ?expTotalWeight / 3.0 AS ?expUpperThreshold)
+
+    # Calculate ratings from security scores
+    BIND(
+        IF(?securityScore_exploitability >= ?upperThreshold, csro:LowExploitability,
+            IF(?securityScore_exploitability >= ?threshold, csro:MediumExploitability, csro:HighExploitability)
+        ) AS ?exploitabilityRating
+    )
+
+    BIND(
+        IF(?securityScore_exposure >= ?expUpperThreshold, csro:LowExposure,
+            IF(?securityScore_exposure >= ?expThreshold, csro:MediumExposure, csro:HighExposure)
+        ) AS ?exposureRating
+    )
+
+    # Get rating descriptions
+    ?exploitabilityRating csro:description ?exploitabilityRatingDescription .
+    ?exposureRating csro:description ?exposureRatingDescription .
+
     # Get attack actions for container attack techniques
     ?attackAction a csro:AttackAction ;
                   csro:appliesTechnique ?technique ;
@@ -168,9 +276,39 @@ WHERE {
                   csro:description ?attackDescription ;
                   csro:affects ?component ;
                   csro:causesImpact ?impact .
-    
+            
     # Container attack technique information
     ?technique csro:description ?techniqueDescription .
+
+    # Scenario information
+    ?scenario csro:description ?scenarioDescription ;
+              csro:includes ?component .
+
+    # Component information
+    ?component rdfs:label ?componentLabel ;
+               csro:description ?componentDescription .
+
+    # Impact and risk relationships
+    ?impact csro:description ?impactDescription ;
+            csro:hasImpactRating ?impactRating ;
+            csro:indicates ?risk .
+
+    # Impact rating information
+    ?impactRating csro:description ?impactRatingDescription .
+
+    # Base risk information (no treatment relationship here)
+    ?risk rdfs:label ?riskLabel ;
+          csro:description ?riskDescription .
+
+    BIND(STRAFTER(STR(?scenario), "#") AS ?scenarioAfter)
+    # Generate scenario-specific risk instance
+    BIND(URI(CONCAT(STR(?risk), "_", ?scenarioAfter)) AS ?scenarioSpecificRisk)
+    BIND(CONCAT(?riskLabel, " (", ?scenarioAfter, ")") AS ?scenarioSpecificRiskLabel)
+
+    # Generate scenario-specific impact instance  
+    BIND(URI(CONCAT(STR(?impact), "_", ?scenarioAfter)) AS ?scenarioSpecificImpact)
+    BIND(CONCAT(STRAFTER(STR(?impact), "#"), " (", ?scenarioAfter, ")") AS ?scenarioSpecificImpactLabel)
+
     OPTIONAL { 
         ?technique csro:referencesAttackTechnique ?attackTechnique .
         ?attackTechnique rdfs:label ?attackTechniqueLabel ;
@@ -189,11 +327,7 @@ WHERE {
             ?traitEvidence csro:description ?traitEvidenceDescription .
         }
     }
-    
-    # Scenario information
-    ?scenario csro:description ?scenarioDescription ;
-              csro:includes ?component .
-    
+
     # Get all assumptions in scenario
     OPTIONAL {
         ?scenario csro:includesAssumption ?assumptionInScenario .
@@ -233,58 +367,62 @@ WHERE {
             ?satisfactionState csro:description ?satisfactionStateDescription .
         }
     }
-    
-    # Component information
-    ?component rdfs:label ?componentLabel ;
-               csro:description ?componentDescription .
-    
-    # Impact and risk relationships
-    ?impact csro:description ?impactDescription ;
-            csro:hasImpactRating ?impactRating ;
-            csro:indicates ?risk .
-    
-    # Impact rating information
-    ?impactRating csro:description ?impactRatingDescription .
-    
-    # Base risk information (no treatment relationship here)
-    ?risk rdfs:label ?riskLabel ;
-          csro:description ?riskDescription .
-    
-    # Generate scenario-specific risk instance
-    BIND(URI(CONCAT(STR(?risk), "_", REPLACE(STR(?scenario), ".*[:#]", ""))) AS ?scenarioSpecificRisk)
-    BIND(CONCAT(?riskLabel, " (", REPLACE(STR(?scenario), ".*[:#]", ""), ")") AS ?scenarioSpecificRiskLabel)
-    
-    # Generate scenario-specific impact instance  
-    BIND(URI(CONCAT(STR(?impact), "_", REPLACE(STR(?scenario), ".*[:#]", ""))) AS ?scenarioSpecificImpact)
-    BIND(CONCAT(REPLACE(STR(?impact), ".*[:#]", ""), " (", REPLACE(STR(?scenario), ".*[:#]", ""), ")") AS ?scenarioSpecificImpactLabel)
-    
-    # Risk treatments filtered by scenario
+
+    # Calculate likelihood from exploitability + exposure (for current scenario)
     OPTIONAL {
-        ?risk csro:isTreatedBy ?riskTreatment .
-        ?riskTreatment rdfs:label ?treatmentLabel ;
-                       csro:description ?treatmentDescription .
-        
-        # Only include treatments that are applicable in this scenario
+        ?currentLikelihoodRule a csro:LikelihoodCalculationRule ;
+                               csro:hasExploitabilityRating ?exploitabilityRating ;
+                               csro:hasExposureRating ?exposureRating ;
+                               csro:resultsIn ?likelihood .
+
+        # Get likelihood label
+        ?likelihood rdfs:label ?likelihoodLabel .
+
+        # Calculate risk level from likelihood + impact (for current scenario)
+        OPTIONAL {
+            ?currentRiskRule a csro:RiskCalculationRule ;
+                             csro:hasLikelihoodRating ?likelihood ;
+                             csro:hasImpactRating ?impactRating ;
+                             csro:resultsIn ?riskLevel .
+
+            # Get risk level label
+            ?riskLevel rdfs:label ?riskLevelLabel .
+        }
+    }
+
+    # Dynamic risk treatments based on calculation rule weights
+    OPTIONAL {
+        # Check if the assumption addressed by the treatment has positive weight 
+        # in either exploitability or exposure calculation rules for this technique
         {
-            # Case 1: General treatments (don't address specific assumptions)
-            FILTER NOT EXISTS { ?riskTreatment csro:addresses ?anyAssumption }
+            # Check exploitability calculation rules
+            ?exploitabilityRule a csro:ExploitabilityCalculationRule ;
+                                csro:appliesTo ?technique ;
+                                csro:hasWeight ?assumptionWeight .
+            ?assumptionWeight csro:refersToAssumption ?treatmentAddressedAssumption ;
+                              csro:weightValue ?weight .
+            FILTER(?weight > 0)
         }
         UNION
         {
-            # Case 2: Treatments for unsatisfied assumptions in current scenario
-            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
-            ?scenario csro:includesAssumption ?addressedAssumptionInScenario .
-            ?addressedAssumptionInScenario csro:forAssumption ?treatmentAddressedAssumption ;
-                                           csro:hasSatisfactionState ?addressedAssumptionSatisfactionState .
-            FILTER(?addressedAssumptionSatisfactionState != csro:Satisfied)
+            # Check exposure calculation rules
+            ?exposureRule a csro:ExposureCalculationRule ;
+                          csro:appliesTo ?technique ;
+                          csro:hasWeight ?assumptionWeight .
+            ?assumptionWeight csro:refersToAssumption ?treatmentAddressedAssumption ;
+                              csro:weightValue ?weight .
+            FILTER(?weight > 0)
         }
-        
-        # Treatment details
-        OPTIONAL {
-            ?riskTreatment csro:addresses ?treatmentAddressedAssumption .
-            ?treatmentAddressedAssumption csro:assumptionId ?treatmentAddressedAssumptionId ;
-                                          csro:description ?treatmentAddressedAssumptionDescription .
-        }
+
+        # Find treatments that address assumptions with positive weights in calculation rules
+        ?riskTreatment a csro:RiskTreatment ;
+                       rdfs:label ?treatmentLabel ;
+                       csro:description ?treatmentDescription ;
+                       csro:addresses ?treatmentAddressedAssumption .
+
+        # Get treatment details
+        ?treatmentAddressedAssumption csro:assumptionId ?treatmentAddressedAssumptionId ;
+                                      csro:description ?treatmentAddressedAssumptionDescription .
         
         OPTIONAL {
             ?riskTreatment csro:isImplementedBy ?treatmentImplementationTrait .
@@ -300,136 +438,4 @@ WHERE {
             }
         }
     }
-    
-
-    
-    # Dynamic calculations for exploitability with dynamic thresholds
-    {
-        SELECT ?attackAction ?scenario
-               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exploitability)
-               ?threshold ?upperThreshold
-        WHERE {
-            ?attackAction a csro:AttackAction ;
-                          csro:appliesTechnique ?technique ;
-                          csro:inContext ?scenario .
-            
-            # Get exploitability rule and calculate dynamic thresholds
-            ?rule a csro:ExploitabilityCalculationRule ;
-                  csro:appliesTo ?technique ;
-                  csro:hasWeight ?assumptionWeight .
-            
-            ?assumptionWeight csro:refersToAssumption ?assumption ;
-                              csro:weightValue ?weight .
-            
-            # Calculate sum of all weights for this rule to determine thresholds
-            {
-                SELECT ?rule (SUM(?w) AS ?totalWeight)
-                WHERE {
-                    ?rule csro:hasWeight ?aw .
-                    ?aw csro:weightValue ?w .
-                }
-                GROUP BY ?rule
-            }
-            
-            # Calculate dynamic thresholds: 1/3 and 2/3 of total weight
-            BIND(?totalWeight / 3.0 AS ?threshold)
-            BIND(2.0 * ?totalWeight / 3.0 AS ?upperThreshold)
-            
-            # Get satisfaction states from scenario-assumption relationship
-            ?scenario csro:includesAssumption ?assumptionInScenario .
-            ?assumptionInScenario csro:forAssumption ?assumption ;
-                                  csro:hasSatisfactionState ?satisfactionState .
-            
-            BIND(
-                IF(?satisfactionState = csro:Satisfied, 1.0,
-                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
-                ) AS ?satisfactionScore
-            )
-        }
-        GROUP BY ?attackAction ?scenario ?threshold ?upperThreshold
-    }
-    
-    # Dynamic calculations for exposure with dynamic thresholds
-    {
-        SELECT ?attackAction ?scenario
-               (SUM(?satisfactionScore * ?weight) AS ?securityScore_exposure)
-               ?expThreshold ?expUpperThreshold
-        WHERE {
-            ?attackAction a csro:AttackAction ;
-                          csro:appliesTechnique ?technique ;
-                          csro:inContext ?scenario .
-            
-            # Get exposure rule and calculate dynamic thresholds
-            ?rule a csro:ExposureCalculationRule ;
-                  csro:appliesTo ?technique ;
-                  csro:hasWeight ?assumptionWeight .
-            
-            ?assumptionWeight csro:refersToAssumption ?assumption ;
-                              csro:weightValue ?weight .
-            
-            # Calculate sum of all weights for this rule to determine thresholds
-            {
-                SELECT ?rule (SUM(?w) AS ?totalWeight)
-                WHERE {
-                    ?rule csro:hasWeight ?aw .
-                    ?aw csro:weightValue ?w .
-                }
-                GROUP BY ?rule
-            }
-            
-            # Calculate dynamic thresholds: 1/3 and 2/3 of total weight
-            BIND(?totalWeight / 3.0 AS ?expThreshold)
-            BIND(2.0 * ?totalWeight / 3.0 AS ?expUpperThreshold)
-            
-            # Get satisfaction states from scenario-assumption relationship
-            ?scenario csro:includesAssumption ?assumptionInScenario .
-            ?assumptionInScenario csro:forAssumption ?assumption ;
-                                  csro:hasSatisfactionState ?satisfactionState .
-            
-            BIND(
-                IF(?satisfactionState = csro:Satisfied, 1.0,
-                   IF(?satisfactionState = csro:Dissatisfied, 0.0, 0.5)
-                ) AS ?satisfactionScore
-            )
-        }
-        GROUP BY ?attackAction ?scenario ?expThreshold ?expUpperThreshold
-    }
-    
-    # Calculate ratings from security scores
-    BIND(
-        IF(?securityScore_exploitability >= ?upperThreshold, csro:LowExploitability,
-           IF(?securityScore_exploitability >= ?threshold, csro:MediumExploitability, csro:HighExploitability)
-        ) AS ?exploitabilityRating
-    )
-    
-    BIND(
-        IF(?securityScore_exposure >= ?expUpperThreshold, csro:LowExposure,
-           IF(?securityScore_exposure >= ?expThreshold, csro:MediumExposure, csro:HighExposure)
-        ) AS ?exposureRating
-    )
-    
-    # Calculate likelihood from exploitability + exposure (for current scenario)
-    OPTIONAL {
-        ?currentLikelihoodRule a csro:LikelihoodCalculationRule ;
-                        csro:hasExploitabilityRating ?exploitabilityRating ;
-                        csro:hasExposureRating ?exposureRating ;
-                        csro:resultsIn ?likelihood .
-    }
-    
-    # Get rating descriptions and labels
-    ?exploitabilityRating csro:description ?exploitabilityRatingDescription .
-    ?exposureRating csro:description ?exposureRatingDescription .
-    OPTIONAL { ?likelihood rdfs:label ?likelihoodLabel . }
-    
-    # Calculate risk level from likelihood + impact (for current scenario)
-    OPTIONAL {
-        ?currentRiskRule a csro:RiskCalculationRule ;
-                  csro:hasLikelihoodRating ?likelihood ;
-                  csro:hasImpactRating ?impactRating ;
-                  csro:resultsIn ?riskLevel .
-    }
-    
-    # Get risk level label
-    OPTIONAL { ?riskLevel rdfs:label ?riskLevelLabel . }
 }
-ORDER BY ?scenario ?component ?riskTreatment

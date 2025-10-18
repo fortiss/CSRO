@@ -1,0 +1,113 @@
+{
+  "scenarios": [
+    {
+      "name": "ProductionScenario",
+      "description": "Production deployment with comprehensive security controls implemented",
+      "rules": {
+        "IMG": "Satisfied",
+        "RTS": "Satisfied",
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "SCM": "Satisfied",
+        "HIS": "Satisfied",
+        "MON": "Satisfied",
+        "CIC": "Satisfied",
+        "CRM": "Satisfied"
+      },
+      "default": "Satisfied"
+    },
+    {
+      "name": "DevelopmentScenario",
+      "description": "Development environment with minimal security controls for ease of development",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "NET": "Dissatisfied",
+        "AUTH": "Dissatisfied",
+        "SCM": "Unknown",
+        "HIS": "Dissatisfied",
+        "MON": "Dissatisfied",
+        "CIC": "Satisfied",
+        "CRM": "Dissatisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "NetworkHardenedScenario",
+      "description": "Scenario with strong network security controls but relaxed other controls",
+      "rules": {
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "IMG": "Unknown",
+        "RTS": "Unknown"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "RuntimeHardenedScenario",
+      "description": "Scenario with strong runtime security controls",
+      "rules": {
+        "RTS": "Satisfied",
+        "IMG": "Satisfied",
+        "NET": "Unknown",
+        "AUTH": "Unknown"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "CISCompliantScenario",
+      "description": "Scenario implementing all CIS Docker Benchmark recommendations",
+      "rules": {
+        "IMG": "Satisfied",
+        "RTS": "Satisfied",
+        "NET": "Satisfied",
+        "AUTH": "Satisfied",
+        "SCM": "Satisfied",
+        "HIS": "Satisfied",
+        "MON": "Satisfied",
+        "CIC": "Satisfied",
+        "CRM": "Satisfied"
+      },
+      "default": "Satisfied"
+    },
+    {
+      "name": "MinimalSecurityScenario",
+      "description": "Scenario with only critical security controls implemented",
+      "satisfaction_map": {
+        "IMG-1": "Satisfied",
+        "RTS-1": "Satisfied",
+        "RTS-3": "Satisfied",
+        "NET-2": "Satisfied",
+        "AUTH-1": "Satisfied",
+        "SCM-1": "Satisfied",
+        "SCM-2": "Satisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "HighRiskScenario",
+      "description": "Scenario representing high-risk deployment with most controls disabled",
+      "rules": {
+        "IMG": "Dissatisfied",
+        "RTS": "Dissatisfied",
+        "NET": "Dissatisfied",
+        "AUTH": "Dissatisfied",
+        "SCM": "Dissatisfied",
+        "HIS": "Dissatisfied",
+        "MON": "Dissatisfied",
+        "CIC": "Dissatisfied",
+        "CRM": "Dissatisfied"
+      },
+      "default": "Dissatisfied"
+    },
+    {
+      "name": "ImageSecurityFocusedScenario",
+      "description": "Scenario with strong focus on container image security",
+      "rules": {
+        "IMG": "Satisfied",
+        "CIC": "Satisfied"
+      },
+      "default": "Unknown"
+    }
+  ]
+}

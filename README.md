@@ -14,38 +14,49 @@ The Container Security Risk Ontology (CSRO) provides a formal representation for
 
 ## Repository Structure
 
-- `csro.ttl` — The main ontology file in Turtle format.
-- `sparql_queries/`
-  - `calculate_risk_ratings.sparql` — Query to run the "Calculate Risk Ratings and Treatments" algorithm and export the AttackActions of the ontology.
-  - `calculation_example.sparql` — Example query for risk calculation.
-  - `calculation_rules_export.sparql` — Query to export calculation rules.
-- `container_security_assumptions/`
-  - `container_security_assumptions.csv` — Curated list of container security assumptions from standards such as NIST SP 800-190.
+- `csro.ttl` — The main ontology file in Turtle format
+- `attack_actions/` — Attack action generation and configuration
+- `attack_techniques/` — Attack technique definitions and weight matrices  
+- `container_security_assumptions/` — Container security assumptions from established standards
+- `context_scenarios/` — Context scenario generation and configuration
+- `sparql_queries/` — SPARQL queries for risk calculation and data export
+- `docs/` — Detailed documentation and automation guides
 
-## Usage
+## Quick Start
 
-1. **Ontology**
-   - Import `csro.ttl` into your triple store or ontology editor (e.g., Protégé).
-   - Use the defined classes and properties to model container security scenarios.
+1. **Import the Ontology**
+   ```turtle
+   # Import csro.ttl into your triple store or ontology editor (e.g., Protégé, GraphDB)
+   ```
 
-2. **SPARQL Queries**
-   - Run the queries in the `sparql_queries` folder against a CSRO-compliant dataset.
-   - Adapt queries as needed for your use case.
+2. **Run Risk Calculations**
+   ```sparql
+   # Execute sparql_queries/calculate_risk_ratings.sparql for comprehensive risk assessment
+   ```
 
-3. **Container Security Assumptions**
-   - Access the curated list of container security assumptions from established standards.
-   - Use these assumptions as reference for security assessments and risk modeling.
+3. **Explore Components**
+   - See individual README files in each directory for detailed usage instructions
+   - Check `docs/` for automation guides and detailed documentation
 
-## Classes and Properties
+## Key Features
 
-The ontology includes:
-- **Classes:** SecurityAssumption, Risk, RiskLevel, AttackAction, Component, Standard, etc.
-- **Object Properties:** hasRiskLevel, appliesTechnique, isTreatedBy, etc.
-- **Data Properties:** description, publicationYear, weightValue, etc.
+- **Dynamic Risk Calculation**: Context-aware risk assessment based on security assumption satisfaction
+- **Attack Technique Modeling**: Integration with MITRE ATT&CK framework via D3FEND ontology
+- **Treatment Recommendations**: Automatic selection of relevant security treatments based on calculation rules
+- **Scenario-Based Analysis**: Support for different deployment scenarios and security postures
 
-See `csro.ttl` for the full list.
+## Core Concepts
 
-## How to Cite
+The ontology includes key classes such as:
+- `ContainerSecurityAssumption` — Security controls and their satisfaction states
+- `ContainerAttackTechnique` — Attack methods with associated calculation rules  
+- `AttackAction` — Specific attacks in given scenarios with calculated risk levels
+- `RiskTreatment` — Security measures to mitigate identified risks
+- `ContextScenario` — Deployment contexts with different security postures
+
+See `csro.ttl` for complete class and property definitions.
+
+## Citation
 
 If you use CSRO, please cite the ontology using its IRI:  
 `https://w3id.org/csro/ontology`
@@ -56,4 +67,4 @@ This ontology is licensed under Creative Commons. See the ontology metadata for 
 
 ## Contact
 
-For questions or contributions, please contact Yannick Landeck.
+For questions or contributions, please contact [Yannick Landeck](https://github.com/YannickLand).

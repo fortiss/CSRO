@@ -1,46 +1,46 @@
-﻿Assumption ID;Security Assumption Category;Security Assumption;Application Container Security Guide (NIST SP 800-190);CIS Docker Benchmark;OWASP Docker Top 10;OWASP Docker Security Cheat Sheet
-IMG-1;Container Image Security;App images are scanned for vulnerabilities;§4.1.1;4.4;;#9, #13
-IMG-2;Container Image Security;App uses minimal base images;§4.1.2;4.3;D04;
-IMG-3;Container Image Security;App images are signed and verified;§4.1.5;4.2, 4.5;D08;#13
-IMG-4;Container Image Security;Dockerfiles of the app pin the base image version;$4.2.2;6.1;;#9
-IMG-5;Container Image Security;App images are rebuilt and updated regularly;§4.1.1;4.4, 5.28;D02;
-IMG-6;Container Image Security;Device orchestration only uses trusted image registries;§4.2;2.5, 4.5;D08;#13 
-RTS-1;Runtime Security;App containers are run as non-root user;§4.1.2;4.1, 5.24, 5.31;D01;#2, #9, #11
-RTS-2;Runtime Security;App containers use read-only file systems;§4.4.4;5.13;D09;#8
-RTS-3;Runtime Security;App containers are deployed with minimal Linux capabilities;§4.4.3;4.8, 5.4;D04;#3
-RTS-4;Runtime Security;Seccomp is implemented on the device;§4.4.3;2.17, 5.22;D04;#6
-RTS-5;Runtime Security;AppArmor is implemented on the device;§4.4.3;5.2;D04;#6
-RTS-6;Runtime Security;SELinux is implemented on the device;§4.4.3;5.3;D04;#6
-RTS-7;Runtime Security;App containers have minimal access to host resources;§4.4.3;5.6, 5.10, 5.11, 5.12, 5.16, 5.17, 5.18, 5.21, 5.25, 5.31;D07;#7, #11
-AUTH-1;Authentication & Access;Authentication for exposed container APIs is enforced;§4.3.2;2.7;D04;
-AUTH-2;Authentication & Access;Role-based access control is used for orchestration and container management;§4.3.1;2.12;;
-AUTH-3;Authentication & Access;Access to container management interfaces (e.g., Docker socket) is restricted;§4.3.1;3.3, 3.4, 3.23, 3.24, 5.32;;#1
-NET-1;Network Security;App container networks are segmented;§4.3.3;5.10, 5.30;D03;#5
-NET-2;Network Security;Host-level firewall rules and network policies are applied;;2.2, 5.14;D03;#5
-NET-3;Network Security;Inter-container communication is encrypted;§4.3.3;7.3;;
-NET-4;Network Security;Ingress/egress controls for containers are implemented;§4.4.2;2.2, 5.14;D03, D04;
-SCM-1;Secrets & Config Management;Secure secrets management tools (e.g. vaults or secrets manager) are used;§4.1.4;7.4;D06;#12
-SCM-2;Secrets & Config Management;Apps do not contain any hardcoded secrets;§4.1.4;4.10;D06;#12
-SCM-3;Secrets & Config Management;Secrets at rest and in transit are encrypted;§4.1.4;;D06;#12
-SCM-4;Secrets & Config Management;Automatic secret rotation and revocation policies are implemented;§4.1.4;7.6, 7.7, 7.8;;
-HIS-1;Host & Infrastructure Security;The container runtime on the host device is up to date;§4.5.3;1.2.2;D02;#0
-HIS-2;Host & Infrastructure Security;The host device is deployed as an immutable infrastructure (e.g. read-only file system);§4.5.3;;D09;#8
-HIS-3;Host & Infrastructure Security;The host device is monitored for unauthorized changes;§4.5.5;;;
-MON-1;Monitoring, Detection & Response;Container-level logging is enabled;§4.4.4;1.1, 2.3;D10;#10
-MON-2;Monitoring, Detection & Response;Processes on the host device are monitored for anomalous behavior;§4.4.4;;;
-MON-3;Monitoring, Detection & Response;Runtime security tools (e.g. Falco, Trivy) are used;§4.4.4;2.17, 5.2, 5.3, 5.22;;
-MON-4;Monitoring, Detection & Response;Incident response procedures are implemented;§4.4.4;4.6, 5.27;;
-MON-5;Monitoring, Detection & Response;Logs are centralized and protected;§4.4.4;2.13;D10;
-MON-6;Monitoring, Detection & Response;Decoy containers (honeypots) are deployed on the device to detect malicious activity;§4.4.4;;;
-MON-7;Monitoring, Detection & Response;Container API calls and orchestration events are monitored for anomalies;§4.4.4;;;
-MON-8;Monitoring, Detection & Response;Alerts are triggered for unauthorized access attempts to container registries or APIs;§4.4.4;;;
-CIC-1;CI/CD & Supply Chain;The CI/CD pipeline for the app is secured (regarding code repositories, build environments, secrets, vulnerabilities, signing, auditing ...);;;;#13
-CIC-2;CI/CD & Supply Chain;SBOMs are used for the app to track code dependencies;;;;#13
-CIC-3;CI/CD & Supply Chain;Code reviews and automated testing of the app are enforced;;;;#9
-CIC-4;CI/CD & Supply Chain;Third-party components used by the app are validated;§4.1.5;4.11;D04;#13
-CIC-5;CI/CD & Supply Chain;The CI/CD pipeline for the app enables reproducible builds;;4.7;;
-CIC-6;CI/CD & Supply Chain;Apps for development and production are not deployed in the same environment;§4.4.5;;D05;
-CRM-1;Compliance & Risk Management;Regular risk assessments of apps and host devices are performed;§6;;;
-CRM-2;Compliance & Risk Management;The operation's asset inventory is maintained;§6;;;
-CRM-3;Compliance & Risk Management;Container security policies along the app lifecycle are documented and enforced;§4.1.2, §4.3.1, §4.4.3, §6;2.17, 5.2, 5.3, 5.22;;#5
-CRM-4;Compliance & Risk Management;Periodic audits and reviews of apps and host devices are conducted;§4.1.2, §4.3.1, §4.4.3;;;
+﻿Assumption ID;Security Assumption Category;Security Assumption;Treatment ID;Treatment Description;Application Container Security Guide (NIST SP 800-190);CIS Docker Benchmark;OWASP Docker Top 10;OWASP Docker Security Cheat Sheet
+IMG-1;Container Image Security;App images are scanned for vulnerabilities;ScanContainerImages;Perform vulnerability scanning on container images to identify and address security issues;§4.1.1;4.4;;#9, #13
+IMG-2;Container Image Security;App uses minimal base images;UseMinimalBaseImages;Use minimal base images to reduce attack surface and container footprint;§4.1.2;4.3;D04;
+IMG-3;Container Image Security;App images are signed and verified;SignAndVerifyImages;Sign and verify container images to ensure authenticity and integrity;§4.1.5;4.2, 4.5;D08;#13
+IMG-4;Container Image Security;Dockerfiles of the app pin the base image version;PinBaseImageVersions;Pin base image versions in Dockerfiles to ensure reproducibility and control updates;.2.2;6.1;;#9
+IMG-5;Container Image Security;App images are rebuilt and updated regularly;RebuildImagesRegularly;Rebuild and update container images regularly to address vulnerabilities and apply patches;§4.1.1;4.4, 5.28;D02;
+IMG-6;Container Image Security;Device orchestration only uses trusted image registries;UseTrustedRegistries;Use only trusted and verified image registries for container deployment;§4.2;2.5, 4.5;D08;#13 
+RTS-1;Runtime Security;App containers are run as non-root user;RunAsNonRootUser;Configure containers to run with non-root user privileges to limit potential damage;§4.1.2;4.1, 5.24, 5.31;D01;#2, #9, #11
+RTS-2;Runtime Security;App containers use read-only file systems;EnableReadOnlyFilesystem;Mount container filesystem as read-only to prevent malicious file modifications;§4.4.4;5.13;D09;#8
+RTS-3;Runtime Security;App containers are deployed with minimal Linux capabilities;MinimizeCapabilities;Deploy containers with minimal Linux capabilities to reduce attack surface;§4.4.3;4.8, 5.4;D04;#3
+RTS-4;Runtime Security;Seccomp is implemented on the device;ImplementSeccomp;Implement Seccomp profiles to restrict system calls available to containers;§4.4.3;2.17, 5.22;D04;#6
+RTS-5;Runtime Security;AppArmor is implemented on the device;ImplementAppArmor;Implement AppArmor profiles to enforce mandatory access control for containers;§4.4.3;5.2;D04;#6
+RTS-6;Runtime Security;SELinux is implemented on the device;ImplementSELinux;Implement SELinux policies to provide mandatory access control for containers;§4.4.3;5.3;D04;#6
+RTS-7;Runtime Security;App containers have minimal access to host resources;MinimizeHostResourceAccess;Minimize container access to host resources through proper isolation and restrictions;§4.4.3;5.6, 5.10, 5.11, 5.12, 5.16, 5.17, 5.18, 5.21, 5.25, 5.31;D07;#7, #11
+AUTH-1;Authentication & Access;Authentication for exposed container APIs is enforced;EnforceAPIAuthentication;Enforce authentication mechanisms for all exposed container APIs;§4.3.2;2.7;D04;
+AUTH-2;Authentication & Access;Role-based access control is used for orchestration and container management;ImplementRBAC;Implement role-based access control for container orchestration and management;§4.3.1;2.12;;
+AUTH-3;Authentication & Access;Access to container management interfaces (e.g., Docker socket) is restricted;RestrictManagementAccess;Restrict access to container management interfaces to authorized users and processes;§4.3.1;3.3, 3.4, 3.23, 3.24, 5.32;;#1
+NET-1;Network Security;App container networks are segmented;SegmentNetworks;Implement network segmentation to limit container communication and reduce attack spread;§4.3.3;5.10, 5.30;D03;#5
+NET-2;Network Security;Host-level firewall rules and network policies are applied;ConfigureHostFirewall;Configure host-level firewall rules and network policies to control traffic;;2.2, 5.14;D03;#5
+NET-3;Network Security;Inter-container communication is encrypted;EncryptInterContainerCommunication;Encrypt inter-container communication to protect data in transit;§4.3.3;7.3;;
+NET-4;Network Security;Ingress/egress controls for containers are implemented;ImplementIngressEgressControls;Implement ingress and egress controls to restrict container network traffic;§4.4.2;2.2, 5.14;D03, D04;
+SCM-1;Secrets & Config Management;Secure secrets management tools (e.g. vaults or secrets manager) are used;UseSecureSecretsManagement;Use secure secrets management tools for credential storage and handling;§4.1.4;7.4;D06;#12
+SCM-2;Secrets & Config Management;Apps do not contain any hardcoded secrets;ProhibitHardcodedSecrets;Prohibit hardcoded secrets in application code and container images;§4.1.4;4.10;D06;#12
+SCM-3;Secrets & Config Management;Secrets at rest and in transit are encrypted;EncryptSecrets;Encrypt secrets both at rest and in transit to protect sensitive data;§4.1.4;;D06;#12
+SCM-4;Secrets & Config Management;Automatic secret rotation and revocation policies are implemented;ImplementSecretRotation;Implement automatic secret rotation and revocation policies for credentials;§4.1.4;7.6, 7.7, 7.8;;
+HIS-1;Host & Infrastructure Security;The container runtime on the host device is up to date;UpdateContainerRuntime;Keep container runtime on host devices up to date with security patches;§4.5.3;1.2.2;D02;#0
+HIS-2;Host & Infrastructure Security;The host device is deployed as an immutable infrastructure (e.g. read-only file system);DeployImmutableInfrastructure;Deploy host devices as immutable infrastructure to prevent unauthorized modifications;§4.5.3;;D09;#8
+HIS-3;Host & Infrastructure Security;The host device is monitored for unauthorized changes;MonitorHostForChanges;Monitor host devices for unauthorized changes and configuration drift;§4.5.5;;;
+MON-1;Monitoring, Detection & Response;Container-level logging is enabled;EnableContainerLogging;Enable comprehensive container-level logging for security monitoring and audit;§4.4.4;1.1, 2.3;D10;#10
+MON-2;Monitoring, Detection & Response;Processes on the host device are monitored for anomalous behavior;MonitorProcessBehavior;Monitor host processes for anomalous behavior and suspicious activities;§4.4.4;;;
+MON-3;Monitoring, Detection & Response;Runtime security tools (e.g. Falco, Trivy) are used;UseRuntimeSecurityTools;Deploy runtime security tools to detect and respond to container threats;§4.4.4;2.17, 5.2, 5.3, 5.22;;
+MON-4;Monitoring, Detection & Response;Incident response procedures are implemented;ImplementIncidentResponse;Implement and maintain incident response procedures for container security events;§4.4.4;4.6, 5.27;;
+MON-5;Monitoring, Detection & Response;Logs are centralized and protected;CentralizeAndProtectLogs;Centralize logs and implement protection mechanisms to ensure integrity;§4.4.4;2.13;D10;
+MON-6;Monitoring, Detection & Response;Decoy containers (honeypots) are deployed on the device to detect malicious activity;DeployDecoyContainers;Deploy decoy containers as honeypots to detect malicious activities;§4.4.4;;;
+MON-7;Monitoring, Detection & Response;Container API calls and orchestration events are monitored for anomalies;MonitorAPIAndOrchestration;Monitor container API calls and orchestration events for anomalous patterns;§4.4.4;;;
+MON-8;Monitoring, Detection & Response;Alerts are triggered for unauthorized access attempts to container registries or APIs;AlertUnauthorizedAccess;Configure alerts for unauthorized access attempts to registries and APIs;§4.4.4;;;
+CIC-1;CI/CD & Supply Chain;The CI/CD pipeline for the app is secured (regarding code repositories, build environments, secrets, vulnerabilities, signing, auditing ...);SecureCICDPipeline;Secure CI/CD pipeline to prevent supply chain attacks and ensure build integrity;;;;#13
+CIC-2;CI/CD & Supply Chain;SBOMs are used for the app to track code dependencies;UseSBOMs;Use Software Bill of Materials to track and manage application dependencies;;;;#13
+CIC-3;CI/CD & Supply Chain;Code reviews and automated testing of the app are enforced;EnforceCodeReviewsAndTesting;Enforce code reviews and automated testing to identify security issues early;;;;#9
+CIC-4;CI/CD & Supply Chain;Third-party components used by the app are validated;ValidateThirdPartyComponents;Validate third-party components for security vulnerabilities and trustworthiness;§4.1.5;4.11;D04;#13
+CIC-5;CI/CD & Supply Chain;The CI/CD pipeline for the app enables reproducible builds;EnableReproducibleBuilds;Enable reproducible builds in CI/CD pipeline to ensure build consistency;;4.7;;
+CIC-6;CI/CD & Supply Chain;Apps for development and production are not deployed in the same environment;SeparateDevelopmentProduction;Separate development and production environments to reduce security risks;§4.4.5;;D05;
+CRM-1;Compliance & Risk Management;Regular risk assessments of apps and host devices are performed;PerformRegularRiskAssessments;Perform regular risk assessments of applications and host infrastructure;§6;;;
+CRM-2;Compliance & Risk Management;The operation's asset inventory is maintained;MaintainAssetInventory;Maintain comprehensive asset inventory for container infrastructure;§6;;;
+CRM-3;Compliance & Risk Management;Container security policies along the app lifecycle are documented and enforced;DocumentSecurityPolicies;Document and enforce container security policies throughout application lifecycle;§4.1.2, §4.3.1, §4.4.3, §6;2.17, 5.2, 5.3, 5.22;;#5
+CRM-4;Compliance & Risk Management;Periodic audits and reviews of apps and host devices are conducted;ConductPeriodicAudits;Conduct periodic security audits and reviews of containers and host devices;§4.1.2, §4.3.1, §4.4.3;;;

@@ -1,0 +1,4 @@
+# Python dependencies for CSRO Context Scenarios tools
+# Install with: pip install -r requirements.txt
+
+rdflib>=7.0.0
