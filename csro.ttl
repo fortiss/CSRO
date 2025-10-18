@@ -253,20 +253,20 @@ csro:inContext rdf:type owl:ObjectProperty ;
                rdfs:label "in context"@en .
 
 
-###  https://w3id.org/csro/ontology#includes
-csro:includes rdf:type owl:ObjectProperty ;
-              rdfs:domain csro:ContextScenario ;
-              rdfs:range csro:Component ;
-              rdfs:comment "Indicates which components are involved in or affected by a context scenario."@en ;
-              rdfs:label "includes"@en .
-
-
 ###  https://w3id.org/csro/ontology#includesAssumption
 csro:includesAssumption rdf:type owl:ObjectProperty ;
                         rdfs:domain csro:ContextScenario ;
                         rdfs:range csro:SecurityAssumption ;
                         rdfs:comment "Indicates that a context scenario includes a specific security assumption."@en ;
                         rdfs:label "includes assumption"@en .
+
+
+###  https://w3id.org/csro/ontology#includesComponent
+csro:includesComponent rdf:type owl:ObjectProperty ;
+                       rdfs:domain csro:ContextScenario ;
+                       rdfs:range csro:Component ;
+                       rdfs:comment "Indicates which components are involved in or affected by a context scenario."@en ;
+                       rdfs:label "includes component"@en .
 
 
 ###  https://w3id.org/csro/ontology#indicates
@@ -743,11 +743,6 @@ csro:AUTH_3 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#AirGappedScenario
 csro:AirGappedScenario rdf:type owl:NamedIndividual ,
                                 csro:ContextScenario ;
-                       csro:includes csro:Application ,
-                                     csro:Device ,
-                                     csro:DeviceContainerRuntime ,
-                                     csro:DeviceOperatingSystem ,
-                                     csro:OtherApplications ;
                        csro:includesAssumption csro:AirGappedScenario_AUTH_1 ,
                                                csro:AirGappedScenario_AUTH_2 ,
                                                csro:AirGappedScenario_AUTH_3 ,
@@ -793,6 +788,11 @@ csro:AirGappedScenario rdf:type owl:NamedIndividual ,
                                                csro:AirGappedScenario_SCM_2 ,
                                                csro:AirGappedScenario_SCM_3 ,
                                                csro:AirGappedScenario_SCM_4 ;
+                       csro:includesComponent csro:Application ,
+                                              csro:Device ,
+                                              csro:DeviceContainerRuntime ,
+                                              csro:DeviceOperatingSystem ,
+                                              csro:OtherApplications ;
                        csro:description "Air-gapped environment with no external connectivity but potentially outdated images and limited updates" ;
                        rdfs:label "Air-Gapped Scenario" .
 
@@ -1144,11 +1144,6 @@ csro:AuthenticationBypassRisk rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#BalancedContainerSecurityScenario
 csro:BalancedContainerSecurityScenario rdf:type owl:NamedIndividual ,
                                                 csro:ContextScenario ;
-                                       csro:includes csro:Application ,
-                                                     csro:Device ,
-                                                     csro:DeviceContainerRuntime ,
-                                                     csro:DeviceOperatingSystem ,
-                                                     csro:OtherApplications ;
                                        csro:includesAssumption csro:BalancedContainerSecurityScenario_AUTH_1 ,
                                                                csro:BalancedContainerSecurityScenario_AUTH_2 ,
                                                                csro:BalancedContainerSecurityScenario_AUTH_3 ,
@@ -1194,6 +1189,11 @@ csro:BalancedContainerSecurityScenario rdf:type owl:NamedIndividual ,
                                                                csro:BalancedContainerSecurityScenario_SCM_2 ,
                                                                csro:BalancedContainerSecurityScenario_SCM_3 ,
                                                                csro:BalancedContainerSecurityScenario_SCM_4 ;
+                                       csro:includesComponent csro:Application ,
+                                                              csro:Device ,
+                                                              csro:DeviceContainerRuntime ,
+                                                              csro:DeviceOperatingSystem ,
+                                                              csro:OtherApplications ;
                                        csro:description "Balanced approach with moderate security controls across all categories, typical for mid-sized organizations" ;
                                        rdfs:label "Balanced Container Security Scenario" .
 
@@ -1516,11 +1516,6 @@ csro:BalancedContainerSecurityScenario_SCM_4 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#BasicContainerSecurityScenario
 csro:BasicContainerSecurityScenario rdf:type owl:NamedIndividual ,
                                              csro:ContextScenario ;
-                                    csro:includes csro:Application ,
-                                                  csro:Device ,
-                                                  csro:DeviceContainerRuntime ,
-                                                  csro:DeviceOperatingSystem ,
-                                                  csro:OtherApplications ;
                                     csro:includesAssumption csro:BasicContainerSecurityScenario_AUTH_1 ,
                                                             csro:BasicContainerSecurityScenario_AUTH_2 ,
                                                             csro:BasicContainerSecurityScenario_AUTH_3 ,
@@ -1566,6 +1561,11 @@ csro:BasicContainerSecurityScenario rdf:type owl:NamedIndividual ,
                                                             csro:BasicContainerSecurityScenario_SCM_2 ,
                                                             csro:BasicContainerSecurityScenario_SCM_3 ,
                                                             csro:BasicContainerSecurityScenario_SCM_4 ;
+                                    csro:includesComponent csro:Application ,
+                                                           csro:Device ,
+                                                           csro:DeviceContainerRuntime ,
+                                                           csro:DeviceOperatingSystem ,
+                                                           csro:OtherApplications ;
                                     csro:description "Scenario with only critical security controls implemented, representing minimal viable security" ;
                                     rdfs:label "Basic Container Security Scenario" .
 
@@ -1888,17 +1888,17 @@ csro:BasicContainerSecurityScenario_SCM_4 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#BasicScenario
 csro:BasicScenario rdf:type owl:NamedIndividual ,
                             csro:ContextScenario ;
-                   csro:includes csro:Application ,
-                                 csro:Device ,
-                                 csro:DeviceContainerRuntime ,
-                                 csro:DeviceOperatingSystem ,
-                                 csro:OtherApplications ;
                    csro:includesAssumption csro:BasicScenario_IMG_1 ,
                                            csro:BasicScenario_NET_1 ,
                                            csro:BasicScenario_NET_2 ,
                                            csro:BasicScenario_RTS_1 ,
                                            csro:BasicScenario_RTS_2 ,
                                            csro:BasicScenario_RTS_3 ;
+                   csro:includesComponent csro:Application ,
+                                          csro:Device ,
+                                          csro:DeviceContainerRuntime ,
+                                          csro:DeviceOperatingSystem ,
+                                          csro:OtherApplications ;
                    csro:description "Basic container deployment scenario with minimal security measures implemented." ;
                    rdfs:label "Basic Scenario" .
 
@@ -1948,11 +1948,6 @@ csro:BasicScenario_RTS_3 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#CICDSecurityScenario
 csro:CICDSecurityScenario rdf:type owl:NamedIndividual ,
                                    csro:ContextScenario ;
-                          csro:includes csro:Application ,
-                                        csro:Device ,
-                                        csro:DeviceContainerRuntime ,
-                                        csro:DeviceOperatingSystem ,
-                                        csro:OtherApplications ;
                           csro:includesAssumption csro:CICDSecurityScenario_AUTH_1 ,
                                                   csro:CICDSecurityScenario_AUTH_2 ,
                                                   csro:CICDSecurityScenario_AUTH_3 ,
@@ -1998,6 +1993,11 @@ csro:CICDSecurityScenario rdf:type owl:NamedIndividual ,
                                                   csro:CICDSecurityScenario_SCM_2 ,
                                                   csro:CICDSecurityScenario_SCM_3 ,
                                                   csro:CICDSecurityScenario_SCM_4 ;
+                          csro:includesComponent csro:Application ,
+                                                 csro:Device ,
+                                                 csro:DeviceContainerRuntime ,
+                                                 csro:DeviceOperatingSystem ,
+                                                 csro:OtherApplications ;
                           csro:description "Environment with security integrated throughout CI/CD pipeline including automated scanning and policy enforcement" ;
                           rdfs:label "CI/CD Security Scenario" .
 
@@ -2385,11 +2385,6 @@ csro:CIC_6 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#CISCompliantScenario
 csro:CISCompliantScenario rdf:type owl:NamedIndividual ,
                                    csro:ContextScenario ;
-                          csro:includes csro:Application ,
-                                        csro:Device ,
-                                        csro:DeviceContainerRuntime ,
-                                        csro:DeviceOperatingSystem ,
-                                        csro:OtherApplications ;
                           csro:includesAssumption csro:CISCompliantScenario_AUTH_1 ,
                                                   csro:CISCompliantScenario_AUTH_2 ,
                                                   csro:CISCompliantScenario_AUTH_3 ,
@@ -2435,6 +2430,11 @@ csro:CISCompliantScenario rdf:type owl:NamedIndividual ,
                                                   csro:CISCompliantScenario_SCM_2 ,
                                                   csro:CISCompliantScenario_SCM_3 ,
                                                   csro:CISCompliantScenario_SCM_4 ;
+                          csro:includesComponent csro:Application ,
+                                                 csro:Device ,
+                                                 csro:DeviceContainerRuntime ,
+                                                 csro:DeviceOperatingSystem ,
+                                                 csro:OtherApplications ;
                           csro:description "Scenario following CIS Docker Benchmark recommendations" ;
                           rdfs:label "CIS Compliant Scenario" .
 
@@ -19860,11 +19860,6 @@ csro:DeployImmutableInfrastructure rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#DevelopmentScenario
 csro:DevelopmentScenario rdf:type owl:NamedIndividual ,
                                   csro:ContextScenario ;
-                         csro:includes csro:Application ,
-                                       csro:Device ,
-                                       csro:DeviceContainerRuntime ,
-                                       csro:DeviceOperatingSystem ,
-                                       csro:OtherApplications ;
                          csro:includesAssumption csro:DevelopmentScenario_AUTH_1 ,
                                                  csro:DevelopmentScenario_AUTH_2 ,
                                                  csro:DevelopmentScenario_AUTH_3 ,
@@ -19910,6 +19905,11 @@ csro:DevelopmentScenario rdf:type owl:NamedIndividual ,
                                                  csro:DevelopmentScenario_SCM_2 ,
                                                  csro:DevelopmentScenario_SCM_3 ,
                                                  csro:DevelopmentScenario_SCM_4 ;
+                         csro:includesComponent csro:Application ,
+                                                csro:Device ,
+                                                csro:DeviceContainerRuntime ,
+                                                csro:DeviceOperatingSystem ,
+                                                csro:OtherApplications ;
                          csro:description "Development environment with minimal security controls for ease of development and debugging" ;
                          rdfs:label "Development Scenario" .
 
@@ -20280,11 +20280,6 @@ csro:DocumentSecurityPolicies rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#EdgeComputingScenario
 csro:EdgeComputingScenario rdf:type owl:NamedIndividual ,
                                     csro:ContextScenario ;
-                           csro:includes csro:Application ,
-                                         csro:Device ,
-                                         csro:DeviceContainerRuntime ,
-                                         csro:DeviceOperatingSystem ,
-                                         csro:OtherApplications ;
                            csro:includesAssumption csro:EdgeComputingScenario_AUTH_1 ,
                                                    csro:EdgeComputingScenario_AUTH_2 ,
                                                    csro:EdgeComputingScenario_AUTH_3 ,
@@ -20330,6 +20325,11 @@ csro:EdgeComputingScenario rdf:type owl:NamedIndividual ,
                                                    csro:EdgeComputingScenario_SCM_2 ,
                                                    csro:EdgeComputingScenario_SCM_3 ,
                                                    csro:EdgeComputingScenario_SCM_4 ;
+                           csro:includesComponent csro:Application ,
+                                                  csro:Device ,
+                                                  csro:DeviceContainerRuntime ,
+                                                  csro:DeviceOperatingSystem ,
+                                                  csro:OtherApplications ;
                            csro:description "Edge computing deployment with limited central monitoring and physical security constraints" ;
                            rdfs:label "Edge Computing Scenario" .
 
@@ -20791,17 +20791,17 @@ csro:HIS_3 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#HardenedScenario
 csro:HardenedScenario rdf:type owl:NamedIndividual ,
                                csro:ContextScenario ;
-                      csro:includes csro:Application ,
-                                    csro:Device ,
-                                    csro:DeviceContainerRuntime ,
-                                    csro:DeviceOperatingSystem ,
-                                    csro:OtherApplications ;
                       csro:includesAssumption csro:HardenedScenario_IMG_1 ,
                                               csro:HardenedScenario_NET_1 ,
                                               csro:HardenedScenario_NET_2 ,
                                               csro:HardenedScenario_RTS_1 ,
                                               csro:HardenedScenario_RTS_2 ,
                                               csro:HardenedScenario_RTS_3 ;
+                      csro:includesComponent csro:Application ,
+                                             csro:Device ,
+                                             csro:DeviceContainerRuntime ,
+                                             csro:DeviceOperatingSystem ,
+                                             csro:OtherApplications ;
                       csro:description "Hardened container deployment scenario with comprehensive security measures implemented." ;
                       rdfs:label "Hardened Scenario" .
 
@@ -20893,11 +20893,6 @@ csro:HighExposure rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#HighRiskScenario
 csro:HighRiskScenario rdf:type owl:NamedIndividual ,
                                csro:ContextScenario ;
-                      csro:includes csro:Application ,
-                                    csro:Device ,
-                                    csro:DeviceContainerRuntime ,
-                                    csro:DeviceOperatingSystem ,
-                                    csro:OtherApplications ;
                       csro:includesAssumption csro:HighRiskScenario_AUTH_1 ,
                                               csro:HighRiskScenario_AUTH_2 ,
                                               csro:HighRiskScenario_AUTH_3 ,
@@ -20943,6 +20938,11 @@ csro:HighRiskScenario rdf:type owl:NamedIndividual ,
                                               csro:HighRiskScenario_SCM_2 ,
                                               csro:HighRiskScenario_SCM_3 ,
                                               csro:HighRiskScenario_SCM_4 ;
+                      csro:includesComponent csro:Application ,
+                                             csro:Device ,
+                                             csro:DeviceContainerRuntime ,
+                                             csro:DeviceOperatingSystem ,
+                                             csro:OtherApplications ;
                       csro:description "High-risk deployment with most security controls disabled, representing worst-case scenario" ;
                       rdfs:label "High Risk Scenario" .
 
@@ -21330,11 +21330,6 @@ csro:HostSystemFilesExposedRisk rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#HybridCloudScenario
 csro:HybridCloudScenario rdf:type owl:NamedIndividual ,
                                   csro:ContextScenario ;
-                         csro:includes csro:Application ,
-                                       csro:Device ,
-                                       csro:DeviceContainerRuntime ,
-                                       csro:DeviceOperatingSystem ,
-                                       csro:OtherApplications ;
                          csro:includesAssumption csro:HybridCloudScenario_AUTH_1 ,
                                                  csro:HybridCloudScenario_AUTH_2 ,
                                                  csro:HybridCloudScenario_AUTH_3 ,
@@ -21380,6 +21375,11 @@ csro:HybridCloudScenario rdf:type owl:NamedIndividual ,
                                                  csro:HybridCloudScenario_SCM_2 ,
                                                  csro:HybridCloudScenario_SCM_3 ,
                                                  csro:HybridCloudScenario_SCM_4 ;
+                         csro:includesComponent csro:Application ,
+                                                csro:Device ,
+                                                csro:DeviceContainerRuntime ,
+                                                csro:DeviceOperatingSystem ,
+                                                csro:OtherApplications ;
                          csro:description "Hybrid cloud deployment with varying security controls across on-premises and cloud environments" ;
                          rdfs:label "Hybrid Cloud Scenario" .
 
@@ -21775,11 +21775,6 @@ csro:IMG_6 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#ImageSecurityFocusedScenario
 csro:ImageSecurityFocusedScenario rdf:type owl:NamedIndividual ,
                                            csro:ContextScenario ;
-                                  csro:includes csro:Application ,
-                                                csro:Device ,
-                                                csro:DeviceContainerRuntime ,
-                                                csro:DeviceOperatingSystem ,
-                                                csro:OtherApplications ;
                                   csro:includesAssumption csro:ImageSecurityFocusedScenario_AUTH_1 ,
                                                           csro:ImageSecurityFocusedScenario_AUTH_2 ,
                                                           csro:ImageSecurityFocusedScenario_AUTH_3 ,
@@ -21825,6 +21820,11 @@ csro:ImageSecurityFocusedScenario rdf:type owl:NamedIndividual ,
                                                           csro:ImageSecurityFocusedScenario_SCM_2 ,
                                                           csro:ImageSecurityFocusedScenario_SCM_3 ,
                                                           csro:ImageSecurityFocusedScenario_SCM_4 ;
+                                  csro:includesComponent csro:Application ,
+                                                         csro:Device ,
+                                                         csro:DeviceContainerRuntime ,
+                                                         csro:DeviceOperatingSystem ,
+                                                         csro:OtherApplications ;
                                   csro:description "Scenario with strong focus on container image security including scanning, signing, and minimal base images" ;
                                   rdfs:label "Image Security Focused Scenario" .
 
@@ -22448,11 +22448,6 @@ csro:MediumExposure rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#MicroservicesScenario
 csro:MicroservicesScenario rdf:type owl:NamedIndividual ,
                                     csro:ContextScenario ;
-                           csro:includes csro:Application ,
-                                         csro:Device ,
-                                         csro:DeviceContainerRuntime ,
-                                         csro:DeviceOperatingSystem ,
-                                         csro:OtherApplications ;
                            csro:includesAssumption csro:MicroservicesScenario_AUTH_1 ,
                                                    csro:MicroservicesScenario_AUTH_2 ,
                                                    csro:MicroservicesScenario_AUTH_3 ,
@@ -22498,6 +22493,11 @@ csro:MicroservicesScenario rdf:type owl:NamedIndividual ,
                                                    csro:MicroservicesScenario_SCM_2 ,
                                                    csro:MicroservicesScenario_SCM_3 ,
                                                    csro:MicroservicesScenario_SCM_4 ;
+                           csro:includesComponent csro:Application ,
+                                                  csro:Device ,
+                                                  csro:DeviceContainerRuntime ,
+                                                  csro:DeviceOperatingSystem ,
+                                                  csro:OtherApplications ;
                            csro:description "Microservices architecture with service-to-service authentication but limited runtime protection" ;
                            rdfs:label "Microservices Scenario" .
 
@@ -22844,17 +22844,17 @@ csro:Minor rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#MixedScenario
 csro:MixedScenario rdf:type owl:NamedIndividual ,
                             csro:ContextScenario ;
-                   csro:includes csro:Application ,
-                                 csro:Device ,
-                                 csro:DeviceContainerRuntime ,
-                                 csro:DeviceOperatingSystem ,
-                                 csro:OtherApplications ;
                    csro:includesAssumption csro:MixedScenario_IMG_1 ,
                                            csro:MixedScenario_NET_1 ,
                                            csro:MixedScenario_NET_2 ,
                                            csro:MixedScenario_RTS_1 ,
                                            csro:MixedScenario_RTS_2 ,
                                            csro:MixedScenario_RTS_3 ;
+                   csro:includesComponent csro:Application ,
+                                          csro:Device ,
+                                          csro:DeviceContainerRuntime ,
+                                          csro:DeviceOperatingSystem ,
+                                          csro:OtherApplications ;
                    csro:description "Mixed container deployment scenario with partial security measures implemented to demonstrate medium ratings." ;
                    rdfs:label "Mixed Scenario" .
 
@@ -22993,11 +22993,6 @@ csro:NET_4 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#NISTCompliantScenario
 csro:NISTCompliantScenario rdf:type owl:NamedIndividual ,
                                     csro:ContextScenario ;
-                           csro:includes csro:Application ,
-                                         csro:Device ,
-                                         csro:DeviceContainerRuntime ,
-                                         csro:DeviceOperatingSystem ,
-                                         csro:OtherApplications ;
                            csro:includesAssumption csro:NISTCompliantScenario_AUTH_1 ,
                                                    csro:NISTCompliantScenario_AUTH_2 ,
                                                    csro:NISTCompliantScenario_AUTH_3 ,
@@ -23043,6 +23038,11 @@ csro:NISTCompliantScenario rdf:type owl:NamedIndividual ,
                                                    csro:NISTCompliantScenario_SCM_2 ,
                                                    csro:NISTCompliantScenario_SCM_3 ,
                                                    csro:NISTCompliantScenario_SCM_4 ;
+                           csro:includesComponent csro:Application ,
+                                                  csro:Device ,
+                                                  csro:DeviceContainerRuntime ,
+                                                  csro:DeviceOperatingSystem ,
+                                                  csro:OtherApplications ;
                            csro:description "Scenario following NIST SP 800-190 Application Container Security Guide recommendations" ;
                            rdfs:label "NIST Compliant Scenario" .
 
@@ -23516,11 +23516,6 @@ csro:NetworkCommunicationCompromiseRisk rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#NetworkHardenedScenario
 csro:NetworkHardenedScenario rdf:type owl:NamedIndividual ,
                                       csro:ContextScenario ;
-                             csro:includes csro:Application ,
-                                           csro:Device ,
-                                           csro:DeviceContainerRuntime ,
-                                           csro:DeviceOperatingSystem ,
-                                           csro:OtherApplications ;
                              csro:includesAssumption csro:NetworkHardenedScenario_AUTH_1 ,
                                                      csro:NetworkHardenedScenario_AUTH_2 ,
                                                      csro:NetworkHardenedScenario_AUTH_3 ,
@@ -23566,6 +23561,11 @@ csro:NetworkHardenedScenario rdf:type owl:NamedIndividual ,
                                                      csro:NetworkHardenedScenario_SCM_2 ,
                                                      csro:NetworkHardenedScenario_SCM_3 ,
                                                      csro:NetworkHardenedScenario_SCM_4 ;
+                             csro:includesComponent csro:Application ,
+                                                    csro:Device ,
+                                                    csro:DeviceContainerRuntime ,
+                                                    csro:DeviceOperatingSystem ,
+                                                    csro:OtherApplications ;
                              csro:description "Scenario with strong network security controls including network policies, segmentation, and egress filtering" ;
                              rdfs:label "Network Hardened Scenario" .
 
@@ -23927,11 +23927,6 @@ csro:OTSystemCompromise rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#OWASPCheatSheetCompliantScenario
 csro:OWASPCheatSheetCompliantScenario rdf:type owl:NamedIndividual ,
                                                csro:ContextScenario ;
-                                      csro:includes csro:Application ,
-                                                    csro:Device ,
-                                                    csro:DeviceContainerRuntime ,
-                                                    csro:DeviceOperatingSystem ,
-                                                    csro:OtherApplications ;
                                       csro:includesAssumption csro:OWASPCheatSheetCompliantScenario_AUTH_1 ,
                                                               csro:OWASPCheatSheetCompliantScenario_AUTH_2 ,
                                                               csro:OWASPCheatSheetCompliantScenario_AUTH_3 ,
@@ -23977,6 +23972,11 @@ csro:OWASPCheatSheetCompliantScenario rdf:type owl:NamedIndividual ,
                                                               csro:OWASPCheatSheetCompliantScenario_SCM_2 ,
                                                               csro:OWASPCheatSheetCompliantScenario_SCM_3 ,
                                                               csro:OWASPCheatSheetCompliantScenario_SCM_4 ;
+                                      csro:includesComponent csro:Application ,
+                                                             csro:Device ,
+                                                             csro:DeviceContainerRuntime ,
+                                                             csro:DeviceOperatingSystem ,
+                                                             csro:OtherApplications ;
                                       csro:description "Scenario following OWASP Docker Security Cheat Sheet recommendations" ;
                                       rdfs:label "OWASP Cheat Sheet Compliant Scenario" .
 
@@ -24299,11 +24299,6 @@ csro:OWASPCheatSheetCompliantScenario_SCM_4 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#OWASPTop10CompliantScenario
 csro:OWASPTop10CompliantScenario rdf:type owl:NamedIndividual ,
                                           csro:ContextScenario ;
-                                 csro:includes csro:Application ,
-                                               csro:Device ,
-                                               csro:DeviceContainerRuntime ,
-                                               csro:DeviceOperatingSystem ,
-                                               csro:OtherApplications ;
                                  csro:includesAssumption csro:OWASPTop10CompliantScenario_AUTH_1 ,
                                                          csro:OWASPTop10CompliantScenario_AUTH_2 ,
                                                          csro:OWASPTop10CompliantScenario_AUTH_3 ,
@@ -24349,6 +24344,11 @@ csro:OWASPTop10CompliantScenario rdf:type owl:NamedIndividual ,
                                                          csro:OWASPTop10CompliantScenario_SCM_2 ,
                                                          csro:OWASPTop10CompliantScenario_SCM_3 ,
                                                          csro:OWASPTop10CompliantScenario_SCM_4 ;
+                                 csro:includesComponent csro:Application ,
+                                                        csro:Device ,
+                                                        csro:DeviceContainerRuntime ,
+                                                        csro:DeviceOperatingSystem ,
+                                                        csro:OtherApplications ;
                                  csro:description "Scenario following OWASP Docker Top 10 security risks mitigation recommendations" ;
                                  rdfs:label "OWASP Top 10 Compliant Scenario" .
 
@@ -24881,11 +24881,6 @@ csro:OtherApplications rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#OutdatedContainersScenario
 csro:OutdatedContainersScenario rdf:type owl:NamedIndividual ,
                                          csro:ContextScenario ;
-                                csro:includes csro:Application ,
-                                              csro:Device ,
-                                              csro:DeviceContainerRuntime ,
-                                              csro:DeviceOperatingSystem ,
-                                              csro:OtherApplications ;
                                 csro:includesAssumption csro:OutdatedContainersScenario_AUTH_1 ,
                                                         csro:OutdatedContainersScenario_AUTH_2 ,
                                                         csro:OutdatedContainersScenario_AUTH_3 ,
@@ -24931,6 +24926,11 @@ csro:OutdatedContainersScenario rdf:type owl:NamedIndividual ,
                                                         csro:OutdatedContainersScenario_SCM_2 ,
                                                         csro:OutdatedContainersScenario_SCM_3 ,
                                                         csro:OutdatedContainersScenario_SCM_4 ;
+                                csro:includesComponent csro:Application ,
+                                                       csro:Device ,
+                                                       csro:DeviceContainerRuntime ,
+                                                       csro:DeviceOperatingSystem ,
+                                                       csro:OtherApplications ;
                                 csro:description "Legacy container deployment with outdated security practices and limited monitoring" ;
                                 rdfs:label "Outdated Containers Scenario" .
 
@@ -25316,11 +25316,6 @@ csro:PossibleLikelihoodAndNegligibleImpact rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#ProductionScenario
 csro:ProductionScenario rdf:type owl:NamedIndividual ,
                                  csro:ContextScenario ;
-                        csro:includes csro:Application ,
-                                      csro:Device ,
-                                      csro:DeviceContainerRuntime ,
-                                      csro:DeviceOperatingSystem ,
-                                      csro:OtherApplications ;
                         csro:includesAssumption csro:ProductionScenario_AUTH_1 ,
                                                 csro:ProductionScenario_AUTH_2 ,
                                                 csro:ProductionScenario_AUTH_3 ,
@@ -25366,6 +25361,11 @@ csro:ProductionScenario rdf:type owl:NamedIndividual ,
                                                 csro:ProductionScenario_SCM_2 ,
                                                 csro:ProductionScenario_SCM_3 ,
                                                 csro:ProductionScenario_SCM_4 ;
+                        csro:includesComponent csro:Application ,
+                                               csro:Device ,
+                                               csro:DeviceContainerRuntime ,
+                                               csro:DeviceOperatingSystem ,
+                                               csro:OtherApplications ;
                         csro:description "Production deployment with comprehensive security controls implemented according to best practices" ;
                         rdfs:label "Production Scenario" .
 
@@ -25801,11 +25801,6 @@ csro:RTS_7 rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#RapidPrototypeScenario
 csro:RapidPrototypeScenario rdf:type owl:NamedIndividual ,
                                      csro:ContextScenario ;
-                            csro:includes csro:Application ,
-                                          csro:Device ,
-                                          csro:DeviceContainerRuntime ,
-                                          csro:DeviceOperatingSystem ,
-                                          csro:OtherApplications ;
                             csro:includesAssumption csro:RapidPrototypeScenario_AUTH_1 ,
                                                     csro:RapidPrototypeScenario_AUTH_2 ,
                                                     csro:RapidPrototypeScenario_AUTH_3 ,
@@ -25851,6 +25846,11 @@ csro:RapidPrototypeScenario rdf:type owl:NamedIndividual ,
                                                     csro:RapidPrototypeScenario_SCM_2 ,
                                                     csro:RapidPrototypeScenario_SCM_3 ,
                                                     csro:RapidPrototypeScenario_SCM_4 ;
+                            csro:includesComponent csro:Application ,
+                                                   csro:Device ,
+                                                   csro:DeviceContainerRuntime ,
+                                                   csro:DeviceOperatingSystem ,
+                                                   csro:OtherApplications ;
                             csro:description "Rapid prototyping environment prioritizing speed over security with minimal controls" ;
                             rdfs:label "Rapid Prototype Scenario" .
 
@@ -26224,11 +26224,6 @@ csro:RunAsNonRootUser rdf:type owl:NamedIndividual ,
 ###  https://w3id.org/csro/ontology#RuntimeHardenedScenario
 csro:RuntimeHardenedScenario rdf:type owl:NamedIndividual ,
                                       csro:ContextScenario ;
-                             csro:includes csro:Application ,
-                                           csro:Device ,
-                                           csro:DeviceContainerRuntime ,
-                                           csro:DeviceOperatingSystem ,
-                                           csro:OtherApplications ;
                              csro:includesAssumption csro:RuntimeHardenedScenario_AUTH_1 ,
                                                      csro:RuntimeHardenedScenario_AUTH_2 ,
                                                      csro:RuntimeHardenedScenario_AUTH_3 ,
@@ -26274,6 +26269,11 @@ csro:RuntimeHardenedScenario rdf:type owl:NamedIndividual ,
                                                      csro:RuntimeHardenedScenario_SCM_2 ,
                                                      csro:RuntimeHardenedScenario_SCM_3 ,
                                                      csro:RuntimeHardenedScenario_SCM_4 ;
+                             csro:includesComponent csro:Application ,
+                                                    csro:Device ,
+                                                    csro:DeviceContainerRuntime ,
+                                                    csro:DeviceOperatingSystem ,
+                                                    csro:OtherApplications ;
                              csro:description "Scenario with strong runtime security controls including AppArmor, Seccomp, and read-only filesystems" ;
                              rdfs:label "Runtime Hardened Scenario" .
 

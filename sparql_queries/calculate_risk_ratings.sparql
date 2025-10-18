@@ -67,6 +67,7 @@ CONSTRUCT {
 
     # Assumption categories
     ?assumptionCategory a csro:AssumptionCategory ;
+        rdfs:label ?categoryLabel ;
         csro:description ?categoryDescription .
 
     # Security standard sections for assumptions (granular references)
@@ -76,6 +77,7 @@ CONSTRUCT {
     
     # Security standards (accessible through sections)
     ?sectionParentStandard a csro:ContainerSecurityStandard ;
+        rdfs:label ?assumptionSecurityStandardLabel ;
         csro:description ?assumptionSecurityStandardDescription .
         
     # Verification traits
@@ -337,7 +339,8 @@ WHERE {
                     csro:belongsToCategory ?assumptionCategory .
         
         # Assumption category information
-        ?assumptionCategory csro:description ?categoryDescription .
+        ?assumptionCategory rdfs:label ?categoryLabel ;
+                            csro:description ?categoryDescription .
         
         # Security standard sections for assumptions (granular references - optional)
         OPTIONAL {
@@ -348,6 +351,7 @@ WHERE {
             
             # Get the parent standard information through the section
             ?sectionParentStandard a csro:ContainerSecurityStandard ;
+                                   rdfs:label ?assumptionSecurityStandardLabel ;
                                    csro:description ?assumptionSecurityStandardDescription .
         }
         
