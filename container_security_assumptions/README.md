@@ -63,7 +63,7 @@ The framework includes **48 security assumptions** across **9 categories**:
 - **SCM-3**: Configuration files are secured and access-controlled
 - **SCM-4**: Container configuration is validated against security baselines
 
-### **🏛️ Historical System Security (HIS)** - 3 assumptions
+### **🏛️ Host Infrastructure Security (HIS)** - 3 assumptions
 - **HIS-1**: Host operating system is hardened according to security benchmarks
 - **HIS-2**: Host system updates and patches are applied regularly
 - **HIS-3**: Host access is restricted and monitored
